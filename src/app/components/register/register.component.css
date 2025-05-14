@@ -1,0 +1,68 @@
+*, *::before, *::after {
+  box-sizing: border-box;
+}
+
+.login-container {
+  display: flex;
+  flex-direction: column; /* Cambia a diseño en columna */
+  justify-content: flex-start; /* Asegura que el contenido comience desde arriba */
+  align-items: center;
+  height: 100dvh;
+  background-color: #EEF3EF;
+  padding: 20px;
+  overflow: auto; /* Habilita el scroll si el contenido excede el espacio */
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  text-align: center;
+  background-color: white;
+  padding: 15px;
+  border-radius: 20px;
+  border: 1px solid black;
+  max-width: 400px; /* Limita el ancho máximo del formulario */
+  width: 100%; /* Asegura que el formulario sea responsivo */
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Añade un sombreado para mejor estética */
+}
+.title{
+  color: #296244;
+  margin-bottom: 10px;
+}
+
+.user-input{
+  margin-top: 10px ;
+  text-align: left;
+}
+.labels{
+  font-weight: bold;
+  margin-bottom: 5px;
+}
+
+.fields{
+  display: flex;
+  flex-direction: column;
+}
+.input{
+  padding-left: 10px;
+  padding-right: 10px;
+}
+
+.password-recovery{
+  display: flex;
+  justify-content: space-between;
+  a{
+    color: #296244;
+    font-weight: bold;
+  }
+}
+.log-in{
+  width: 100%;
+  background-color: #2ECC71;
+  margin-bottom: 10px;
+  border-radius: 10px;
+  a{
+    color: #296244;
+  }
+}

@@ -1,0 +1,39 @@
+<div class="login-container">
+  <mat-card appearance="outlined" class="form">
+
+    <mat-card-content>
+        <img src="" class="logo" width="50px" height="50px">
+        <h1 class="title">Bienvenido de nuevo </h1>
+        <mat-card-subtitle> Ingresa tus credenciales para acceder a tu cuenta</mat-card-subtitle>
+
+        <div class="user-input">
+          <div class="fields">
+            <label class="labels" for="email">Correo electrónico</label>
+              <mat-form-field appearance="outline">
+                <input class="input" id="email" matInput placeholder="ejemplo@correo.com">
+              </mat-form-field>
+          </div>
+          <div class="fields">
+            <div class="password-recovery">
+              <label class="labels" for="password">Contraseña</label>
+              <a href=""> ¿Olvidaste tu contraseña? </a>
+            </div>
+            <mat-form-field appearance="outline">
+              <input class="input" id="password" matInput placeholder="*******">
+            </mat-form-field>
+          </div>
+
+
+        </div>
+      <button mat-button class="log-in">Iniciar Sesión</button>
+      <div >
+        <span>¿No tienes una cuenta? </span>
+        <a routerLink="/register">Regístrate</a>
+      </div>
+    </mat-card-content>
+  </mat-card>
+
+
+
+</div>
+

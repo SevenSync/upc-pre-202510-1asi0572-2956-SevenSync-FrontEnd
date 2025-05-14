@@ -1,0 +1,48 @@
+<div class="login-container">
+  <mat-card appearance="outlined" class="form">
+
+    <mat-card-content>
+      <img src="" class="logo" width="50px" height="50px">
+      <h1 class="title">Crear una cuenta </h1>
+      <mat-card-subtitle>Ingresa tus datos para registrarte en la plataforma</mat-card-subtitle>
+
+      <div class="user-input">
+        <div class="fields">
+          <label class="labels" for="name">Correo electrónico</label>
+          <mat-form-field appearance="outline">
+            <input class="input" id="name" matInput placeholder="Tu nombre">
+          </mat-form-field>
+        </div>
+        <div class="fields">
+          <label class="labels" for="email">Correo electrónico</label>
+          <mat-form-field appearance="outline">
+            <input class="input" id="email" matInput placeholder="ejemplo@correo.com">
+          </mat-form-field>
+        </div>
+        <div class="fields">
+          <label class="labels" for="password">Contraseña</label>
+          <mat-form-field appearance="outline">
+            <input class="input" id="password" matInput placeholder="********">
+          </mat-form-field>
+        </div>
+        <div class="fields">
+          <label class="labels" for="confirm_password">Confirmar contraseña</label>
+          <mat-form-field appearance="outline">
+            <input class="input" id="confirm_password" matInput placeholder="********">
+          </mat-form-field>
+        </div>
+      </div>
+
+      <button mat-button class="log-in">Registrarse</button>
+      <div >
+        <span>¿Ya tienes una cuenta? </span>
+        <a routerLink="/login">Iniciar Sesión</a>
+      </div>
+
+    </mat-card-content>
+  </mat-card>
+
+
+
+</div>
+
