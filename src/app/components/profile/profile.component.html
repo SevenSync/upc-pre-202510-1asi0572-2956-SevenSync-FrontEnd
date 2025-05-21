@@ -1,0 +1,137 @@
+<app-toolbar></app-toolbar>
+<div class="container">
+  <h1>Mi perfil</h1>
+
+  <div class="profile-container">
+
+      <div class="main_data">
+
+        <div class="picture_container">
+          <img src="AdobeExpress.png" width="100px" height="100px" class="picture" alt="Profile Picture">
+          <h2>Nombre </h2>
+          <h3>user&#64;hotmail.com</h3>
+
+        </div>
+
+        <div class="data">
+          <mat-icon class="material-symbols-outlined filled" >person</mat-icon>
+          Miembro desde Mayo 2023
+        </div>
+        <div class="data">
+          <mat-icon class="material-symbols-outlined filled" >nest_eco_leaf</mat-icon>
+          4 macetas activas
+        </div>
+
+
+          <div class="current_plan">
+            <h3>Membresía</h3>
+            <div class="data">
+              <mat-icon class="material-symbols-outlined filled" >nest_eco_leaf</mat-icon>
+              Plan Gratuito
+            </div>
+            <div class="button_container">
+              <button   class="upgrade_button">
+                <mat-icon class="material-symbols-outlined crown-icon">crown</mat-icon>
+                Actualizar a Premium
+              </button>
+            </div>
+
+          </div>
+
+        <button class="logout_button" >
+          <mat-icon class="material-symbols-outlined crown-icon">logout</mat-icon>
+          <a routerLink="/login">Cerrar Sesión</a>
+        </button>
+
+
+      </div>
+
+      <div class="data_settings">
+        <div class="settings">
+          <h2>Configuración de la cuenta</h2>
+          <button   class="edit_button">
+            <mat-icon class="material-symbols-outlined crown-icon">edit_square</mat-icon>
+            Editar
+          </button>
+        </div>
+        <mat-tab-group animationDuration="100ms">
+          <mat-tab label="Cuenta">
+            <div class="field">
+              <label for="name">Nombre Completo</label>
+              <input type="text" id="name" class="input" placeholder="John Doe">
+            </div>
+            <div class="field">
+              <label for="email" >Correo Electrónico</label>
+              <input type="text" id="email" class="input" placeholder="user@hotmail.com">
+            </div>
+            <div class="field">
+              <label  for="cellphone">Teléfono</label>
+              <input type="text" id="cellphone" class="input" placeholder="123456789">
+            </div>
+            <div class="field">
+              <label for="address">Dirección</label>
+              <input type="text"  id="address" class="input" placeholder="Nombre de la calle, número, ciudad">
+            </div>
+          </mat-tab>
+          <mat-tab label="Notificaciones">
+
+            <div class="option">
+              <div>
+                <h3>Alertas de riego</h3>
+                Recibe notificaciones cuando tus plantas necesiten agua
+              </div>
+              <mat-checkbox class="example-margin"></mat-checkbox>
+            </div>
+            <hr>
+            <div class="option">
+              <div>
+                <h3>Alertas de sensores</h3>
+                Recibe notificaciones cuando los sensores detecten condiciones anormales
+              </div>
+              <mat-checkbox class="example-margin"></mat-checkbox>
+            </div>
+            <hr>
+            <div class="option">
+              <div>
+                <h3>Reportes semanales</h3>
+                Recibe un resumen semanal del estado de tus plantas
+              </div>
+              <mat-checkbox class="example-margin"></mat-checkbox>
+            </div>
+            <hr>
+            <div class="option">
+              <div>
+                <h3>Notificaciones por correo</h3>
+                Recibe todas las notificaciones por correo electrónico
+              </div>
+              <mat-checkbox class="example-margin"></mat-checkbox>
+            </div>
+
+          </mat-tab>
+          <mat-tab label="Facturación">
+            <div class="plan">
+              <h3>Plan Actual</h3>
+              <div class="user_plan" >
+                <div class="icon_and_plan">
+                  <mat-icon class="material-symbols-outlined filled" >nest_eco_leaf</mat-icon>
+                  <div>
+                    <h4>Plan Gratuito</h4>
+                    <p>Funcionalidades Básicas</p>
+                  </div>
+                </div>
+
+                <button class="upgrade_button">
+                  <mat-icon class="material-symbols-outlined crown-icon">crown</mat-icon>
+                  Actualizar
+                </button>
+              </div>
+            </div>
+          </mat-tab>
+        </mat-tab-group>
+
+
+      </div>
+
+
+  </div>
+</div>
