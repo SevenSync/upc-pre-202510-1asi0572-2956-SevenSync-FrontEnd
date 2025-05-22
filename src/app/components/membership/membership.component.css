@@ -1,0 +1,211 @@
+*{
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+.container{
+  box-sizing: border-box;
+  background-color: #EEF3EF;
+  padding: 30px 40px;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.titulo{
+  font-size: 30px;
+  font-weight: 600;
+  color: #296244;
+  margin-bottom: 20px;
+  align-self: flex-start;
+}
+.membership_card{
+  width: 90%;
+  background-color: rgba(175, 232, 199, 0.75);
+  border-radius: 10px;
+  border: 1px solid #296244;
+  padding: 10px 40px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 10px;
+  .membership_info{
+    display: flex;
+    flex-direction: column;
+  }
+  .current_membership{
+    display: flex;
+    align-items: center;
+    gap: 10px;
+
+    .icon{
+      font-size: 30px;
+      height: 30px;
+      width: 30px;
+      color: #2ECC71;
+    }
+  }
+
+  .upgrade_button{
+    /*width: 20%;*/
+    padding: 10px 25px;
+    font-size: 15px;
+    background-color: #E67E22;
+    color: white;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+
+    a{
+      color: white;
+    }
+  }
+}
+
+.membership_period{
+  width: 25%;
+  background-color: #E3E3E3;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  border-radius: 10px;
+  margin-bottom: 10px;
+  padding: 5px;
+  /*align-self: end;*/
+
+  .period{
+    padding: 5px 20px;
+    border-radius: 5px;
+    border: none;
+  }
+  .period.active {
+    background-color: #296244;
+    color: white;
+  }
+  span{
+    font-size: 20px;
+    font-weight: 600;
+    color: #296244;
+    background-color: rgba(175, 232, 199, 0.75);
+    padding: 5px 10px;
+    border-radius: 25px;
+  }
+}
+
+
+.membership_plans{
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+}
+.plan_card_free,.plan_card_premium{
+  display: flex;
+  flex-direction: column;
+  width: 30%;
+  background-color: white;
+  border-radius: 10px;
+}
+.plan_card_free{
+  border: 1px solid #2ECC71;
+}
+.plan_card_premium{
+  border: 1px solid #E67E22;
+}
+.plan_head,.plan_head_premium{
+  padding: 10px 25px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+}
+.crown{
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  .icon{
+    font-size: 30px;
+    height: 30px;
+    width: 30px;
+    color: #FFD700;
+    font-variation-settings:
+      'FILL' 1
+  }
+
+}
+.plan_head_premium{
+  background: linear-gradient(90deg, #FFF8DD 36.54%, #FFEFB0 65.38%);
+  -webkit-border-top-left-radius: 15px;
+  -webkit-border-top-right-radius: 15px;
+}
+
+.plan_body{
+  padding:  5px 25px 40px 25px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+
+  .feature{
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 15px;
+  }
+  .free_icon{
+    color: #2ECC71;
+  }
+  .premium_icon{
+    color: #E67E22;
+  }
+  ul {
+    padding-left: 20px;
+    margin-bottom: 10px;
+  }
+  .current_membership{
+    font-weight: bold;
+    padding: 10px 25px;
+    border-radius: 10px;
+    background-color: white;
+    border-style: dashed;
+  }
+  .upgrade_button{
+    padding: 10px 25px;
+    font-size: 15px;
+    background-color: #E67E22;
+    color: white;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+
+    a{
+      text-decoration: none;
+      color: white;
+    }
+  }
+}
+.membership_footer{
+  width: 70%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: start;
+  gap: 10px;
+  margin-top: 20px;
+  padding: 10px 0;
+
+  h1{
+    color: #296244;
+  }
+}
+
+
+
