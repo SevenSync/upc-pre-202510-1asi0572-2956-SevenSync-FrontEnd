@@ -1,0 +1,103 @@
+<div class="container">
+  <mat-dialog-content class="mat-typography">
+  <h2 >Cambiar de contraseña</h2>
+  <p class="subtitle">Antes de cambiar tu contraseña, debes ingresar nuevamente tu contraseña antigua y confirmar tu nueva contraseña</p>
+  <form>
+    <div  class="field">
+      <h3>Contraseña antigua</h3>
+      <input  type="password" required>
+    </div>
+
+    <div  class="field">
+      <h3>Contraseña nueva</h3>
+      <input  type="password" required>
+    </div>
+
+    <p class="requirements">
+      La contraseña debe seguir estos puntos:
+      <br>(✓) Tener al menos 8 caracteres
+      <br>(✓) Tener al menos una letra mayúscula y minúscula
+      <br>(✗) Tener al menos un número (0 al 9)
+    </p>
+
+    <div  class=field>
+      <h3>Confirmar contraseña nueva</h3>
+      <input  type="password" required>
+    </div>
+
+    <mat-dialog-actions class="button-row">
+      <button class="save"  >Guardar</button>
+      <button class="cancel" mat-dialog-close>Cancelar</button>
+    </mat-dialog-actions>
+  </form>
+  </mat-dialog-content >
+
+</div>
+
+
+<style>
+  .container{
+    padding: .5rem;
+    background-color: #f9f9f9;
+    border-radius: 15px;
+  }
+
+  .field {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-top: 20px;
+    input{
+      outline: none;
+      border: 1px solid #B9B9B9;
+      padding: 5px;
+      border-radius: 5px;
+      margin-right: 5px;
+    }
+  }
+
+  .subtitle {
+    color: #888;
+    font-size: 0.9rem;
+    margin-bottom: 1rem;
+  }
+
+  .requirements {
+    font-size: 0.85rem;
+    margin: 0.5rem 0 1rem;
+  }
+
+  .button-row {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 1rem;
+  }
+
+  .save{
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 2px;
+    cursor: pointer;
+    border-radius: 5px;
+  }
+  .cancel{
+    background-color: #f44336;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 2px;
+    cursor: pointer;
+    border-radius: 5px;
+  }
+
+</style>

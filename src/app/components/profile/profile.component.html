@@ -23,24 +23,28 @@
         </div>
 
 
-          <div class="current_plan">
-            <h3>Membresía</h3>
-            <div class="data">
-              <mat-icon class="material-symbols-outlined filled" >nest_eco_leaf</mat-icon>
-              Plan Gratuito
-            </div>
-            <div class="button_container">
-              <button   class="upgrade_button">
-                <mat-icon class="material-symbols-outlined crown-icon">crown</mat-icon>
-                Actualizar a Premium
-              </button>
-            </div>
-
+        <div class="current_plan">
+          <h3>Membresía</h3>
+          <div class="data">
+            <mat-icon class="material-symbols-outlined filled" >nest_eco_leaf</mat-icon>
+            Plan Gratuito
           </div>
+          <div class="button_container">
+            <button   class="upgrade_button">
+              <mat-icon class="material-symbols-outlined crown-icon">crown</mat-icon>
+              Actualizar a Premium
+            </button>
+          </div>
+        </div>
 
         <button class="logout_button" >
-          <mat-icon class="material-symbols-outlined crown-icon">logout</mat-icon>
+          <mat-icon class="material-symbols-outlined">logout</mat-icon>
           <a routerLink="/login">Cerrar Sesión</a>
+        </button>
+
+        <button class="delete_button" (click)="openDeleteAccount_Dialog()" >
+          <mat-icon class="material-symbols-outlined">delete_forever</mat-icon>
+          <a >Borrar Cuenta</a>
         </button>
 
 
@@ -49,28 +53,49 @@
       <div class="data_settings">
         <div class="settings">
           <h2>Configuración de la cuenta</h2>
-          <button   class="edit_button">
-            <mat-icon class="material-symbols-outlined crown-icon">edit_square</mat-icon>
-            Editar
-          </button>
         </div>
-        <mat-tab-group animationDuration="100ms">
-          <mat-tab label="Cuenta">
-            <div class="field">
-              <label for="name">Nombre Completo</label>
-              <input type="text" id="name" class="input" placeholder="John Doe">
-            </div>
-            <div class="field">
-              <label for="email" >Correo Electrónico</label>
-              <input type="text" id="email" class="input" placeholder="user@hotmail.com">
-            </div>
-            <div class="field">
-              <label  for="cellphone">Teléfono</label>
-              <input type="text" id="cellphone" class="input" placeholder="123456789">
-            </div>
-            <div class="field">
-              <label for="address">Dirección</label>
-              <input type="text"  id="address" class="input" placeholder="Nombre de la calle, número, ciudad">
+        <mat-tab-group animationDuration="100ms" class="account"  >
+          <mat-tab label="Cuenta" class="profile"  >
+            <div class="profile_section  " >
+              <div class="fields">
+                <div class="field">
+                  <label for="name">Nombre Completo</label>
+                  <input type="text" id="name" class="input" [disabled]="!isEditingProfile" [(ngModel)]="nombre">
+                </div>
+                <div class="field">
+                  <label for="email">Correo Electrónico</label>
+                  <input type="text" id="email" class="input" [disabled]="!isEditingProfile" [(ngModel)]="correo">
+                </div>
+                <div class="field">
+                  <label for="cellphone">Teléfono</label>
+                  <input type="text" id="cellphone" class="input" [disabled]="!isEditingProfile" [(ngModel)]="telefono">
+                </div>
+                <div class="field">
+                  <label for="address">Dirección</label>
+                  <input type="text" id="address" class="input" [disabled]="!isEditingProfile" [(ngModel)]="direccion">
+                </div>
+              </div>
+
+              <!-- BOTONES -->
+              <div class="buttons" *ngIf="isEditingProfile; else defaultButtons">
+                <button class="save"   (click)="cancelEditing()">Cancelar</button>
+                <button  class="cancel" (click)="saveChanges()">Guardar cambios</button>
+              </div>
+
+              <ng-template #defaultButtons>
+                <div class="buttons">
+                  <button class="edit_button" (click)="openReset_Password_Dialog()">
+                    <mat-icon class="material-symbols-outlined crown-icon">lock</mat-icon>
+                    Cambiar Contraseña
+                  </button>
+                  <button class="edit_button" (click)="enableProfileEditing()">
+                    <mat-icon class="material-symbols-outlined crown-icon">edit</mat-icon>
+                    Editar Perfil
+                  </button>
+                </div>
+              </ng-template>
+
+
             </div>
           </mat-tab>
           <mat-tab label="Notificaciones">
