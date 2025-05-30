@@ -1,0 +1,361 @@
+.pots-container {
+  background-color: #eef3ef;
+  min-height: 100vh;
+  padding: 0;
+}
+
+.header-section {
+  padding: 30px 40px 20px 40px;
+}
+
+.page-title {
+  color: #296244;
+  font-size: 2rem;
+  font-weight: 600;
+  margin: 0 0 8px 0;
+}
+
+.subtitle {
+  color: #666;
+  font-size: 1.1rem;
+  margin: 0;
+}
+
+.content-wrapper {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 0 40px 40px 40px;
+}
+
+.pots-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 20px;
+  background: white;
+  padding: 24px;
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.header-info {
+  flex: 1;
+}
+
+.section-title {
+  color: #333;
+  font-size: 1.5rem;
+  font-weight: 600;
+  margin: 0 0 8px 0;
+}
+
+.status-summary {
+  color: #666;
+  font-size: 0.9rem;
+  margin: 0;
+}
+
+.header-actions {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+}
+
+.add-pot-button {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background-color: #2ecc71;
+  color: white;
+}
+
+.pots-tabs {
+  background: white;
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  margin-bottom: 20px;
+}
+
+.pots-tabs ::ng-deep .mat-mdc-tab-group {
+  background: white;
+  border-radius: 12px;
+}
+
+.pots-tabs ::ng-deep .mat-mdc-tab-header {
+  border-bottom: 1px solid #e0e0e0;
+}
+
+.pots-tabs ::ng-deep .mat-mdc-tab {
+  color: #666;
+  font-weight: 500;
+}
+
+.pots-tabs ::ng-deep .mat-mdc-tab.mdc-tab--active {
+  color: #296244;
+}
+
+.pots-tabs ::ng-deep .mat-ink-bar {
+  background-color: #296244;
+}
+
+.pots-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(400px, 1fr));
+  gap: 20px;
+}
+
+.pot-card {
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  transition: all 0.2s ease;
+  border-left: 4px solid #e0e0e0;
+}
+
+.pot-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.15);
+}
+
+.pot-card.status-healthy {
+  border-left-color: #2ecc71;
+}
+
+.pot-card.status-warning {
+  border-left-color: #f39c12;
+}
+
+.pot-card.status-critical {
+  border-left-color: #e74c3c;
+}
+
+.pot-header {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 20px 20px 16px 20px;
+}
+
+.pot-image {
+  width: 60px;
+  height: 60px;
+  background: linear-gradient(135deg, #2ecc71, #27ae60);
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.plant-icon {
+  color: white;
+  font-size: 32px;
+  width: 32px;
+  height: 32px;
+}
+
+.pot-info {
+  flex: 1;
+  min-width: 0;
+}
+
+.pot-name {
+  color: #333;
+  font-size: 1.2rem;
+  font-weight: 600;
+  margin: 0 0 4px 0;
+}
+
+.plant-type {
+  color: #666;
+  font-size: 0.9rem;
+  margin: 0;
+}
+
+.status-indicator {
+  padding: 6px 12px;
+  border-radius: 20px;
+  flex-shrink: 0;
+}
+
+.status-text {
+  color: white;
+  font-size: 0.8rem;
+  font-weight: 500;
+}
+
+.pot-content {
+  padding: 0 20px 16px 20px;
+}
+
+.metrics-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+  margin-bottom: 20px;
+}
+
+.metric {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.metric-header {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.metric-icon {
+  color: #666;
+  font-size: 20px;
+  width: 20px;
+  height: 20px;
+}
+
+.metric-label {
+  color: #666;
+  font-size: 0.9rem;
+  font-weight: 500;
+}
+
+.metric-value {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.metric-value .value {
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: #333;
+}
+
+.watering-info {
+  background: #f8f9fa;
+  border-radius: 8px;
+  padding: 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.watering-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.watering-item .label {
+  color: #666;
+  font-size: 0.9rem;
+}
+
+.watering-item .value {
+  color: #333;
+  font-weight: 500;
+  font-size: 0.9rem;
+}
+
+.watering-item .value.urgent {
+  color: #e74c3c;
+  font-weight: 600;
+}
+
+.pot-actions {
+  padding: 16px 20px 20px 20px;
+  display: flex;
+  gap: 12px;
+}
+
+.water-button {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  color: #2ecc71;
+  border: 1px solid #2ecc71;
+}
+
+.water-button:hover:not(:disabled) {
+  background-color: #2ecc71;
+  color: white;
+}
+
+.water-button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.details-button {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  color: #666;
+  border: 1px solid #ddd;
+}
+
+.details-button:hover {
+  background-color: #f5f5f5;
+}
+
+.no-pots {
+  grid-column: 1 / -1;
+  text-align: center;
+  padding: 60px 20px;
+  color: #999;
+}
+
+.no-pots-icon {
+  font-size: 64px;
+  margin-bottom: 16px;
+  opacity: 0.5;
+  color: #2ecc71;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .content-wrapper {
+    padding: 0 20px 20px 20px;
+  }
+
+  .header-section {
+    padding: 20px;
+  }
+
+  .page-title {
+    font-size: 1.5rem;
+  }
+
+  .pots-header {
+    flex-direction: column;
+    gap: 16px;
+    align-items: stretch;
+  }
+
+  .pots-grid {
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
+
+  .pot-header {
+    padding: 16px;
+  }
+
+  .pot-content {
+    padding: 0 16px 12px 16px;
+  }
+
+  .pot-actions {
+    padding: 12px 16px 16px 16px;
+    flex-direction: column;
+  }
+
+  .metrics-grid {
+    grid-template-columns: 1fr;
+    gap: 12px;
+  }
+}

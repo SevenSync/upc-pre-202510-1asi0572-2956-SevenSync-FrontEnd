@@ -1,0 +1,159 @@
+<app-toolbar></app-toolbar>
+
+<div class="pots-container">
+  <div class="header-section">
+    <h1 class="page-title">Mis Macetas</h1>
+    <p class="subtitle">Monitorea y cuida tus plantas inteligentes</p>
+  </div>
+
+  <div class="content-wrapper">
+    <div class="pots-header">
+      <div class="header-info">
+        <h2 class="section-title">{{ filteredPots.length }} macetas</h2>
+        <p class="status-summary">
+          {{ healthyCount }} saludables •
+          {{ warningCount }} necesitan atención •
+          {{ criticalCount }} críticas
+        </p>
+      </div>
+
+      <div class="header-actions">
+        <button mat-raised-button color="primary" class="add-pot-button">
+          <mat-icon>add</mat-icon>
+          Agregar Maceta
+        </button>
+      </div>
+    </div>
+
+    <mat-tab-group
+      class="pots-tabs"
+      (selectedTabChange)="onTabChange($event.index)"
+      animationDuration="200ms">
+
+      <mat-tab label="Todas"></mat-tab>
+      <mat-tab label="Saludables"></mat-tab>
+      <mat-tab label="Necesitan atención"></mat-tab>
+      <mat-tab label="Críticas"></mat-tab>
+    </mat-tab-group>
+
+    <div class="pots-grid">
+      <mat-card
+        *ngFor="let pot of filteredPots"
+        class="pot-card"
+        [class.status-healthy]="pot.status === 'healthy'"
+        [class.status-warning]="pot.status === 'warning'"
+        [class.status-critical]="pot.status === 'critical'">
+
+        <mat-card-header class="pot-header">
+          <div class="pot-image">
+            <mat-icon class="plant-icon">local_florist</mat-icon>
+          </div>
+          <div class="pot-info">
+            <mat-card-title class="pot-name">{{ pot.name }}</mat-card-title>
+            <mat-card-subtitle class="plant-type">{{ pot.plantType }}</mat-card-subtitle>
+          </div>
+          <div class="status-indicator" [style.background-color]="getStatusColor(pot.status)">
+            <span class="status-text">{{ getStatusText(pot.status) }}</span>
+          </div>
+        </mat-card-header>
+
+        <mat-card-content class="pot-content">
+          <div class="metrics-grid">
+            <div class="metric">
+              <div class="metric-header">
+                <mat-icon class="metric-icon">water_drop</mat-icon>
+                <span class="metric-label">Humedad</span>
+              </div>
+              <div class="metric-value">
+                <span class="value" [style.color]="getHumidityColor(pot.humidity)">{{ pot.humidity }}%</span>
+                <mat-progress-bar
+                  mode="determinate"
+                  [value]="pot.humidity"
+                  [color]="pot.humidity >= 60 ? 'primary' : pot.humidity >= 30 ? 'accent' : 'warn'">
+                </mat-progress-bar>
+              </div>
+            </div>
+
+            <div class="metric">
+              <div class="metric-header">
+                <mat-icon class="metric-icon">thermostat</mat-icon>
+                <span class="metric-label">Temperatura</span>
+              </div>
+              <div class="metric-value">
+                <span class="value">{{ pot.temperature }}°C</span>
+              </div>
+            </div>
+
+            <div class="metric">
+              <div class="metric-header">
+                <mat-icon class="metric-icon">wb_sunny</mat-icon>
+                <span class="metric-label">Luz</span>
+              </div>
+              <div class="metric-value">
+                <span class="value">{{ pot.lightLevel }}%</span>
+                <mat-progress-bar
+                  mode="determinate"
+                  [value]="pot.lightLevel"
+                  color="accent">
+                </mat-progress-bar>
+              </div>
+            </div>
+
+            <div class="metric">
+              <div class="metric-header">
+                <mat-icon class="metric-icon">battery_std</mat-icon>
+                <span class="metric-label">Batería</span>
+              </div>
+              <div class="metric-value">
+                <span class="value" [style.color]="getBatteryColor(pot.batteryLevel)">{{ pot.batteryLevel }}%</span>
+                <mat-progress-bar
+                  mode="determinate"
+                  [value]="pot.batteryLevel"
+                  [color]="pot.batteryLevel >= 70 ? 'primary' : pot.batteryLevel >= 30 ? 'accent' : 'warn'">
+                </mat-progress-bar>
+              </div>
+            </div>
+          </div>
+
+          <div class="watering-info">
+            <div class="watering-item">
+              <span class="label">Último riego:</span>
+              <span class="value">{{ pot.lastWatered }}</span>
+            </div>
+            <div class="watering-item">
+              <span class="label">Próximo riego:</span>
+              <span class="value" [class.urgent]="pot.nextWatering === 'Urgente' || pot.nextWatering === 'Hoy'">
+                {{ pot.nextWatering }}
+              </span>
+            </div>
+          </div>
+        </mat-card-content>
+
+        <mat-card-actions class="pot-actions">
+          <button
+            mat-button
+            class="water-button"
+            (click)="waterPlant(pot.id)"
+            [disabled]="pot.nextWatering === 'En 2 días' || pot.nextWatering === 'En 3 días'">
+            <mat-icon>water_drop</mat-icon>
+            Regar ahora
+          </button>
+          <button mat-button class="details-button" (click)="viewDetails(pot.id)">
+            <mat-icon>visibility</mat-icon>
+            Ver detalles
+          </button>
+        </mat-card-actions>
+      </mat-card>
+
+      <div *ngIf="filteredPots.length === 0" class="no-pots">
+        <mat-icon class="no-pots-icon">eco</mat-icon>
+        <p>No hay macetas en esta categoría</p>
+        <button mat-raised-button color="primary">
+          <mat-icon>add</mat-icon>
+          Agregar tu primera maceta
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+
