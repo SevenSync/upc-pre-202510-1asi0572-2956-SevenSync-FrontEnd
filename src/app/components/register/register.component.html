@@ -1,48 +1,52 @@
-<div class="login-container">
+<div class="register-container">
   <mat-card appearance="outlined" class="form">
-
     <mat-card-content>
       <img src="" class="logo" width="50px" height="50px">
-      <h1 class="title">Crear una cuenta </h1>
+      <h1 class="title">Crear una cuenta</h1>
       <mat-card-subtitle>Ingresa tus datos para registrarte en la plataforma</mat-card-subtitle>
 
-      <div class="user-input">
-        <div class="fields">
-          <label class="labels" for="name">Correo electrónico</label>
-          <mat-form-field appearance="outline">
-            <input class="input" id="name" matInput placeholder="Tu nombre">
-          </mat-form-field>
-        </div>
+      <form [formGroup]="registerForm" (ngSubmit)="onSubmit()" class="user-input">
         <div class="fields">
           <label class="labels" for="email">Correo electrónico</label>
           <mat-form-field appearance="outline">
-            <input class="input" id="email" matInput placeholder="ejemplo@correo.com">
+            <input class="input" id="email" matInput placeholder="ejemplo@correo.com" formControlName="email" required>
+            <mat-error *ngIf="email?.hasError('required')" class="error">El correo es obligatorio</mat-error>
+            <mat-error *ngIf="email?.hasError('email')" class="error">Correo inválido</mat-error>
           </mat-form-field>
         </div>
+
         <div class="fields">
           <label class="labels" for="password">Contraseña</label>
           <mat-form-field appearance="outline">
-            <input class="input" id="password" matInput placeholder="********">
+            <input class="input" id="password" matInput type="password" placeholder="********" formControlName="password" required>
+            <mat-error *ngIf="password?.hasError('required')" class="error">La contraseña es obligatoria</mat-error>
+            <mat-error *ngIf="password?.hasError('minlength')" class="error">Mínimo 6 caracteres</mat-error>
           </mat-form-field>
         </div>
+
         <div class="fields">
-          <label class="labels" for="confirm_password">Confirmar contraseña</label>
+          <label class="labels" for="confirmPassword">Confirmar contraseña</label>
           <mat-form-field appearance="outline">
-            <input class="input" id="confirm_password" matInput placeholder="********">
+            <input class="input" id="confirmPassword" matInput type="password" placeholder="********" formControlName="confirmPassword" required>
+            <mat-error *ngIf="confirmPassword?.hasError('required')" class="error">Campo obligatorio</mat-error>
+            <mat-error *ngIf="confirmPassword?.hasError('mismatch')" class="error">Las contraseñas no coinciden</mat-error>
           </mat-form-field>
         </div>
+
+        <button mat-button class="log-in">Registrarse</button>
+      </form>
+
+      <mat-error *ngIf="errorMessage" style="display: block; margin-top: 8px;">
+        {{ errorMessage }}
+      </mat-error>
+      <div *ngIf="successMessage" style="color: green; margin-top: 8px;">
+        {{ successMessage }}
       </div>
 
-      <button mat-button class="log-in">Registrarse</button>
-      <div >
+      <div>
         <span>¿Ya tienes una cuenta? </span>
         <a routerLink="/login">Iniciar Sesión</a>
       </div>
-
     </mat-card-content>
   </mat-card>
-
-
-
 </div>
-

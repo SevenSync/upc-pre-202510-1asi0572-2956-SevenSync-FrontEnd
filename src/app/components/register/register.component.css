@@ -2,10 +2,10 @@
   box-sizing: border-box;
 }
 
-.login-container {
+.register-container {
   display: flex;
   flex-direction: column; /* Cambia a diseño en columna */
-  justify-content: flex-start; /* Asegura que el contenido comience desde arriba */
+  justify-content: center; /* Asegura que el contenido comience desde arriba */
   align-items: center;
   height: 100dvh;
   background-color: #EEF3EF;
@@ -65,4 +65,7 @@
   a{
     color: #296244;
   }
+}
+.error {
+  color: red;
 }
