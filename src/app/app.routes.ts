@@ -4,7 +4,6 @@ import {RegisterComponent} from './components/register/register.component';
 import {ProfileComponent} from './components/profile/profile.component';
 import {NotificationsComponent} from './components/notifications/notifications.component';
 import {PotsComponent} from './components/pots/pots.component';
-import {MembershipsComponent} from './components/memberships/memberships.component';
 
 
 export const routes: Routes = [
@@ -13,7 +12,6 @@ export const routes: Routes = [
   { path: 'profile', component: ProfileComponent },
   { path: 'notifications', component: NotificationsComponent },
   { path: "pots", component: PotsComponent },
-  { path: "memberships", component: MembershipsComponent },
   { path: '**', redirectTo: 'login', pathMatch: 'full' },
 
 ];
