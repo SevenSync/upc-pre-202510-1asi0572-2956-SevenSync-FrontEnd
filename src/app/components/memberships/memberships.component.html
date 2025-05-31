@@ -1,0 +1,137 @@
+<app-toolbar></app-toolbar>
+
+<div class="memberships-container">
+  <div class="header-section">
+    <h1 class="page-title">Membresías</h1>
+  </div>
+
+  <div class="content-wrapper">
+    <!-- Current Membership Section -->
+    <div class="current-membership">
+      <div class="current-membership-content">
+        <div class="current-plan-info">
+          <mat-icon class="check-icon">check_circle</mat-icon>
+          <div class="plan-details">
+            <span class="current-label">Tu membresía actual</span>
+            <span class="current-plan-name">Plan Gratuito</span>
+          </div>
+        </div>
+        <button mat-raised-button class="upgrade-button" (click)="upgradeToPremium()">
+          <mat-icon fontSet="material-symbols-outlined crown-icon">crown</mat-icon>
+
+          Actualizar a Premium
+        </button>
+      </div>
+    </div>
+
+    <!-- Billing Toggle -->
+    <div class="billing-toggle-section">
+      <mat-button-toggle-group
+        class="billing-toggle"
+        [value]="billingPeriod"
+        (change)="setBillingPeriod($event.value)">
+        <mat-button-toggle value="monthly">Mensual</mat-button-toggle>
+        <mat-button-toggle value="yearly">
+          Anual
+          <span class="discount-badge">-17%</span>
+        </mat-button-toggle>
+      </mat-button-toggle-group>
+    </div>
+
+    <!-- Plans Section -->
+    <div class="plans-section">
+      <!-- Free Plan -->
+      <mat-card class="plan-card free-plan">
+        <mat-card-content class="plan-content">
+          <div class="plan-header">
+            <h3 class="plan-name">Plan Gratuito</h3>
+            <div class="plan-price">
+              <span class="price">$0</span>
+            </div>
+          </div>
+
+          <div class="plan-features">
+            <div class="features-section">
+              <h4 class="features-title">Funcionalidades Básicas</h4>
+              <p class="features-subtitle">Incluye:</p>
+              <ul class="features-list included">
+                <li *ngFor="let feature of freeFeatures" class="feature-item">
+                  <mat-icon class="feature-icon included">check</mat-icon>
+                  {{ feature }}
+                </li>
+              </ul>
+            </div>
+
+            <div class="limitations-section">
+              <h4 class="limitations-title">Limitaciones:</h4>
+              <ul class="limitations-list">
+                <li *ngFor="let limitation of freeLimitations" class="limitation-item">
+                  <span class="limitation-dot">•</span>
+                  {{ limitation }}
+                </li>
+              </ul>
+            </div>
+          </div>
+
+          <button mat-stroked-button class="plan-button current-plan-button" disabled>
+            Plan Actual
+          </button>
+        </mat-card-content>
+      </mat-card>
+
+      <!-- Premium Plan -->
+      <mat-card class="plan-card premium-plan">
+        <mat-card-content class="plan-content">
+          <div class="plan-header">
+            <div class="premium-badge">
+              <mat-icon class="crown-icon">crown</mat-icon>
+              <span>Plan Premium</span>
+            </div>
+            <div class="plan-price">
+              <span class="price">${{ premiumPrice }}</span>
+              <span class="period">por {{ premiumPeriod }}</span>
+            </div>
+          </div>
+
+          <div class="plan-features">
+            <div class="features-section">
+              <h4 class="features-title">Funcionalidades Avanzadas</h4>
+              <p class="features-subtitle">Todo lo del plan gratuito, más:</p>
+              <ul class="features-list premium">
+                <li *ngFor="let feature of premiumFeatures" class="feature-item">
+                  <mat-icon class="feature-icon premium">check</mat-icon>
+                  {{ feature }}
+                </li>
+              </ul>
+            </div>
+          </div>
+
+          <button mat-raised-button class="plan-button upgrade-plan-button" (click)="upgradeToPremium()">
+            <mat-icon fontSet="material-symbols-outlined crown-icon">crown</mat-icon>
+            Actualizar a Premium
+          </button>
+        </mat-card-content>
+      </mat-card>
+    </div>
+
+    <!-- FAQ Section -->
+    <div class="faq-section">
+      <h2 class="faq-title">Preguntas Frecuentes:</h2>
+
+      <div class="faq-list">
+        <div *ngFor="let faq of faqs; let i = index" class="faq-item">
+          <div class="faq-question" (click)="toggleFAQ(i)">
+            <span class="question-text">{{ faq.question }}</span>
+            <mat-icon class="expand-icon" [class.expanded]="faq.expanded">
+              {{ faq.expanded ? 'expand_less' : 'expand_more' }}
+            </mat-icon>
+          </div>
+          <div class="faq-answer" [class.expanded]="faq.expanded">
+            <p>{{ faq.answer }}</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
