@@ -9,24 +9,26 @@
 
   <div class="buttons" style="font-variation-settings: 'FILL' 1, 'wght' 700, 'GRAD' 0, 'opsz' 48;">
 
-    <button mat-fab extended  class="titles">
-      <mat-icon fontSet="material-symbols-outlined crown-icon">crown</mat-icon>
+    <button
+      mat-fab extended class="titles" routerLink="/memberships" routerLinkActive="active-button">
+      <mat-icon class="material-symbols-outlined crown-icon">crown</mat-icon>
       Membresías
     </button>
 
-
-    <button mat-fab extended class="titles" >
-      <mat-icon fontSet="material-symbols-outlined regular-icon">potted_plant</mat-icon>
+    <button
+      mat-fab extended class="titles" routerLink="/pots" routerLinkActive="active-button">
+      <mat-icon class="material-symbols-outlined regular-icon">potted_plant</mat-icon>
       Macetas
     </button>
 
-    <button mat-fab extended class="titles" >
-      <mat-icon fontSet="material-symbols-outlined regular-icon">notifications</mat-icon>
+    <button
+      mat-fab extended class="titles" routerLink="/notifications" routerLinkActive="active-button">
+      <mat-icon class="material-symbols-outlined regular-icon">notifications</mat-icon>
       Notificaciones
     </button>
 
-    <button mat-fab extended  class="titles">
-      <mat-icon fontSet="material-symbols-outlined regular-icon">person</mat-icon>
+    <button mat-fab extended class="titles" routerLink="/profile" routerLinkActive="active-button">
+      <mat-icon class="material-symbols-outlined regular-icon">person</mat-icon>
       Perfil
     </button>
   </div>
