@@ -18,6 +18,7 @@ import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatInputModule} from '@angular/material/input';
 import {FormsModule} from '@angular/forms';
 import {NgIf} from '@angular/common';
+import {HttpClient} from '@angular/common/http';
 
 @Component({
   selector: 'app-profile',
@@ -34,12 +35,51 @@ import {NgIf} from '@angular/common';
 })
 export class ProfileComponent {
   readonly dialog = inject(MatDialog);
+  private http = inject(HttpClient);
+
   isEditingProfile = false;
 
-  nombre = 'John Doe';
-  correo = 'johndoe@gmail.com';
+  nombre = '';
+  correo = '';
   telefono = '';
   direccion = '';
+
+  ngOnInit() {
+    this.loadProfileData();
+    this.loadUserData();
+  }
+
+  // 🔹 Llama al endpoint /api/profiles/get
+  loadProfileData() {
+    this.http.get<{ id: number; fullName: string; streetAddress: string }>(
+      'https://macetech.azurewebsites.net/api/profiles/get'
+    ).subscribe({
+      next: (res) => {
+        this.nombre = res.fullName;
+        this.direccion = res.streetAddress;
+      },
+      error: (err) => {
+        console.error('Error al obtener perfil:', err);
+      }
+    });
+  }
+
+  // 🔹 Llama al endpoint /api/user/{uid}
+  loadUserData() {
+    const uid = localStorage.getItem('userId'); // asumimos que lo guardaste al iniciar sesión
+    if (!uid) return;
+
+    this.http.get<{ uid: string; email: string }>(
+      `https://macetech.azurewebsites.net/api/user/${uid}`
+    ).subscribe({
+      next: (res) => {
+        this.correo = res.email;
+      },
+      error: (err) => {
+        console.error('Error al obtener email:', err);
+      }
+    });
+  }
 
   openReset_Password_Dialog() {
     this.dialog.open(ChangeProfileDialog);
