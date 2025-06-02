@@ -4,7 +4,7 @@
     <p class="subtitle">¿Está seguro de que desea borrar su cuenta? Esta acción no se puede deshacer.</p>
     <form>
       <mat-dialog-actions class="button-row">
-        <button class="save" mat-button mat-dialog-close  >Borrar cuenta</button>
+        <button class="save" mat-button mat-dialog-close (click)="deleteAccount()"  >Borrar cuenta</button>
         <button class="cancel"  mat-button [mat-dialog-close]="true">Cancelar</button>
       </mat-dialog-actions>
     </form>

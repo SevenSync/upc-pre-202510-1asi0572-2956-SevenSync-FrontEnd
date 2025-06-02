@@ -8,8 +8,8 @@
 
         <div class="picture_container">
           <img src="AdobeExpress.png" width="100px" height="100px" class="picture" alt="Profile Picture">
-          <h2>Nombre </h2>
-          <h3>user&#64;hotmail.com</h3>
+          <h2>{{ nombre }}</h2>
+          <h3>{{ correo }}</h3>
 
         </div>
 
@@ -37,9 +37,9 @@
           </div>
         </div>
 
-        <button class="logout_button" >
+        <button class="logout_button" (click)="signOut()" >
           <mat-icon class="material-symbols-outlined">logout</mat-icon>
-          <a routerLink="/login">Cerrar Sesión</a>
+          Cerrar Sesión
         </button>
 
         <button class="delete_button" (click)="openDeleteAccount_Dialog()" >
@@ -70,6 +70,7 @@
                   <label for="cellphone">Teléfono</label>
                   <input type="text" id="cellphone" class="input" [disabled]="!isEditingProfile" [(ngModel)]="telefono">
                 </div>
+
                 <div class="field">
                   <label for="address">Dirección</label>
                   <input type="text" id="address" class="input" [disabled]="!isEditingProfile" [(ngModel)]="direccion">
@@ -78,8 +79,8 @@
 
               <!-- BOTONES -->
               <div class="buttons" *ngIf="isEditingProfile; else defaultButtons">
-                <button class="save"   (click)="cancelEditing()">Cancelar</button>
-                <button  class="cancel" (click)="saveChanges()">Guardar cambios</button>
+                <button class="cancel"   (click)="cancelEditing()">Cancelar</button>
+                <button  class="save" (click)="saveChanges()">Guardar cambios</button>
               </div>
 
               <ng-template #defaultButtons>

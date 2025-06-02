@@ -2,34 +2,28 @@
   <mat-dialog-content class="mat-typography">
   <h2 >Cambiar de contraseña</h2>
   <p class="subtitle">Antes de cambiar tu contraseña, debes ingresar nuevamente tu contraseña antigua y confirmar tu nueva contraseña</p>
-  <form>
-    <div  class="field">
-      <h3>Contraseña antigua</h3>
-      <input  type="password" required>
-    </div>
+    <form (ngSubmit)="changePassword()" #passwordForm="ngForm">
+      <div class="field">
+        <h3>Contraseña antigua</h3>
+        <input type="password" required [(ngModel)]="oldPassword" name="oldPassword">
+      </div>
 
-    <div  class="field">
-      <h3>Contraseña nueva</h3>
-      <input  type="password" required>
-    </div>
+      <div class="field">
+        <h3>Contraseña nueva</h3>
+        <input type="password" required [(ngModel)]="newPassword" name="newPassword">
+      </div>
 
-    <p class="requirements">
-      La contraseña debe seguir estos puntos:
-      <br>(✓) Tener al menos 8 caracteres
-      <br>(✓) Tener al menos una letra mayúscula y minúscula
-      <br>(✗) Tener al menos un número (0 al 9)
-    </p>
+      <div class="field">
+        <h3>Confirmar contraseña nueva</h3>
+        <input type="password" required [(ngModel)]="confirmPassword" name="confirmPassword">
+      </div>
 
-    <div  class=field>
-      <h3>Confirmar contraseña nueva</h3>
-      <input  type="password" required>
-    </div>
+      <mat-dialog-actions class="button-row">
+        <button class="save" type="submit">Guardar</button>
+        <button class="cancel" mat-dialog-close>Cancelar</button>
+      </mat-dialog-actions>
+    </form>
 
-    <mat-dialog-actions class="button-row">
-      <button class="save"  >Guardar</button>
-      <button class="cancel" mat-dialog-close>Cancelar</button>
-    </mat-dialog-actions>
-  </form>
   </mat-dialog-content >
 
 </div>
