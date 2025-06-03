@@ -94,8 +94,8 @@ export class RegisterComponent {
     ).subscribe({
       next: (res) => {
         if (res.created) {
-          this.successMessage = 'Registro exitoso. Redirigiendo al login...';
-          setTimeout(() => this.router.navigate(['/login']), 2000);
+          this.successMessage = 'Registro exitoso';
+          setTimeout(() => this.router.navigate(['/login']), 1500);
         } else {
           this.errorMessage = 'No se pudo registrar. Intenta de nuevo.';
         }

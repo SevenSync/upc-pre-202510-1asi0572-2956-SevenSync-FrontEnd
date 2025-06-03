@@ -98,13 +98,29 @@ export class LoginComponent {
         localStorage.setItem('authToken', res.token);
         localStorage.setItem('userId', res.uid);
 
-        // Redireccionar
-        this.router.navigate(['/profile'])
+        // Verificar si tiene perfil
+        this.http.get<{ hasProfile: boolean }>(
+          'https://macetech.azurewebsites.net/api/profiles/has-profile',
+          {
+            headers: {
+              Authorization: `Bearer ${res.token}`
+            }
+          }
+        ).subscribe({
+          next: (result) => {
+            const route = result.hasProfile ? '/profile' : '/create-profile';
+            this.router.navigate([route]);
+          },
+          error: () => {
+            // Si falla la verificación, por seguridad lo llevamos al perfil por defecto
+            this.router.navigate(['/profile']);
+          }
+        });
+
       },
       error: () => {
         this.isLoading = false;
         this.errorMessage = 'Correo o contraseña incorrectos.';
-        // console.error('Error de login:', err);
       }
     });
   }

@@ -257,20 +257,16 @@ export class DeleteAccountDialog  {
     const token = localStorage.getItem('authToken');
     if (!token) return;
 
-    this.http.post('https://macetech.azurewebsites.net/api/users/delete-account', {}, {
+    this.http.delete('https://macetech.azurewebsites.net/api/users/delete-account', {
       headers: {
         Authorization: `Bearer ${token}`
       }
     }).subscribe({
-      next: (res: any) => {
-        if (res.deleted) {
-          alert('Cuenta eliminada con éxito.');
-          localStorage.clear();
-          this.dialogRef.close();
-          this.router.navigate(['/login']);
-        } else {
-          alert('No se pudo eliminar la cuenta.');
-        }
+      next: () => {
+        alert('Cuenta eliminada con éxito.');
+        localStorage.clear();
+        this.dialogRef.close();
+        this.router.navigate(['/login']);
       },
       error: (err) => {
         console.error('Error al eliminar cuenta:', err);
@@ -278,5 +274,6 @@ export class DeleteAccountDialog  {
       }
     });
   }
+
 
 }
