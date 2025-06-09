@@ -44,16 +44,19 @@
         [class.status-warning]="pot.status === 'warning'"
         [class.status-critical]="pot.status === 'critical'">
 
-        <mat-card-header class="pot-header">
-          <div class="pot-image">
-            <mat-icon class="plant-icon">local_florist</mat-icon>
+        <div class="pot-image-container">
+          <img [src]="pot.image" [alt]="pot.name" class="pot-image" />
+          <div class="status-overlay">
+            <div class="status-indicator" [style.background-color]="getStatusColor(pot.status)">
+              <span class="status-text">{{ getStatusText(pot.status) }}</span>
+            </div>
           </div>
+        </div>
+
+        <mat-card-header class="pot-header">
           <div class="pot-info">
             <mat-card-title class="pot-name">{{ pot.name }}</mat-card-title>
             <mat-card-subtitle class="plant-type">{{ pot.plantType }}</mat-card-subtitle>
-          </div>
-          <div class="status-indicator" [style.background-color]="getStatusColor(pot.status)">
-            <span class="status-text">{{ getStatusText(pot.status) }}</span>
           </div>
         </mat-card-header>
 
@@ -156,4 +159,3 @@
     </div>
   </div>
 </div>
-

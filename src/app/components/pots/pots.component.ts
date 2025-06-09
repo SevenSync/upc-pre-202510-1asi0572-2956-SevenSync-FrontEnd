@@ -18,7 +18,7 @@ interface Pot {
   lightLevel: number
   lastWatered: string
   nextWatering: string
-  image?: string
+  image: string
   batteryLevel: number
 }
 
@@ -51,6 +51,7 @@ export class PotsComponent {
       lightLevel: 75,
       lastWatered: "Hace 3 días",
       nextWatering: "Hoy",
+      image: "demoplant.png",
       batteryLevel: 85,
     },
     {
@@ -63,6 +64,7 @@ export class PotsComponent {
       lightLevel: 80,
       lastWatered: "Ayer",
       nextWatering: "En 2 días",
+      image: "demoplant.png",
       batteryLevel: 92,
     },
     {
@@ -75,6 +77,7 @@ export class PotsComponent {
       lightLevel: 90,
       lastWatered: "Hace 1 semana",
       nextWatering: "Urgente",
+      image: "demoplant.png",
       batteryLevel: 45,
     },
     {
@@ -87,6 +90,7 @@ export class PotsComponent {
       lightLevel: 60,
       lastWatered: "Hace 2 días",
       nextWatering: "Mañana",
+      image: "demoplant.png",
       batteryLevel: 78,
     },
   ]
@@ -107,15 +111,14 @@ export class PotsComponent {
   }
 
   get healthyCount(): number {
-    return this.pots.filter(p => p.status === 'healthy').length;
+    return this.pots.filter((p) => p.status === "healthy").length
   }
   get warningCount(): number {
-    return this.pots.filter(p => p.status === 'warning').length;
+    return this.pots.filter((p) => p.status === "warning").length
   }
   get criticalCount(): number {
-    return this.pots.filter(p => p.status === 'critical').length;
+    return this.pots.filter((p) => p.status === "critical").length
   }
-
 
   getStatusColor(status: string): string {
     switch (status) {
