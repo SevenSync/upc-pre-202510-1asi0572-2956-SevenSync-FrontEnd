@@ -1,0 +1,140 @@
+<app-toolbar></app-toolbar>
+<div class="container">
+  <div class="title">
+    <a routerLink="/membership">
+      <mat-icon class="material-symbols-outlined icon">keyboard_backspace</mat-icon>
+    </a>
+
+    <h1 class="titulo">Checkout</h1>
+  </div>
+
+  <div class="payment_container">
+
+    <mat-card appearance="outlined" class="payment_info">
+      <mat-card-content >
+        <h2>Información de pago</h2>
+        <p>Completa los detalles para actualizar a Premium</p>
+        <h3>Ciclo de facturación</h3>
+        <div class="payment_periods">
+          <!-- ngClass permite aplicar una clase dinámica  -->
+          <button
+            class="period"
+            [ngClass]="{ 'active': selectedPeriod === 'monthly' }"
+            (click)="selectPeriod('monthly')"
+          >
+            Mensual
+          </button>
+          <button
+            class="period"
+            [ngClass]="{ 'active': selectedPeriod === 'annual' }"
+            (click)="selectPeriod('annual')"
+          >
+            Anual
+          </button>
+          <span >-17%</span>
+        </div>
+        <h3>Método de pago</h3>
+
+        <mat-radio-group >
+
+          <div class="payment_method">
+            <mat-radio-button value="1"></mat-radio-button>
+            <mat-icon class="material-symbols-outlined icon">credit_card</mat-icon>
+            Tarjeta de crédito o débito
+          </div>
+
+          <div class="payment_method">
+            <mat-radio-button value="1"></mat-radio-button>
+            <img class="paypal_icon" src="paypal.png">
+            Paypal
+          </div>
+        </mat-radio-group>
+
+        <div class="payment_fields">
+          <div class="field">
+            <h3>Número de tarjeta</h3>
+            <input type="text" placeholder="1234 5678 91234 5678" />
+          </div>
+          <div class="field">
+            <h3>Nombre completo</h3>
+            <input type="text" placeholder="John Doe" />
+          </div>
+
+          <div class="card_info">
+            <div class="card date">
+              <h3>Fecha de expiración</h3>
+              <input type="text" placeholder="MM/AA" />
+            </div>
+            <div class="card cvv">
+              <h3>CVV</h3>
+              <input type="text" placeholder="123" />
+            </div>
+          </div>
+
+        </div>
+
+        <div class="button">
+          <button class="payment_button">
+            <mat-icon class="material-symbols-outlined">lock</mat-icon>
+            <a routerLink="/payment">Pagar {{ selectedPeriod === 'annual' ? '$99.50' : '$9.99' }}</a>
+          </button>
+
+        </div>
+        <p class="message">Tu información de pago está segura y encriptada</p>
+
+
+
+      </mat-card-content>
+    </mat-card>
+
+    <mat-card appearance="outlined" class="resume">
+      <mat-card-content>
+        <h2>Resumen</h2>
+        <div class="plan">
+          <mat-icon class="material-symbols-outlined icon">crown</mat-icon>
+          <h3>Plan Premium</h3>
+        </div>
+        <p>{{ selectedPeriod === 'annual' ? 'Facturación anual' : 'Facturación mensual' }}</p>
+
+        <hr>
+        <div class="pricing">
+          <p>Subtotal</p>
+          <p>{{ selectedPeriod === 'annual' ? '$99.50' : '$9.99' }}</p>
+        </div>
+        <div class="pricing taxes">
+          <p>Impuestos</p>
+          <p>$0.00</p>
+        </div>
+        <hr>
+        <div class="pricing total">
+          <p>Total</p>
+          <p>{{ selectedPeriod === 'annual' ? '$99.50' : '$9.99' }}</p>
+        </div>
+
+        <div class="resume_container">
+          <div class="plan_resume">
+            <h2>Plan Premium</h2>
+            <div class="feature ">
+              <mat-icon class="material-symbols-outlined free_icon ">check</mat-icon>
+              Macetas inteligentes ilimitadas
+            </div>
+            <div class="feature ">
+              <mat-icon class="material-symbols-outlined free_icon ">check</mat-icon>
+              Historial de datos ilimitado
+            </div>
+            <div class="feature ">
+              <mat-icon class="material-symbols-outlined free_icon ">check</mat-icon>
+              Reportes semanales detallados
+            </div>
+            <div class="feature ">
+              <mat-icon class="material-symbols-outlined free_icon ">check</mat-icon>
+              Programación de riego automático
+            </div>
+          </div>
+        </div>
+
+      </mat-card-content>
+    </mat-card>
+  </div>
+
+</div>

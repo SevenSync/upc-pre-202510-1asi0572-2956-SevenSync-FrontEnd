@@ -5,8 +5,8 @@ import { MatToolbarModule} from '@angular/material/toolbar';
 import {ToolbarComponent} from '../public/toolbar/toolbar.component';
 import {MatTabsModule} from '@angular/material/tabs';
 import {MatCheckboxModule} from '@angular/material/checkbox';
-import {Router} from '@angular/router';
 import {ChangeDetectionStrategy, Component, inject} from '@angular/core';
+import { Router } from '@angular/router';
 import {
   MatDialog,
   MatDialogActions,
