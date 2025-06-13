@@ -1,0 +1,155 @@
+<app-toolbar></app-toolbar>
+
+<div class="pot-details-container">
+  <div class="header-section">
+    <div class="header-left">
+      <button mat-icon-button class="back-button" (click)="goBack()">
+        <mat-icon class="back-icon">arrow_back</mat-icon>
+      </button>
+      <h1 class="page-title">{{ potDetails.name }}</h1>
+    </div>
+    <div class="header-actions">
+      <button mat-stroked-button class="edit-button" (click)="editPot()">
+        <mat-icon>edit</mat-icon>
+        Editar
+      </button>
+      <button mat-icon-button class="menu-button">
+        <mat-icon>more_vert</mat-icon>
+      </button>
+    </div>
+  </div>
+
+  <div class="content-wrapper">
+    <div class="main-layout">
+      <!-- Columna Izquierda -->
+      <div class="left-column">
+        <mat-card class="pot-info-card">
+          <div class="pot-image-container">
+            <img [src]="potDetails.image" [alt]="potDetails.name" class="pot-image" />
+          </div>
+
+          <div class="pot-basic-info">
+            <h2 class="pot-name">{{ potDetails.name }}</h2>
+            <p class="pot-type">{{ potDetails.plantType }}</p>
+            <p class="pot-description">{{ potDetails.description }}</p>
+          </div>
+
+          <div class="care-info">
+            <div class="care-item">
+              <mat-icon class="care-icon">schedule</mat-icon>
+              <div class="care-details">
+                <span class="care-label">Horario de riego:</span>
+                <span class="care-value">{{ potDetails.wateringSchedule }}</span>
+              </div>
+            </div>
+
+            <div class="care-item">
+              <mat-icon class="care-icon">wb_sunny</mat-icon>
+              <div class="care-details">
+                <span class="care-label">Exposición al sol:</span>
+                <span class="care-value">{{ potDetails.sunExposure }}</span>
+              </div>
+            </div>
+
+            <div class="care-item">
+              <mat-icon class="care-icon">water_drop</mat-icon>
+              <div class="care-details">
+                <span class="care-label">Humedad óptima:</span>
+                <span class="care-value">{{ potDetails.optimalHumidity }}</span>
+              </div>
+            </div>
+          </div>
+        </mat-card>
+
+        <mat-card class="battery-card">
+          <h3 class="battery-title">Estado de la batería</h3>
+          <div class="battery-info">
+            <div class="battery-level">
+              <span class="battery-label">Nivel de batería</span>
+              <span class="battery-percentage">{{ potDetails.batteryLevel }}%</span>
+            </div>
+            <mat-progress-bar
+              mode="determinate"
+              [value]="potDetails.batteryLevel"
+              class="battery-bar"
+              [style.--progress-color]="getBatteryColor()">
+            </mat-progress-bar>
+            <p class="battery-status">Batería en buen estado</p>
+          </div>
+        </mat-card>
+      </div>
+
+      <!-- Columna Derecha -->
+      <div class="right-column">
+        <!-- Métricas -->
+        <div class="metrics-grid">
+          <mat-card *ngFor="let metric of metrics" class="metric-card">
+            <div class="metric-header">
+              <mat-icon class="metric-icon">{{ metric.icon }}</mat-icon>
+              <span class="metric-name">{{ metric.name }}</span>
+            </div>
+            <div class="metric-value">
+              <span class="value">{{ metric.value }}</span>
+              <span class="unit">{{ metric.unit }}</span>
+            </div>
+            <mat-progress-bar
+              mode="determinate"
+              [value]="metric.percentage"
+              class="metric-bar"
+              [style.--progress-color]="getMetricColor(metric)">
+            </mat-progress-bar>
+            <p class="metric-optimal">{{ metric.optimal }}</p>
+          </mat-card>
+        </div>
+
+        <!-- Control de Riego -->
+        <mat-card class="watering-control">
+          <div class="watering-header">
+            <h3 class="watering-title">Control De Riego</h3>
+            <p class="watering-status">El nivel de humedad del suelo es adecuado</p>
+          </div>
+          <button mat-raised-button class="water-button" (click)="waterPlant()">
+            <mat-icon>water_drop</mat-icon>
+            Regar ahora
+          </button>
+        </mat-card>
+
+        <!-- Tabs -->
+        <mat-card class="tabs-card">
+          <mat-tab-group
+            class="details-tabs"
+            (selectedTabChange)="onTabChange($event.index)"
+            [selectedIndex]="selectedTabIndex"
+            animationDuration="200ms">
+
+            <mat-tab label="Gráfico"></mat-tab>
+            <mat-tab label="Historial"></mat-tab>
+            <mat-tab label="Recomendaciones"></mat-tab>
+            <mat-tab label="Alertas"></mat-tab>
+            <mat-tab label="Reportes"></mat-tab>
+            <mat-tab label="Programación">
+              <div class="programming-content">
+                <div class="programming-header">
+                  <h3>Programación de riego</h3>
+                  <p>Configura cuándo y cuánto regar tus plantas. Recuerde que se requiere al menos 10% de batería para el riego automático</p>
+                </div>
+
+                <div class="empty-state">
+                  <mat-icon class="empty-icon">search</mat-icon>
+                  <h4 class="empty-title">Tu planta no tiene un riego automático programado.</h4>
+                  <p class="empty-description">
+                    Te recomendamos configurar al menos un período de riego automático para aprovechar al máximo nuestra aplicación y contribuir al bienestar e hidratación de tu planta.
+                  </p>
+                  <button mat-raised-button class="add-button">
+                    <mat-icon>add</mat-icon>
+                    Añadir
+                  </button>
+                </div>
+              </div>
+            </mat-tab>
+          </mat-tab-group>
+        </mat-card>
+      </div>
+    </div>
+  </div>
+</div>
