@@ -1,4 +1,4 @@
-import { Component, OnInit } from "@angular/core"
+import { Component, OnInit, ViewEncapsulation } from "@angular/core"
 import { FormBuilder, FormGroup, Validators, ReactiveFormsModule } from "@angular/forms"
 import { ActivatedRoute, Router } from "@angular/router"
 import { MatButtonModule } from "@angular/material/button"
@@ -37,6 +37,7 @@ interface PotEditData {
   ],
   templateUrl: "./edit-pot.component.html",
   styleUrl: "./edit-pot.component.css",
+  encapsulation: ViewEncapsulation.None
 })
 export class EditPotComponent implements OnInit {
   editForm: FormGroup

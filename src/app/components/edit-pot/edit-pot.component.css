@@ -377,3 +377,13 @@
     height: 24px;
   }
 }
+
+
+.mat-mdc-form-field-appearance-outline .mat-mdc-form-field-infix {
+  background-color: #fff;            /* fondo blanco dentro del outline */
+  padding-left: 12px;                /* espaciado izquierdo general */
+}
+
+.mat-mdc-select .mat-mdc-select-value-text{
+  color: #296244 !important;         /* forzar color primary (ajusta hex si tu tema usa otro) */
+}
