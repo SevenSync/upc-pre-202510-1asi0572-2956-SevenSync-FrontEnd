@@ -16,6 +16,13 @@
       <button mat-icon-button class="menu-button">
         <mat-icon>more_vert</mat-icon>
       </button>
+      <button (click)="openPlantSelector()">Seleccionar Planta para la Maceta</button>
+
+      <app-plant-catalog
+        *ngIf="isModalOpen"
+        (plantAssigned)="onPlantSelected($event)"
+        (cancelled)="onModalCancelled()">
+      </app-plant-catalog>
     </div>
   </div>
 

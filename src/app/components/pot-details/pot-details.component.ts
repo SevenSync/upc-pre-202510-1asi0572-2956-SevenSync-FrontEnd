@@ -12,6 +12,8 @@ import {MatSlideToggleModule} from '@angular/material/slide-toggle';
 import {MatSelectModule} from '@angular/material/select';
 import {MatInputModule} from '@angular/material/input';
 import {MatFormFieldModule} from '@angular/material/form-field';
+import {PlantCatalogComponent} from '../../plants/components/plant-catalog/plant-catalog.component';
+import {Plant} from '../../plants/model/plant.entity';
 
 interface PotDetails {
   id: number
@@ -65,6 +67,7 @@ interface WateringSchedule {
     ToolbarComponent,
     CommonModule,
     ReactiveFormsModule,
+    PlantCatalogComponent,
   ],
   templateUrl: "./pot-details.component.html",
   styleUrl: "./pot-details.component.css",
@@ -74,7 +77,7 @@ export class PotDetailsComponent implements OnInit {
   potId = 0
   showNewScheduleForm = false
   newScheduleForm: FormGroup
-
+  isModalOpen = false;
   daysOfWeek = [
     { value: "lunes", label: "Lunes" },
     { value: "martes", label: "Martes" },
@@ -187,7 +190,22 @@ export class PotDetailsComponent implements OnInit {
     this.potId = Number(this.route.snapshot.paramMap.get("id")) || 1
     this.loadPotDetails()
   }
+  // Modal para seleccionar planta
 
+  openPlantSelector(): void {
+    this.isModalOpen = true;
+  }
+
+  onPlantSelected(plant: Plant): void {
+    console.log('Planta asignada:', plant);
+    this.isModalOpen = false;
+    // Aquí harías la lógica para asignar la planta a la maceta
+  }
+
+  onModalCancelled(): void {
+    this.isModalOpen = false;
+  }
+  // Cargar detalles de la maceta según el ID
   loadPotDetails(): void {
     console.log("Cargando detalles de maceta ID:", this.potId)
   }
