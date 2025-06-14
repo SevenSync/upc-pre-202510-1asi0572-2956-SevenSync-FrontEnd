@@ -97,3 +97,20 @@ a:hover {
   }
 }
 
+/* ——— Estilos globales para mat-select (MDC) ——— */
+
+/* Fondo blanco al panel */
+.mat-mdc-select-panel {
+  background-color: #fff !important;
+}
+
+/* Texto de todas las opciones en color primary */
+.mat-mdc-select-panel .mat-mdc-option {
+  background-color: white;         /* u otro fondo si lo quieres */
+}
+
+/* Hover & selected con tintado suave de primary */
+.mat-mdc-select-panel .mat-mdc-option:hover,
+.mat-mdc-select-panel .mat-mdc-option.mat-mdc-selected {
+  background-color: rgba(63,81,181,0.08) !important; /* 8% primary */
+}

@@ -1,4 +1,4 @@
-import { Component, type OnInit } from "@angular/core"
+import { Component, OnInit } from "@angular/core"
 import { ActivatedRoute, Router } from "@angular/router"
 import { MatTabsModule } from "@angular/material/tabs"
 import { MatButtonModule } from "@angular/material/button"
@@ -7,6 +7,11 @@ import { MatCardModule } from "@angular/material/card"
 import { MatProgressBarModule } from "@angular/material/progress-bar"
 import { ToolbarComponent } from "../public/toolbar/toolbar.component"
 import { CommonModule } from "@angular/common"
+import {FormBuilder, FormGroup, ReactiveFormsModule, Validators} from '@angular/forms';
+import {MatSlideToggleModule} from '@angular/material/slide-toggle';
+import {MatSelectModule} from '@angular/material/select';
+import {MatInputModule} from '@angular/material/input';
+import {MatFormFieldModule} from '@angular/material/form-field';
 
 interface PotDetails {
   id: number
@@ -37,6 +42,14 @@ interface Metric {
   icon: string
 }
 
+interface WateringSchedule {
+  id: number
+  day: string
+  time: string
+  amount: number
+  isActive: boolean
+}
+
 @Component({
   selector: "app-pot-details",
   imports: [
@@ -45,8 +58,13 @@ interface Metric {
     MatIconModule,
     MatCardModule,
     MatProgressBarModule,
+    MatFormFieldModule,
+    MatInputModule,
+    MatSelectModule,
+    MatSlideToggleModule,
     ToolbarComponent,
     CommonModule,
+    ReactiveFormsModule,
   ],
   templateUrl: "./pot-details.component.html",
   styleUrl: "./pot-details.component.css",
@@ -54,6 +72,18 @@ interface Metric {
 export class PotDetailsComponent implements OnInit {
   selectedTabIndex = 5 // Programación por defecto
   potId = 0
+  showNewScheduleForm = false
+  newScheduleForm: FormGroup
+
+  daysOfWeek = [
+    { value: "lunes", label: "Lunes" },
+    { value: "martes", label: "Martes" },
+    { value: "miercoles", label: "Miércoles" },
+    { value: "jueves", label: "Jueves" },
+    { value: "viernes", label: "Viernes" },
+    { value: "sabado", label: "Sábado" },
+    { value: "domingo", label: "Domingo" },
+  ]
 
   // Datos simulados de la maceta
   potDetails: PotDetails = {
@@ -75,6 +105,23 @@ export class PotDetailsComponent implements OnInit {
     lastWatered: "Hace 3 días",
     nextWatering: "En 2 días",
   }
+
+  wateringSchedules: WateringSchedule[] = [
+    {
+      id: 1,
+      day: "martes",
+      time: "16:00",
+      amount: 300,
+      isActive: true,
+    },
+    {
+      id: 2,
+      day: "viernes",
+      time: "09:00",
+      amount: 300,
+      isActive: true,
+    },
+  ]
 
   metrics: Metric[] = [
     {
@@ -127,17 +174,21 @@ export class PotDetailsComponent implements OnInit {
   constructor(
     private route: ActivatedRoute,
     private router: Router,
-  ) {}
+    private fb: FormBuilder,
+  ) {
+    this.newScheduleForm = this.fb.group({
+      day: ["", Validators.required],
+      time: ["", Validators.required],
+      amount: [200, [Validators.required, Validators.min(50), Validators.max(1000)]],
+    })
+  }
 
   ngOnInit(): void {
     this.potId = Number(this.route.snapshot.paramMap.get("id")) || 1
-    // En una aplicación real, aquí cargarías los datos de la maceta desde el servicio
     this.loadPotDetails()
   }
 
   loadPotDetails(): void {
-    // Simular carga de datos
-    // En una aplicación real, harías una llamada HTTP aquí
     console.log("Cargando detalles de maceta ID:", this.potId)
   }
 
@@ -150,12 +201,10 @@ export class PotDetailsComponent implements OnInit {
   }
 
   waterPlant(): void {
-    // Simular riego
     this.potDetails.lastWatered = "Ahora"
     this.potDetails.nextWatering = "En 3 días"
     this.potDetails.humidity = Math.min(this.potDetails.humidity + 20, 100)
 
-    // Actualizar métrica de humedad
     const humidityMetric = this.metrics.find((m) => m.name === "Humedad")
     if (humidityMetric) {
       humidityMetric.value = this.potDetails.humidity.toString()
@@ -170,17 +219,17 @@ export class PotDetailsComponent implements OnInit {
   getMetricColor(metric: Metric): string {
     switch (metric.name) {
       case "Humedad":
-        return "#2196F3" // Azul
+        return "#2196F3"
       case "Luz":
-        return "#FF9800" // Naranja
+        return "#FF9800"
       case "Temperatura":
-        return "#F44336" // Rojo
+        return "#F44336"
       case "Acidez":
-        return "#4CAF50" // Verde
+        return "#4CAF50"
       case "Salinidad":
-        return "#009688" // Teal
+        return "#009688"
       default:
-        return "#9E9E9E" // Gris
+        return "#9E9E9E"
     }
   }
 
@@ -188,5 +237,63 @@ export class PotDetailsComponent implements OnInit {
     if (this.potDetails.batteryLevel >= 70) return "#4CAF50"
     if (this.potDetails.batteryLevel >= 30) return "#FF9800"
     return "#F44336"
+  }
+
+  // Métodos para programación de riego
+  showAddScheduleForm(): void {
+    this.showNewScheduleForm = true
+  }
+
+  cancelNewSchedule(): void {
+    this.showNewScheduleForm = false
+    this.newScheduleForm.reset()
+    this.newScheduleForm.patchValue({ amount: 200 })
+  }
+
+  saveNewSchedule(): void {
+    if (this.newScheduleForm.valid) {
+      const formValue = this.newScheduleForm.value
+      const newSchedule: WateringSchedule = {
+        id: this.wateringSchedules.length + 1,
+        day: formValue.day,
+        time: formValue.time,
+        amount: formValue.amount,
+        isActive: true,
+      }
+
+      this.wateringSchedules.push(newSchedule)
+      this.cancelNewSchedule()
+    }
+  }
+
+  toggleSchedule(scheduleId: number): void {
+    const schedule = this.wateringSchedules.find((s) => s.id === scheduleId)
+    if (schedule) {
+      schedule.isActive = !schedule.isActive
+    }
+  }
+
+  deleteSchedule(scheduleId: number): void {
+    this.wateringSchedules = this.wateringSchedules.filter((s) => s.id !== scheduleId)
+  }
+
+  getDayLabel(day: string): string {
+    const dayOption = this.daysOfWeek.find((d) => d.value === day)
+    return dayOption ? dayOption.label : day
+  }
+
+  get hasSchedules(): boolean {
+    return this.wateringSchedules.length > 0
+  }
+
+  // Getters para el formulario
+  get day() {
+    return this.newScheduleForm.get("day")
+  }
+  get time() {
+    return this.newScheduleForm.get("time")
+  }
+  get amount() {
+    return this.newScheduleForm.get("amount")
   }
 }

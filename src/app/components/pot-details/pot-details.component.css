@@ -388,6 +388,203 @@
   margin: 0;
 }
 
+/* Formulario Nueva Programación */
+.new-schedule-form {
+  background-color: #e3f2fd;
+  border-radius: 12px;
+  padding: 20px;
+  margin-bottom: 24px;
+  border: 1px solid #bbdefb;
+}
+
+.form-title {
+  color: #333;
+  font-size: 1.1rem;
+  font-weight: 600;
+  margin: 0 0 16px 0;
+}
+
+.schedule-form {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.form-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 16px;
+}
+
+.form-field {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.field-label {
+  color: #333;
+  font-size: 0.9rem;
+  font-weight: 600;
+  margin-bottom: 4px;
+}
+
+.full-width {
+  width: 100%;
+}
+
+.form-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 12px;
+  margin-top: 8px;
+}
+
+.cancel-btn {
+  color: #666;
+  border-color: #d0d0d0;
+  font-weight: 500;
+}
+
+.cancel-btn:hover {
+  background-color: #f5f5f5;
+}
+
+.save-btn {
+  background-color: #333;
+  color: white;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.save-btn:hover:not(:disabled) {
+  background-color: #555;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+}
+
+.save-btn:disabled {
+  background-color: #bdc3c7;
+  color: #7f8c8d;
+}
+
+/* Lista de Programaciones */
+.schedules-list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-bottom: 24px;
+}
+
+.schedule-item {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 16px;
+  background: white;
+  border: 1px solid #e0e0e0;
+  border-radius: 12px;
+  transition: all 0.2s ease;
+}
+
+.schedule-item:hover {
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.schedule-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  background-color: #e3f2fd;
+  border-radius: 10px;
+  flex-shrink: 0;
+}
+
+.schedule-icon mat-icon {
+  color: #2196f3;
+  font-size: 20px;
+  width: 20px;
+  height: 20px;
+}
+
+.schedule-info {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.schedule-day {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.day-icon {
+  color: #666;
+  font-size: 16px;
+  width: 16px;
+  height: 16px;
+}
+
+.day-text {
+  color: #333;
+  font-size: 1rem;
+  font-weight: 600;
+}
+
+.schedule-details {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.time-icon {
+  color: #666;
+  font-size: 16px;
+  width: 16px;
+  height: 16px;
+}
+
+.time-text {
+  color: #666;
+  font-size: 0.9rem;
+}
+
+.schedule-actions {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex-shrink: 0;
+}
+
+.schedule-toggle {
+  transform: scale(1.2);
+}
+
+.schedule-toggle ::ng-deep .mdc-switch--selected .mdc-switch__track {
+  background-color: #333 !important;
+}
+
+.schedule-toggle ::ng-deep .mdc-switch--selected .mdc-switch__handle {
+  background-color: white !important;
+}
+
+.delete-btn {
+  color: #f44336;
+  width: 36px;
+  height: 36px;
+}
+
+.delete-btn:hover {
+  background-color: #ffebee;
+}
+
+/* Estado vacío */
 .empty-state {
   text-align: center;
   padding: 40px 20px;
@@ -435,6 +632,11 @@
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
 }
 
+.add-more-section {
+  text-align: center;
+  padding: 20px 0;
+}
+
 /* Responsive Design */
 @media (max-width: 1024px) {
   .main-layout {
@@ -444,6 +646,11 @@
 
   .metrics-grid {
     grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  }
+
+  .form-row {
+    grid-template-columns: 1fr;
+    gap: 12px;
   }
 }
 
@@ -476,6 +683,20 @@
   .empty-state {
     padding: 30px 16px;
   }
+
+  .schedule-item {
+    padding: 12px;
+    gap: 12px;
+  }
+
+  .schedule-icon {
+    width: 36px;
+    height: 36px;
+  }
+
+  .schedule-actions {
+    gap: 8px;
+  }
 }
 
 @media (max-width: 480px) {
@@ -495,4 +716,26 @@
     min-width: 80px;
     font-size: 0.85rem;
   }
+
+  .form-actions {
+    flex-direction: column-reverse;
+  }
+
+  .cancel-btn,
+  .save-btn {
+    width: 100%;
+    justify-content: center;
+  }
+
+  .schedule-item {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 12px;
+  }
+
+  .schedule-actions {
+    justify-content: space-between;
+  }
 }
+
+
