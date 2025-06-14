@@ -58,6 +58,27 @@ interface WateringRecord {
   time: string
 }
 
+interface Alert {
+  id: number
+  type: "critical" | "warning" | "info"
+  title: string
+  description: string
+  icon: string
+  timestamp: string
+  daysAgo: number
+}
+
+interface Recommendation {
+  id: number
+  type: "light" | "humidity" | "fertilizer" | "temperature" | "general"
+  title: string
+  description: string
+  icon: string
+  backgroundColor: string
+  borderColor: string
+  iconColor: string
+}
+
 @Component({
   selector: "app-pot-details",
   imports: [
@@ -160,6 +181,77 @@ export class PotDetailsComponent implements OnInit {
       amount: 175,
       date: "05/05/2025",
       time: "10:30",
+    },
+  ]
+
+  // Alertas de la planta
+  alerts: Alert[] = [
+    {
+      id: 1,
+      type: "critical",
+      title: "Nivel de humedad del suelo bajo",
+      description:
+        "La humedad del sustrato de tu Monstera Deliciosa ha estado por debajo del 30% durante más de 2 días. Tu planta necesita agua urgentemente. Aumenta la frecuencia de regado automático o trata de regarla manualmente.",
+      icon: "water_drop",
+      timestamp: "Hace 4 días",
+      daysAgo: 4,
+    },
+    {
+      id: 2,
+      type: "warning",
+      title: "Temperatura elevada",
+      description:
+        "La temperatura del sustrato de tu Monstera Deliciosa ha superado los 29°C durante varias horas. Considera mover la planta a un lugar más fresco y bajo sombra.",
+      icon: "thermostat",
+      timestamp: "Hace 4 días",
+      daysAgo: 4,
+    },
+    {
+      id: 3,
+      type: "info",
+      title: "Batería baja",
+      description:
+        "El nivel de batería de los sensores de tu Monstera Deliciosa están por debajo del 15%. Recarga pronto para evitar perder datos y seguir monitoreando a tu planta en todo momento.",
+      icon: "battery_alert",
+      timestamp: "Hace 7 días",
+      daysAgo: 7,
+    },
+  ]
+
+  // Recomendaciones para la planta
+  recommendations: Recommendation[] = [
+    {
+      id: 1,
+      type: "light",
+      title: "Ajusta la exposición a la luz",
+      description:
+        "Tu Monstera Deliciosa está recibiendo demasiada luz directa, mayor a los valores óptimos. Considera moverla a un lugar con luz indirecta brillante para evitar que las hojas se quemen.",
+      icon: "wb_sunny",
+      backgroundColor: "#fce4ec",
+      borderColor: "#f8bbd9",
+      iconColor: "#e91e63",
+    },
+    {
+      id: 2,
+      type: "humidity",
+      title: "Aumenta la humedad",
+      description:
+        "Si bien la humedad actual es adecuada para una Monstera Deliciosa, aún puede aumentarse más para mejorar el crecimiento. Puedes rociar agua alrededor de la planta de forma más seguida, hacer más frecuente el riego automático, o usar un humidificador.",
+      icon: "water_drop",
+      backgroundColor: "#fff8e1",
+      borderColor: "#ffecb3",
+      iconColor: "#ff9800",
+    },
+    {
+      id: 3,
+      type: "fertilizer",
+      title: "Tiempo para fertilizar",
+      description:
+        "Es un buen momento para aplicar fertilizante a tu Monstera Deliciosa. Usa un fertilizante equilibrado diluido a la mitad de la concentración recomendada. Asimismo, no sobrepases los niveles de salinidad recomendados.",
+      icon: "location_on",
+      backgroundColor: "#e8f5e8",
+      borderColor: "#c8e6c9",
+      iconColor: "#4caf50",
     },
   ]
 
@@ -354,5 +446,52 @@ export class PotDetailsComponent implements OnInit {
   }
   get amount() {
     return this.newScheduleForm.get("amount")
+  }
+
+  get hasAlerts(): boolean {
+    return this.alerts.length > 0
+  }
+
+  getAlertBackgroundColor(type: string): string {
+    switch (type) {
+      case "critical":
+        return "#ffebee"
+      case "warning":
+        return "#fff8e1"
+      case "info":
+        return "#e3f2fd"
+      default:
+        return "#f5f5f5"
+    }
+  }
+
+  getAlertBorderColor(type: string): string {
+    switch (type) {
+      case "critical":
+        return "#ffcdd2"
+      case "warning":
+        return "#ffecb3"
+      case "info":
+        return "#bbdefb"
+      default:
+        return "#e0e0e0"
+    }
+  }
+
+  getAlertIconColor(type: string): string {
+    switch (type) {
+      case "critical":
+        return "#f44336"
+      case "warning":
+        return "#ff9800"
+      case "info":
+        return "#2196f3"
+      default:
+        return "#666"
+    }
+  }
+
+  get hasRecommendations(): boolean {
+    return this.recommendations.length > 0
   }
 }

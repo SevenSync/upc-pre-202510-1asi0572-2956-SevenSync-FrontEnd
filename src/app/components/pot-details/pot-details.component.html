@@ -158,8 +158,79 @@
                 </div>
               </div>
             </mat-tab>
-            <mat-tab label="Recomendaciones"></mat-tab>
-            <mat-tab label="Alertas"></mat-tab>
+            <mat-tab label="Recomendaciones">
+              <div class="recommendations-content">
+                <div class="recommendations-header">
+                  <h3>Recomendaciones</h3>
+                  <p>Consejos personalizados para el cuidado óptimo de tu planta</p>
+                </div>
+
+                <!-- Lista de Recomendaciones con datos -->
+                <div *ngIf="hasRecommendations" class="recommendations-list">
+                  <div *ngFor="let recommendation of recommendations"
+                       class="recommendation-item"
+                       [style.background-color]="recommendation.backgroundColor"
+                       [style.border-color]="recommendation.borderColor">
+                    <div class="recommendation-icon">
+                      <mat-icon [style.color]="recommendation.iconColor">{{ recommendation.icon }}</mat-icon>
+                    </div>
+                    <div class="recommendation-content">
+                      <h4 class="recommendation-title">{{ recommendation.title }}</h4>
+                      <p class="recommendation-description">{{ recommendation.description }}</p>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Estado vacío -->
+                <div *ngIf="!hasRecommendations" class="recommendations-empty-state">
+                  <div class="empty-search-icon">
+                    <mat-icon>search</mat-icon>
+                  </div>
+                  <h4 class="empty-recommendations-title">No tenemos recomendaciones para ti en este momento.</h4>
+                  <p class="empty-recommendations-description">
+                    Tu planta está en excelente estado. Aun así, siempre es buena idea buscar oportunidades de mejora. ¡Tu planta te lo agradecerá!
+                  </p>
+                </div>
+              </div>
+            </mat-tab>
+            <mat-tab label="Alertas">
+              <div class="alerts-content">
+                <div class="alerts-header">
+                  <h3>Alertas</h3>
+                  <p>Notificaciones importantes sobre el estado de tu planta</p>
+                </div>
+
+                <!-- Lista de Alertas con datos -->
+                <div *ngIf="hasAlerts" class="alerts-list">
+                  <div *ngFor="let alert of alerts"
+                       class="alert-item"
+                       [style.background-color]="getAlertBackgroundColor(alert.type)"
+                       [style.border-color]="getAlertBorderColor(alert.type)">
+                    <div class="alert-icon">
+                      <mat-icon [style.color]="getAlertIconColor(alert.type)">{{ alert.icon }}</mat-icon>
+                    </div>
+                    <div class="alert-content">
+                      <div class="alert-header">
+                        <h4 class="alert-title">{{ alert.title }}</h4>
+                        <span class="alert-timestamp">{{ alert.timestamp }}</span>
+                      </div>
+                      <p class="alert-description">{{ alert.description }}</p>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Estado vacío -->
+                <div *ngIf="!hasAlerts" class="alerts-empty-state">
+                  <div class="empty-search-icon">
+                    <mat-icon>search</mat-icon>
+                  </div>
+                  <h4 class="empty-alerts-title">No se han registrado alertas.</h4>
+                  <p class="empty-alerts-description">
+                    Tu planta está en excelente estado y no necesita cuidados adicionales por ahora. Cuando haya algo que atender, te avisaremos de inmediato
+                  </p>
+                </div>
+              </div>
+            </mat-tab>
             <mat-tab label="Reportes"></mat-tab>
             <mat-tab label="Programación">
               <div class="programming-content">
