@@ -50,6 +50,14 @@ interface WateringSchedule {
   isActive: boolean
 }
 
+interface WateringRecord {
+  id: number
+  type: "manual" | "automatic"
+  amount: number
+  date: string
+  time: string
+}
+
 @Component({
   selector: "app-pot-details",
   imports: [
@@ -70,7 +78,7 @@ interface WateringSchedule {
   styleUrl: "./pot-details.component.css",
 })
 export class PotDetailsComponent implements OnInit {
-  selectedTabIndex = 5 // Programación por defecto
+  selectedTabIndex = 1 // Historial por defecto para mostrar los datos
   potId = 0
   showNewScheduleForm = false
   newScheduleForm: FormGroup
@@ -120,6 +128,38 @@ export class PotDetailsComponent implements OnInit {
       time: "09:00",
       amount: 300,
       isActive: true,
+    },
+  ]
+
+  // Historial de riegos
+  wateringHistory: WateringRecord[] = [
+    {
+      id: 1,
+      type: "manual",
+      amount: 250,
+      date: "15/05/2025",
+      time: "14:30",
+    },
+    {
+      id: 2,
+      type: "automatic",
+      amount: 300,
+      date: "13/05/2025",
+      time: "09:00",
+    },
+    {
+      id: 3,
+      type: "automatic",
+      amount: 300,
+      date: "09/05/2025",
+      time: "16:00",
+    },
+    {
+      id: 4,
+      type: "manual",
+      amount: 175,
+      date: "05/05/2025",
+      time: "10:30",
     },
   ]
 
@@ -210,6 +250,17 @@ export class PotDetailsComponent implements OnInit {
       humidityMetric.value = this.potDetails.humidity.toString()
       humidityMetric.percentage = this.potDetails.humidity
     }
+
+    // Agregar nuevo registro al historial
+    const now = new Date()
+    const newRecord: WateringRecord = {
+      id: this.wateringHistory.length + 1,
+      type: "manual",
+      amount: 200,
+      date: now.toLocaleDateString("es-ES"),
+      time: now.toLocaleTimeString("es-ES", { hour: "2-digit", minute: "2-digit" }),
+    }
+    this.wateringHistory.unshift(newRecord)
   }
 
   onTabChange(index: number): void {
@@ -284,6 +335,14 @@ export class PotDetailsComponent implements OnInit {
 
   get hasSchedules(): boolean {
     return this.wateringSchedules.length > 0
+  }
+
+  get hasWateringHistory(): boolean {
+    return this.wateringHistory.length > 0
+  }
+
+  getWateringTypeLabel(type: string): string {
+    return type === "manual" ? "Riego manual" : "Riego automático"
   }
 
   // Getters para el formulario

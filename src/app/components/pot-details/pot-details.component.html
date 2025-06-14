@@ -123,7 +123,41 @@
             animationDuration="200ms">
 
             <mat-tab label="Gráfico"></mat-tab>
-            <mat-tab label="Historial"></mat-tab>
+            <mat-tab label="Historial">
+              <div class="history-content">
+                <div class="history-header">
+                  <h3>Historial de Riego</h3>
+                  <p>Registro de los últimos riegos de tu planta</p>
+                </div>
+
+                <!-- Lista de Historial con datos -->
+                <div *ngIf="hasWateringHistory" class="history-list">
+                  <div *ngFor="let record of wateringHistory" class="history-item">
+                    <div class="history-icon">
+                      <mat-icon>water_drop</mat-icon>
+                    </div>
+                    <div class="history-info">
+                      <h4 class="history-type">{{ getWateringTypeLabel(record.type) }}</h4>
+                      <p class="history-amount">Cantidad: {{ record.amount }}ml</p>
+                    </div>
+                    <div class="history-datetime">
+                      <span class="history-date">{{ record.date }}, {{ record.time }}</span>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Estado vacío -->
+                <div *ngIf="!hasWateringHistory" class="history-empty-state">
+                  <div class="empty-water-icon">
+                    <mat-icon>water_drop</mat-icon>
+                  </div>
+                  <h4 class="empty-history-title">Tu planta aún no ha sido regada desde que la colocaste en esta maceta</h4>
+                  <p class="empty-history-description">
+                    Podría ser un buen momento para revisar su nivel de humedad: una planta bien hidratada es una planta feliz.
+                  </p>
+                </div>
+              </div>
+            </mat-tab>
             <mat-tab label="Recomendaciones"></mat-tab>
             <mat-tab label="Alertas"></mat-tab>
             <mat-tab label="Reportes"></mat-tab>
@@ -142,7 +176,7 @@
                       <div class="form-field">
                         <label class="field-label">Día</label>
                         <mat-form-field appearance="outline" class="full-width">
-                          <mat-select formControlName="day" placeholder="Seleccionar día" style="padding-left:12px">
+                          <mat-select formControlName="day" placeholder="Seleccionar día">
                             <mat-option *ngFor="let day of daysOfWeek" [value]="day.value">
                               {{ day.label }}
                             </mat-option>
@@ -156,7 +190,7 @@
                       <div class="form-field">
                         <label class="field-label">Hora</label>
                         <mat-form-field appearance="outline" class="full-width">
-                          <input matInput type="time" formControlName="time" placeholder="--:--" style="padding-left:12px">
+                          <input matInput type="time" formControlName="time" placeholder="--:--">
                           <mat-error *ngIf="time?.hasError('required')">
                             Selecciona una hora
                           </mat-error>
@@ -166,7 +200,7 @@
                       <div class="form-field">
                         <label class="field-label">Cantidad (ml)</label>
                         <mat-form-field appearance="outline" class="full-width">
-                          <input matInput type="number" formControlName="amount" placeholder="200ml" style="padding-left:12px" >
+                          <input matInput type="number" formControlName="amount" placeholder="200ml">
                           <mat-error *ngIf="amount?.hasError('required')">
                             Ingresa la cantidad
                           </mat-error>

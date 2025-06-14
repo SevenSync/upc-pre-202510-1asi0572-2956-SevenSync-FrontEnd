@@ -637,6 +637,146 @@
   padding: 20px 0;
 }
 
+/* Historial Content */
+.history-content {
+  padding: 24px;
+}
+
+.history-header {
+  margin-bottom: 40px;
+}
+
+.history-header h3 {
+  color: #333;
+  font-size: 1.2rem;
+  font-weight: 600;
+  margin: 0 0 8px 0;
+}
+
+.history-header p {
+  color: #666;
+  font-size: 0.9rem;
+  line-height: 1.4;
+  margin: 0;
+}
+
+.history-empty-state {
+  text-align: center;
+  padding: 60px 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 300px;
+}
+
+.empty-water-icon {
+  width: 80px;
+  height: 80px;
+  background-color: #e3f2fd;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 24px;
+}
+
+.empty-water-icon mat-icon {
+  font-size: 40px;
+  width: 40px;
+  height: 40px;
+  color: #90caf9;
+}
+
+.empty-history-title {
+  color: #333;
+  font-size: 1.1rem;
+  font-weight: 600;
+  margin: 0 0 16px 0;
+  max-width: 500px;
+  line-height: 1.4;
+}
+
+.empty-history-description {
+  color: #666;
+  font-size: 0.9rem;
+  line-height: 1.5;
+  margin: 0;
+  max-width: 450px;
+}
+
+/* Lista de Historial */
+.history-list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.history-item {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 16px;
+  background: white;
+  border: 1px solid #e0e0e0;
+  border-radius: 12px;
+  transition: all 0.2s ease;
+}
+
+.history-item:hover {
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.history-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  background-color: #e3f2fd;
+  border-radius: 10px;
+  flex-shrink: 0;
+}
+
+.history-icon mat-icon {
+  color: #90caf9;
+  font-size: 20px;
+  width: 20px;
+  height: 20px;
+}
+
+.history-info {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.history-type {
+  color: #333;
+  font-size: 1rem;
+  font-weight: 600;
+  margin: 0;
+}
+
+.history-amount {
+  color: #666;
+  font-size: 0.9rem;
+  margin: 0;
+}
+
+.history-datetime {
+  display: flex;
+  align-items: center;
+  flex-shrink: 0;
+}
+
+.history-date {
+  color: #666;
+  font-size: 0.85rem;
+  font-weight: 500;
+}
+
 /* Responsive Design */
 @media (max-width: 1024px) {
   .main-layout {
@@ -737,5 +877,3 @@
     justify-content: space-between;
   }
 }
-
-
