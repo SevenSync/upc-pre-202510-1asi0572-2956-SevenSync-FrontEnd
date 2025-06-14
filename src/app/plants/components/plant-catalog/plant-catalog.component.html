@@ -1,0 +1,69 @@
+<div class="modal-overlay" (click)="cancel()">
+  <div class="modal-container" (click)="$event.stopPropagation()">
+
+    <div class="modal-header">
+      <h2>Seleccionar Planta</h2>
+      <p>Elige la planta que colocarás en esta maceta</p>
+      <button class="close-btn" (click)="cancel()">×</button>
+    </div>
+
+    <div class="modal-body">
+      <div class="plant-list-container">
+        <div *ngIf="isLoading" class="loader">Cargando plantas...</div>
+        <div *ngIf="error && !isLoading" class="error-banner">{{ error }}</div>
+
+        <ng-container *ngIf="!isLoading && !error">
+          <div class="plant-grid">
+            <!-- El bucle itera sobre 'plants', que contiene los 10 resultados de la página actual -->
+            <div
+              *ngFor="let plant of plants"
+              class="plant-card"
+              [class.selected]="plant.id === selectedPlant?.id"
+              (click)="selectPlant(plant)">
+
+              <img [src]="plant.imageUrl" [alt]="plant.commonName" class="plant-image">
+
+              <div class="plant-info">
+                <h3 class="plant-name">{{ plant.commonName }}</h3>
+                <p class="plant-scientific-name">{{ plant.scientificName }}</p>
+              </div>
+            </div>
+          </div>
+
+          <p *ngIf="!plants.length && !isLoading" class="no-results">
+            No se encontraron plantas.
+          </p>
+        </ng-container>
+      </div>
+    </div>
+
+    <div class="modal-footer paginator-footer">
+      <!-- Paginador -->
+      <div class="paginator" *ngIf="!isLoading && lastPage > 1">
+        <button
+          class="paginator-btn"
+          (click)="goToPage(currentPage - 1)"
+          [disabled]="currentPage === 1">
+          <
+        </button>
+        <!-- Se elimina el texto "Página X de Y" para coincidir con la UI -->
+        <button
+          class="paginator-btn"
+          (click)="goToPage(currentPage + 1)"
+          [disabled]="currentPage === lastPage">
+          >
+        </button>
+      </div>
+      <!-- Botones de Acción -->
+      <div class="action-buttons">
+        <button class="btn btn-secondary" (click)="cancel()">Cancelar</button>
+        <button
+          class="btn btn-primary"
+          [disabled]="!selectedPlant"
+          (click)="assignPlant()">
+          <span class="icon">🌱</span> Asignar planta
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
