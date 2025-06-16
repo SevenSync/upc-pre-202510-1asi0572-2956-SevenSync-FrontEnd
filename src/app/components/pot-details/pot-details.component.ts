@@ -25,7 +25,6 @@ interface PotDetails {
   acidity: number
   salinity: number
   batteryLevel: number
-  wateringSchedule: string
   sunExposure: string
   optimalHumidity: string
   lastWatered: string
@@ -42,13 +41,6 @@ interface Metric {
   icon: string
 }
 
-interface WateringSchedule {
-  id: number
-  day: string
-  time: string
-  amount: number
-  isActive: boolean
-}
 
 interface WateringRecord {
   id: number
@@ -128,29 +120,11 @@ export class PotDetailsComponent implements OnInit {
     acidity: 6.7,
     salinity: 1.1,
     batteryLevel: 72,
-    wateringSchedule: "Cada 5-7 días",
     sunExposure: "Sombra parcial / Luz indirecta",
     optimalHumidity: "40-60%",
     lastWatered: "Hace 3 días",
     nextWatering: "En 2 días",
   }
-
-  wateringSchedules: WateringSchedule[] = [
-    {
-      id: 1,
-      day: "martes",
-      time: "16:00",
-      amount: 300,
-      isActive: true,
-    },
-    {
-      id: 2,
-      day: "viernes",
-      time: "09:00",
-      amount: 300,
-      isActive: true,
-    },
-  ]
 
   // Historial de riegos
   wateringHistory: WateringRecord[] = [
@@ -393,41 +367,11 @@ export class PotDetailsComponent implements OnInit {
     this.newScheduleForm.patchValue({ amount: 200 })
   }
 
-  saveNewSchedule(): void {
-    if (this.newScheduleForm.valid) {
-      const formValue = this.newScheduleForm.value
-      const newSchedule: WateringSchedule = {
-        id: this.wateringSchedules.length + 1,
-        day: formValue.day,
-        time: formValue.time,
-        amount: formValue.amount,
-        isActive: true,
-      }
-
-      this.wateringSchedules.push(newSchedule)
-      this.cancelNewSchedule()
-    }
-  }
-
-  toggleSchedule(scheduleId: number): void {
-    const schedule = this.wateringSchedules.find((s) => s.id === scheduleId)
-    if (schedule) {
-      schedule.isActive = !schedule.isActive
-    }
-  }
-
-  deleteSchedule(scheduleId: number): void {
-    this.wateringSchedules = this.wateringSchedules.filter((s) => s.id !== scheduleId)
-  }
-
   getDayLabel(day: string): string {
     const dayOption = this.daysOfWeek.find((d) => d.value === day)
     return dayOption ? dayOption.label : day
   }
 
-  get hasSchedules(): boolean {
-    return this.wateringSchedules.length > 0
-  }
 
   get hasWateringHistory(): boolean {
     return this.wateringHistory.length > 0

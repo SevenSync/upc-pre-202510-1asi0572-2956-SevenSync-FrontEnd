@@ -119,21 +119,6 @@
           <!-- Segunda fila: Horario de riego y Necesidades de luz -->
           <div class="form-row">
             <div class="form-field">
-              <label class="field-label">Horario de riego recomendado</label>
-              <mat-form-field appearance="outline" class="full-width">
-                <input
-                  matInput
-                  placeholder="Ej: Cada 5-7 días"
-                  formControlName="wateringSchedule"
-                  required
-                  style="padding-left:12px">
-                <mat-error *ngIf="wateringSchedule?.hasError('required')">
-                  El horario de riego es obligatorio
-                </mat-error>
-              </mat-form-field>
-            </div>
-
-            <div class="form-field">
               <label class="field-label">Necesidades de luz</label>
               <mat-form-field appearance="outline" class="full-width">
                 <mat-select formControlName="lightNeeds" required style="padding-left:12px">
@@ -146,6 +131,7 @@
                 </mat-error>
               </mat-form-field>
             </div>
+
           </div>
 
           <!-- Tercera fila: Temperatura y Humedad -->
@@ -174,6 +160,9 @@
                   formControlName="optimalHumidity"
                   required
                   style="padding-left:12px">
+                <mat-error *ngIf="optimalHumidity?.hasError('required')">
+                  La humedad óptima es obligatoria
+                </mat-error>
               </mat-form-field>
             </div>
           </div>

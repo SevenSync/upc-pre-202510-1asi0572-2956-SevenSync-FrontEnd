@@ -16,7 +16,6 @@ interface PotEditData {
   plantType: string
   description: string
   image: string
-  wateringSchedule: string
   lightNeeds: string
   optimalTemperature: string
   optimalHumidity: string
@@ -70,7 +69,6 @@ export class EditPotComponent implements OnInit {
     description:
       "La Monstera Deliciosa es una planta tropical con hojas grandes y perforadas. Es fácil de cuidar y prefiere luz indirecta brillante.",
     image: "demoplant.png",
-    wateringSchedule: "Cada 5-7 días",
     lightNeeds: "indirecta",
     optimalTemperature: "18-27°C",
     optimalHumidity: "40-60%",
@@ -85,7 +83,6 @@ export class EditPotComponent implements OnInit {
       name: ["", [Validators.required, Validators.minLength(2)]],
       plantType: ["", Validators.required],
       description: ["", [Validators.required, Validators.minLength(10)]],
-      wateringSchedule: ["", Validators.required],
       lightNeeds: ["", Validators.required],
       optimalTemperature: ["", Validators.required],
       optimalHumidity: [""],
@@ -109,7 +106,6 @@ export class EditPotComponent implements OnInit {
       name: this.potData.name,
       plantType: this.potData.plantType,
       description: this.potData.description,
-      wateringSchedule: this.potData.wateringSchedule,
       lightNeeds: this.potData.lightNeeds,
       optimalTemperature: this.potData.optimalTemperature,
       optimalHumidity: this.potData.optimalHumidity,
@@ -202,9 +198,6 @@ export class EditPotComponent implements OnInit {
   }
   get description() {
     return this.editForm.get("description")
-  }
-  get wateringSchedule() {
-    return this.editForm.get("wateringSchedule")
   }
   get lightNeeds() {
     return this.editForm.get("lightNeeds")
