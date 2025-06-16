@@ -11,6 +11,7 @@ import {PotsComponent} from './components/pots/pots.component';
 import {CreateProfileComponent} from './components/create-profile/create-profile.component';
 import {PotDetailsComponent} from './components/pot-details/pot-details.component';
 import {EditPotComponent} from './components/edit-pot/edit-pot.component';
+import {AddPotComponent} from './components/add-pot/add-pot.component';
 
 export const routes: Routes = [
   { path: 'login', component: LoginComponent },
@@ -24,6 +25,7 @@ export const routes: Routes = [
   { path: "pots", component: PotsComponent },
   { path: "pot-details/:id", component: PotDetailsComponent },
   { path: "edit-pot/:id", component: EditPotComponent },
+  { path: "add-pot", component: AddPotComponent },
   { path: '**', redirectTo: 'login', pathMatch: 'full' },
 
 ];

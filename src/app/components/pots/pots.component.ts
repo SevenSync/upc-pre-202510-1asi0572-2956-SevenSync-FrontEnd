@@ -180,4 +180,7 @@ export class PotsComponent {
   viewDetails(potId: number): void {
     this.router.navigate(["/pot-details", potId])
   }
+  addNewPot(): void {
+    this.router.navigate(["/add-pot"])
+  }
 }

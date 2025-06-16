@@ -1,0 +1,388 @@
+.add-pot-container {
+  background-color: #eef3ef;
+  min-height: 100vh;
+  padding: 0;
+}
+
+.header-section {
+  padding: 20px 40px;
+  background: white;
+  border-bottom: 1px solid #e0e0e0;
+}
+
+.header-left {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.back-button {
+  width: 40px;
+  height: 40px;
+  background-color: transparent;
+  border: 1px solid #e0e0e0;
+  transition: all 0.2s ease;
+}
+
+.back-button:hover {
+  background-color: #f5f5f5;
+  transform: translateX(-2px);
+}
+
+.back-icon {
+  color: #296244;
+  font-size: 20px;
+  width: 20px;
+  height: 20px;
+}
+
+.page-title {
+  color: #296244;
+  font-size: 1.5rem;
+  font-weight: 600;
+  margin: 0;
+}
+
+.content-wrapper {
+  padding: 40px;
+  display: flex;
+  justify-content: center;
+}
+
+.add-form-card {
+  max-width: 800px;
+  width: 100%;
+  border-radius: 16px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+  background: white;
+}
+
+.form-header {
+  padding: 32px 32px 0 32px;
+  text-align: left;
+}
+
+.form-title {
+  color: #333;
+  font-size: 1.5rem;
+  font-weight: 600;
+  margin: 0 0 8px 0;
+}
+
+.form-subtitle {
+  color: #666;
+  font-size: 1rem;
+  margin: 0;
+  font-weight: 400;
+}
+
+.form-content {
+  padding: 24px 32px 32px 32px;
+}
+
+.step-form {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  margin-top: 20px;
+}
+
+.form-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+}
+
+.form-field {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.full-width-field {
+  grid-column: 1 / -1;
+}
+
+.field-label {
+  color: #333;
+  font-size: 0.95rem;
+  font-weight: 600;
+  margin-bottom: 4px;
+}
+
+.full-width {
+  width: 100%;
+}
+
+/* Estilos para los campos de formulario */
+.step-form ::ng-deep .mat-mdc-form-field {
+  width: 100%;
+}
+
+.step-form ::ng-deep .mat-mdc-text-field-wrapper {
+  background-color: #fafafa;
+  border-radius: 8px;
+}
+
+.step-form ::ng-deep .mat-mdc-form-field-focus-overlay {
+  background-color: transparent;
+}
+
+.step-form ::ng-deep .mdc-notched-outline__leading,
+.step-form ::ng-deep .mdc-notched-outline__notch,
+.step-form ::ng-deep .mdc-notched-outline__trailing {
+  border-color: #e0e0e0;
+}
+
+.step-form ::ng-deep .mat-mdc-form-field.mat-focused .mdc-notched-outline__leading,
+.step-form ::ng-deep .mat-mdc-form-field.mat-focused .mdc-notched-outline__notch,
+.step-form ::ng-deep .mat-mdc-form-field.mat-focused .mdc-notched-outline__trailing {
+  border-color: #296244;
+  border-width: 2px;
+}
+
+/* Área de carga de imagen */
+.image-upload-area {
+  border: 2px dashed #d0d0d0;
+  border-radius: 12px;
+  padding: 40px 20px;
+  text-align: center;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  background-color: #fafafa;
+  position: relative;
+  min-height: 200px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.image-upload-area:hover {
+  border-color: #296244;
+  background-color: #f5f9f6;
+}
+
+.upload-placeholder {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+}
+
+.upload-icon {
+  width: 64px;
+  height: 64px;
+  background-color: #e0e0e0;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 8px;
+}
+
+.upload-icon mat-icon {
+  font-size: 32px;
+  width: 32px;
+  height: 32px;
+  color: #999;
+}
+
+.upload-button {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: #296244;
+  border-color: #296244;
+  font-weight: 500;
+  padding: 12px 24px;
+}
+
+.upload-button:hover {
+  background-color: #f0f8f2;
+}
+
+.upload-text {
+  color: #666;
+  font-size: 0.9rem;
+  margin: 0;
+}
+
+.image-preview {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.preview-image {
+  max-width: 100%;
+  max-height: 160px;
+  border-radius: 8px;
+  object-fit: cover;
+}
+
+.image-overlay {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.image-preview:hover .image-overlay {
+  opacity: 1;
+}
+
+.change-image-btn {
+  background-color: rgba(0, 0, 0, 0.7);
+  color: white;
+  width: 36px;
+  height: 36px;
+}
+
+.change-image-btn:hover {
+  background-color: rgba(0, 0, 0, 0.9);
+}
+
+/* Acciones de los pasos */
+.step-actions {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 32px;
+  padding-top: 20px;
+  border-top: 1px solid #f0f0f0;
+}
+
+.create-button {
+  background-color: #2ecc71;
+  color: white;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 12px 24px;
+}
+
+.create-button:hover:not(:disabled) {
+  background-color: #27ae60;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(46, 204, 113, 0.3);
+}
+
+.create-button:disabled {
+  background-color: #bdc3c7;
+  color: #7f8c8d;
+  cursor: not-allowed;
+}
+
+/* Estilos del stepper */
+.add-form-card ::ng-deep .mat-stepper-horizontal {
+  margin-top: 0;
+}
+
+.add-form-card ::ng-deep .mat-step-header {
+  padding: 16px 24px;
+}
+
+.add-form-card ::ng-deep .mat-step-header .mat-step-icon {
+  background-color: #296244;
+  color: white;
+}
+
+.add-form-card ::ng-deep .mat-step-header .mat-step-icon-selected {
+  background-color: #2ecc71;
+}
+
+.add-form-card ::ng-deep .mat-step-header .mat-step-label {
+  color: #333;
+  font-weight: 500;
+}
+
+.add-form-card ::ng-deep .mat-step-header .mat-step-label.mat-step-label-active {
+  color: #296244;
+  font-weight: 600;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .content-wrapper {
+    padding: 20px;
+  }
+
+  .header-section {
+    padding: 16px 20px;
+  }
+
+  .form-header {
+    padding: 24px 24px 0 24px;
+  }
+
+  .form-content {
+    padding: 20px 24px 24px 24px;
+  }
+
+  .form-row {
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
+
+  .step-actions {
+    flex-direction: column-reverse;
+    gap: 12px;
+  }
+
+  .step-actions button {
+    width: 100%;
+    justify-content: center;
+  }
+
+  .image-upload-area {
+    padding: 30px 16px;
+    min-height: 160px;
+  }
+
+  .page-title {
+    font-size: 1.3rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .header-left {
+    gap: 12px;
+  }
+
+  .page-title {
+    font-size: 1.2rem;
+  }
+
+  .form-title {
+    font-size: 1.3rem;
+  }
+
+  .form-subtitle {
+    font-size: 0.9rem;
+  }
+
+  .step-form {
+    gap: 20px;
+  }
+
+  .image-upload-area {
+    padding: 24px 12px;
+    min-height: 140px;
+  }
+
+  .upload-icon {
+    width: 48px;
+    height: 48px;
+  }
+
+  .upload-icon mat-icon {
+    font-size: 24px;
+    width: 24px;
+    height: 24px;
+  }
+}
