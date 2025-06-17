@@ -1,0 +1,47 @@
+:host {
+  display: block;
+  font-family: Roboto, sans-serif;
+  color: #3B3C45;
+  padding: 1rem;
+}
+
+mat-card {
+  max-width: 400px;
+  margin: 1rem auto;
+  border: 1px solid #E4E4E7;
+}
+
+mat-card-title {
+  font-size: 1.4rem;
+  color: #38865D;
+  text-align: center;
+}
+
+mat-card-content p {
+  margin: 0.5rem 0;
+}
+
+mat-card-content strong {
+  color: #38865D;
+}
+
+mat-card-actions {
+  display: flex;
+  justify-content: flex-end;
+}
+
+mat-card-actions button[color="warn"] {
+  color: white;
+  background-color: #C75000;
+}
+
+mat-card-actions button[color="warn"]:hover {
+  background-color: #9f3d00;
+}
+
+.spinner-container,
+.error-container {
+  display: flex;
+  justify-content: center;
+  margin-top: 2rem;
+}

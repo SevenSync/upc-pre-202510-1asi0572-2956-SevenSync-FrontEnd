@@ -1,0 +1,11 @@
+<mat-card>
+  <mat-card-title>Pago Rechazado</mat-card-title>
+  <mat-card-content>
+    <p>{{ errorMessage }}</p>
+  </mat-card-content>
+  <mat-card-actions>
+    <button mat-raised-button color="primary" (click)="onRetry()">
+      Volver a intentar
+    </button>
+  </mat-card-actions>
+</mat-card>

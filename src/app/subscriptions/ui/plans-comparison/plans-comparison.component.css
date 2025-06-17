@@ -1,0 +1,94 @@
+:host {
+  display: block;
+  font-family: Roboto, sans-serif;
+  color: #3B3C45;
+  padding: 1rem;
+  background-color: #FFFFFF;
+}
+
+.plans-container {
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+  margin-bottom: 2rem;
+}
+
+.plan-card {
+  flex: 1 1 calc(50% - 1rem);
+  border: 1px solid #E4E4E7;
+}
+
+.plan-card mat-card-title {
+  background-color: #38865D;
+  color: white;
+  padding: 0.5rem;
+  font-size: 1.2rem;
+  text-align: center;
+}
+
+.plan-card mat-card-content {
+  padding: 1rem;
+}
+
+.plan-card p {
+  margin: 0.25rem 0;
+}
+
+.plan-card ul {
+  padding-left: 1.2rem;
+  margin: 0.5rem 0;
+}
+
+.plan-card ul li {
+  margin-bottom: 0.25rem;
+}
+
+.plan-card button {
+  margin-right: 0.5rem;
+}
+
+/* Botón Primary */
+.plan-card .mat-raised-button[color="primary"] {
+  background-color: #38865D;
+  border-color: #296244;
+}
+.plan-card .mat-raised-button[color="primary"]:hover {
+  background-color: #296244;
+}
+
+/* Botón Accent */
+.plan-card .mat-stroked-button[color="accent"] {
+  color: #F1C40F;
+  border-color: #F1C40F;
+}
+.plan-card .mat-stroked-button[color="accent"]:hover {
+  background-color: rgba(241, 196, 15, 0.1);
+}
+
+.comparison-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.comparison-table th.mat-header-cell,
+.comparison-table td.mat-cell {
+  border: 1px solid #E4E4E7;
+  padding: 0.5rem;
+  text-align: center;
+}
+
+.comparison-table th.mat-header-cell {
+  background-color: #E4E4E7;
+  color: #3B3C45;
+}
+
+.comparison-table tr.mat-row:nth-child(even) {
+  background-color: #F5F5F5;
+}
+
+.spinner-container,
+.error-container {
+  display: flex;
+  justify-content: center;
+  margin-top: 2rem;
+}
