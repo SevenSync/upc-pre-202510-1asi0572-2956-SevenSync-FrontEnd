@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import {ToolbarComponent} from "../public/toolbar/toolbar.component";
+import {ToolbarComponent} from "../../shared/toolbar/toolbar.component";
 import {MatIconModule} from '@angular/material/icon';
 import {MatCardModule} from '@angular/material/card';
 import {MatTabsModule} from '@angular/material/tabs';

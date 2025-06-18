@@ -5,7 +5,7 @@ import { MatIconModule } from "@angular/material/icon"
 import { MatCardModule } from "@angular/material/card"
 import { MatChipsModule } from "@angular/material/chips"
 import { MatProgressBarModule } from "@angular/material/progress-bar"
-import { ToolbarComponent } from "../public/toolbar/toolbar.component"
+import { ToolbarComponent } from "../../shared/toolbar/toolbar.component"
 import { CommonModule } from "@angular/common"
 
 interface Pot {

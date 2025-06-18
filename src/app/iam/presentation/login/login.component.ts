@@ -8,16 +8,14 @@ import { MatInputModule } from "@angular/material/input";
 import { MatButtonModule } from "@angular/material/button";
 import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 
-import { HttpClient } from '@angular/common/http';
 import { inject } from "@angular/core";
 
 import {MatSelectModule} from '@angular/material/select';
 import {
   MatSnackBar, MatSnackBarActions,
-  MatSnackBarHorizontalPosition,
   MatSnackBarLabel, MatSnackBarRef,
-  MatSnackBarVerticalPosition
 } from '@angular/material/snack-bar';
+import {SignInUserUseCase} from '../../application/use-cases/sign-in-user.usecase';
 
 @Component({
   selector: "app-login",
@@ -40,17 +38,14 @@ export class LoginComponent {
   returnUrl: string;
   isLoading = false;
   errorMessage = '';
-  private http = inject(HttpClient);
-  private _snackBar = inject(MatSnackBar);
   durationInSeconds = 5;
-
-  horizontalPosition: MatSnackBarHorizontalPosition = 'end';
-  verticalPosition: MatSnackBarVerticalPosition = 'bottom';
 
   constructor(
     private fb: FormBuilder,
     private router: Router,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private snackBar: MatSnackBar,
+    private signInUser: SignInUserUseCase
   ) {
     this.loginForm = this.fb.group({
       email: ["", [Validators.required, Validators.email]],
@@ -60,21 +55,14 @@ export class LoginComponent {
     this.returnUrl = this.route.snapshot.queryParams["returnUrl"] || "/";
   }
 
-
-
-  get email() {
-    return this.loginForm.get('email');
-  }
-
-  get password() {
-    return this.loginForm.get('password');
-  }
+  get email() { return this.loginForm.get('email'); }
+  get password() { return this.loginForm.get('password'); }
 
   openSnackBar() {
-    this._snackBar.openFromComponent(SnackBarComponent, {
-      horizontalPosition: this.horizontalPosition,
-      verticalPosition: this.verticalPosition,
+    this.snackBar.openFromComponent(SnackBarComponent, {
       duration: this.durationInSeconds * 1000,
+      horizontalPosition: 'end',
+      verticalPosition: 'bottom'
     });
   }
 
@@ -84,39 +72,21 @@ export class LoginComponent {
     this.isLoading = true;
     this.errorMessage = '';
 
-    const loginData = this.loginForm.value;
+    const { email, password } = this.loginForm.value;
 
-    this.http.post<{ uid: string; token: string }>(
-      'https://macetech.azurewebsites.net/api/users/sign-in',
-      loginData,
-    ).subscribe({
-      next: (res) => {
-        // console.log('Login exitoso:', res);
+    this.signInUser.execute({ email, password }).subscribe({
+      next: ({ token, uid }) => {
         this.openSnackBar();
+        localStorage.setItem('authToken', token);
+        localStorage.setItem('userId', uid);
 
-        // Guardar token (ejemplo en localStorage)
-        localStorage.setItem('authToken', res.token);
-        localStorage.setItem('userId', res.uid);
-
-        // Verificar si tiene perfil
-        this.http.get<{ hasProfile: boolean }>(
-          'https://macetech.azurewebsites.net/api/profiles/has-profile',
-          {
-            headers: {
-              Authorization: `Bearer ${res.token}`
-            }
-          }
-        ).subscribe({
+        this.signInUser.checkProfile(token).subscribe({
           next: (result) => {
             const route = result.hasProfile ? '/profile' : '/create-profile';
             this.router.navigate([route]);
           },
-          error: () => {
-            // Si falla la verificación, por seguridad lo llevamos al perfil por defecto
-            this.router.navigate(['/profile']);
-          }
+          error: () => this.router.navigate(['/profile'])
         });
-
       },
       error: () => {
         this.isLoading = false;
