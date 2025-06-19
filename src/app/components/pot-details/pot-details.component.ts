@@ -41,6 +41,26 @@ interface Metric {
   icon: string
 }
 
+interface ChartDataPoint {
+  time: string
+  humidity: number
+  light: number
+  temperature: number
+  acidity: number
+  salinity: number
+}
+
+interface TooltipData {
+  time: string
+  humidity: string
+  light: string
+  temperature: string
+  acidity: string
+  salinity: string
+  visible: boolean
+  x: number
+  y: number
+}
 
 interface WateringRecord {
   id: number
@@ -91,10 +111,40 @@ interface Recommendation {
   styleUrl: "./pot-details.component.css",
 })
 export class PotDetailsComponent implements OnInit {
-  selectedTabIndex = 1 // Historial por defecto para mostrar los datos
+  selectedTabIndex = 0 // Gráfico por defecto para mostrar los datos
   potId = 0
   showNewScheduleForm = false
   newScheduleForm: FormGroup
+  selectedPeriod = "day"
+  hasChartData = true // Simular que hay datos disponibles
+
+  // Datos simulados del gráfico
+  chartData: ChartDataPoint[] = [
+    { time: "01:00", humidity: 45, light: 0, temperature: 20, acidity: 6.5, salinity: 1.0 },
+    { time: "03:00", humidity: 44, light: 0, temperature: 19, acidity: 6.6, salinity: 1.0 },
+    { time: "05:00", humidity: 43, light: 5, temperature: 19, acidity: 6.6, salinity: 1.1 },
+    { time: "07:00", humidity: 42, light: 15, temperature: 21, acidity: 6.7, salinity: 1.1 },
+    { time: "09:00", humidity: 40, light: 25, temperature: 23, acidity: 6.7, salinity: 1.1 },
+    { time: "11:00", humidity: 38, light: 30, temperature: 24, acidity: 6.8, salinity: 1.2 },
+    { time: "13:00", humidity: 35, light: 35, temperature: 25, acidity: 6.8, salinity: 1.2 },
+    { time: "15:00", humidity: 49, light: 10.25, temperature: 22, acidity: 6.7, salinity: 1.1 },
+    { time: "17:00", humidity: 47, light: 20, temperature: 23, acidity: 6.7, salinity: 1.1 },
+    { time: "19:00", humidity: 46, light: 10, temperature: 22, acidity: 6.6, salinity: 1.0 },
+    { time: "21:00", humidity: 45, light: 2, temperature: 21, acidity: 6.6, salinity: 1.0 },
+    { time: "23:00", humidity: 45, light: 0, temperature: 20, acidity: 6.5, salinity: 1.0 },
+  ]
+
+  tooltipData: TooltipData = {
+    time: "",
+    humidity: "",
+    light: "",
+    temperature: "",
+    acidity: "",
+    salinity: "",
+    visible: false,
+    x: 0,
+    y: 0,
+  }
 
   daysOfWeek = [
     { value: "lunes", label: "Lunes" },
@@ -333,6 +383,80 @@ export class PotDetailsComponent implements OnInit {
     this.selectedTabIndex = index
   }
 
+  onPeriodChange(period: string): void {
+    this.selectedPeriod = period
+    // Aquí se cargarían los datos según el período seleccionado
+    console.log("Período seleccionado:", period)
+  }
+
+  // Métodos para el gráfico
+  getChartPoints(metric: string): string {
+    const maxValue = 80
+    const chartWidth = 800 // Ancho aproximado del área del gráfico
+    const chartHeight = 400// Alto aproximado del área del gráfico
+    const padding = 60
+
+    return this.chartData
+      .map((point, index) => {
+        const x = padding + (index * (chartWidth - padding * 2)) / (this.chartData.length - 1)
+        let value = 0
+
+        switch (metric) {
+          case "humidity":
+            value = point.humidity
+            break
+          case "light":
+            value = point.light
+            break
+          case "temperature":
+            value = point.temperature
+            break
+          case "acidity":
+            value = point.acidity * 10
+            break // Escalar pH para visualización
+          case "salinity":
+            value = point.salinity * 20
+            break // Escalar salinidad para visualización
+        }
+
+        const y = chartHeight - padding - (value / maxValue) * (chartHeight - padding * 2)
+        return `${x},${y}`
+      })
+      .join(" ")
+  }
+
+  onChartMouseMove(event: MouseEvent): void {
+    if (!this.hasChartData) return
+
+    const rect = (event.target as Element).getBoundingClientRect()
+    const x = event.clientX - rect.left
+    const y = event.clientY - rect.top
+
+    // Calcular el punto más cercano
+    const chartWidth = rect.width
+    const padding = 60
+    const pointIndex = Math.round(((x - padding) / (chartWidth - padding * 2)) * (this.chartData.length - 1))
+
+    if (pointIndex >= 0 && pointIndex < this.chartData.length) {
+      const dataPoint = this.chartData[pointIndex]
+      this.tooltipData = {
+        time: dataPoint.time,
+        humidity: `${dataPoint.humidity}% (vol%)`,
+        light: `${dataPoint.light} kLux`,
+        temperature: `${dataPoint.temperature}°C`,
+        acidity: `${dataPoint.acidity} pH`,
+        salinity: `${dataPoint.salinity} dS/m`,
+        visible: true,
+        x: Math.min(x + 10, chartWidth - 200), // Ajustar posición para que no se salga
+        y: Math.max(y - 10, 10),
+      }
+    }
+  }
+
+  onChartMouseLeave(): void {
+    this.tooltipData.visible = false
+  }
+
   getMetricColor(metric: Metric): string {
     switch (metric.name) {
       case "Humedad":
@@ -437,5 +561,37 @@ export class PotDetailsComponent implements OnInit {
 
   get hasRecommendations(): boolean {
     return this.recommendations.length > 0
+  }
+
+  // Propiedades para reportes
+  selectedReportPeriod = {
+    start: new Date(2025, 4, 5), // 05/05/2025
+    end: new Date(2025, 4, 11), // 11/05/2025
+  }
+  hasReportsData = false // Simular que no hay datos suficientes aún
+
+  // Métodos para reportes
+  navigateReportPeriod(direction: "prev" | "next"): void {
+    const days = 7
+    const multiplier = direction === "next" ? 1 : -1
+
+    this.selectedReportPeriod.start = new Date(
+      this.selectedReportPeriod.start.getTime() + days * 24 * 60 * 60 * 1000 * multiplier,
+    )
+    this.selectedReportPeriod.end = new Date(
+      this.selectedReportPeriod.end.getTime() + days * 24 * 60 * 60 * 1000 * multiplier,
+    )
+  }
+
+  formatReportDate(date: Date): string {
+    return date.toLocaleDateString("es-ES", {
+      day: "2-digit",
+      month: "2-digit",
+      year: "numeric",
+    })
+  }
+
+  getReportPeriodText(): string {
+    return `${this.formatReportDate(this.selectedReportPeriod.start)} - ${this.formatReportDate(this.selectedReportPeriod.end)}`
   }
 }

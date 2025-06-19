@@ -115,7 +115,264 @@
             [selectedIndex]="selectedTabIndex"
             animationDuration="200ms">
 
-            <mat-tab label="Gráfico"></mat-tab>
+            <mat-tab label="Gráfico">
+              <div class="chart-content">
+                <div class="chart-header">
+                  <div>
+                    <h3>{{ hasChartData ? 'Historial de Sensores' : 'Gráfico de Métricas' }}</h3>
+                    <p *ngIf="hasChartData" class="chart-subtitle">Monitoreo de las condiciones de tu planta</p>
+                  </div>
+                  <mat-form-field appearance="outline" class="period-selector">
+                    <mat-select [value]="selectedPeriod" (selectionChange)="onPeriodChange($event.value)">
+                      <mat-option value="day">Día</mat-option>
+                      <mat-option value="week">Semana</mat-option>
+                      <mat-option value="month">Mes</mat-option>
+                    </mat-select>
+                  </mat-form-field>
+                </div>
+
+                <!-- Gráfico con datos -->
+                <div *ngIf="hasChartData" class="chart-container">
+                  <div class="chart-with-data"
+                       (mousemove)="onChartMouseMove($event)"
+                       (mouseleave)="onChartMouseLeave()">
+                    <svg class="chart-svg" viewBox="0 0 800 400" preserveAspectRatio="xMidYMid meet">
+                      <!-- Cuadrícula -->
+                      <defs>
+                        <pattern id="grid" width="66.67" height="80" patternUnits="userSpaceOnUse">
+                          <path d="M 66.67 0 L 0 0 0 80" fill="none" stroke="#e8e8e8" stroke-width="1"/>
+                        </pattern>
+                      </defs>
+                      <rect width="100%" height="100%" fill="url(#grid)" />
+
+                      <!-- Ejes -->
+                      <g class="axes">
+                        <!-- Eje Y -->
+                        <g class="y-axis">
+                          <text x="30" y="60" class="axis-label">80</text>
+                          <text x="30" y="140" class="axis-label">60</text>
+                          <text x="30" y="220" class="axis-label">40</text>
+                          <text x="30" y="300" class="axis-label">20</text>
+                          <text x="30" y="380" class="axis-label">0</text>
+                        </g>
+                        <!-- Eje X -->
+                        <g class="x-axis">
+                          <text x="60" y="395" class="axis-label">01:00</text>
+                          <text x="125" y="395" class="axis-label">03:00</text>
+                          <text x="190" y="395" class="axis-label">05:00</text>
+                          <text x="255" y="395" class="axis-label">07:00</text>
+                          <text x="320" y="395" class="axis-label">09:00</text>
+                          <text x="385" y="395" class="axis-label">11:00</text>
+                          <text x="450" y="395" class="axis-label">13:00</text>
+                          <text x="515" y="395" class="axis-label">15:00</text>
+                          <text x="580" y="395" class="axis-label">17:00</text>
+                          <text x="645" y="395" class="axis-label">19:00</text>
+                          <text x="710" y="395" class="axis-label">21:00</text>
+                          <text x="740" y="395" class="axis-label">23:00</text>
+                        </g>
+                      </g>
+
+                      <!-- Líneas de datos -->
+                      <g class="data-lines">
+                        <!-- Humedad -->
+                        <polyline
+                          [attr.points]="getChartPoints('humidity')"
+                          fill="none"
+                          stroke="#2196F3"
+                          stroke-width="2"
+                          class="data-line humidity-line"/>
+
+                        <!-- Luz -->
+                        <polyline
+                          [attr.points]="getChartPoints('light')"
+                          fill="none"
+                          stroke="#FF9800"
+                          stroke-width="2"
+                          class="data-line light-line"/>
+
+                        <!-- Temperatura -->
+                        <polyline
+                          [attr.points]="getChartPoints('temperature')"
+                          fill="none"
+                          stroke="#F44336"
+                          stroke-width="2"
+                          class="data-line temperature-line"/>
+
+                        <!-- Acidez -->
+                        <polyline
+                          [attr.points]="getChartPoints('acidity')"
+                          fill="none"
+                          stroke="#4CAF50"
+                          stroke-width="2"
+                          class="data-line acidity-line"/>
+
+                        <!-- Salinidad -->
+                        <polyline
+                          [attr.points]="getChartPoints('salinity')"
+                          fill="none"
+                          stroke="#009688"
+                          stroke-width="2"
+                          class="data-line salinity-line"/>
+                      </g>
+
+                      <!-- Puntos de datos -->
+                      <g class="data-points">
+                        <ng-container *ngFor="let point of chartData; let i = index">
+                          <circle
+                            [attr.cx]="60 + (i * 680) / (chartData.length - 1)"
+                            [attr.cy]="340 - (point.humidity / 80) * 280"
+                            r="3"
+                            fill="#2196F3"
+                            class="data-point humidity-point"/>
+                          <circle
+                            [attr.cx]="60 + (i * 680) / (chartData.length - 1)"
+                            [attr.cy]="340 - (point.light / 80) * 280"
+                            r="3"
+                            fill="#FF9800"
+                            class="data-point light-point"/>
+                          <circle
+                            [attr.cx]="60 + (i * 680) / (chartData.length - 1)"
+                            [attr.cy]="340 - (point.temperature / 80) * 280"
+                            r="3"
+                            fill="#F44336"
+                            class="data-point temperature-point"/>
+                          <circle
+                            [attr.cx]="60 + (i * 680) / (chartData.length - 1)"
+                            [attr.cy]="340 - ((point.acidity * 10) / 80) * 280"
+                            r="3"
+                            fill="#4CAF50"
+                            class="data-point acidity-point"/>
+                          <circle
+                            [attr.cx]="60 + (i * 680) / (chartData.length - 1)"
+                            [attr.cy]="340 - ((point.salinity * 20) / 80) * 280"
+                            r="3"
+                            fill="#009688"
+                            class="data-point salinity-point"/>
+                        </ng-container>
+                      </g>
+                    </svg>
+
+                    <!-- Tooltip -->
+                    <div *ngIf="tooltipData.visible"
+                         class="chart-tooltip"
+                         [style.left.px]="tooltipData.x"
+                         [style.top.px]="tooltipData.y">
+                      <div class="tooltip-time">{{ tooltipData.time }}</div>
+                      <div class="tooltip-item">
+                        <span class="tooltip-label">Humedad:</span>
+                        <span class="tooltip-value">{{ tooltipData.humidity }}</span>
+                      </div>
+                      <div class="tooltip-item">
+                        <span class="tooltip-label">Luz:</span>
+                        <span class="tooltip-value">{{ tooltipData.light }}</span>
+                      </div>
+                      <div class="tooltip-item">
+                        <span class="tooltip-label">Temperatura:</span>
+                        <span class="tooltip-value">{{ tooltipData.temperature }}</span>
+                      </div>
+                      <div class="tooltip-item">
+                        <span class="tooltip-label">Acidez:</span>
+                        <span class="tooltip-value">{{ tooltipData.acidity }}</span>
+                      </div>
+                      <div class="tooltip-item">
+                        <span class="tooltip-label">Salinidad:</span>
+                        <span class="tooltip-value">{{ tooltipData.salinity }}</span>
+                      </div>
+                    </div>
+                  </div>
+
+                  <!-- Leyenda del gráfico -->
+                  <div class="chart-legend">
+                    <div class="legend-item">
+                      <div class="legend-color humidity"></div>
+                      <span class="legend-label">Humedad (vol%)</span>
+                    </div>
+                    <div class="legend-item">
+                      <div class="legend-color light"></div>
+                      <span class="legend-label">Luz (lux)</span>
+                    </div>
+                    <div class="legend-item">
+                      <div class="legend-color temperature"></div>
+                      <span class="legend-label">Temperatura (°C)</span>
+                    </div>
+                    <div class="legend-item">
+                      <div class="legend-color acidity"></div>
+                      <span class="legend-label">Acidez (pH)</span>
+                    </div>
+                    <div class="legend-item">
+                      <div class="legend-color salinity"></div>
+                      <span class="legend-label">Salinidad (mS/cm)</span>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Estado vacío del gráfico -->
+                <div *ngIf="!hasChartData" class="chart-container">
+                  <div class="chart-empty-state">
+                    <div class="chart-placeholder">
+                      <div class="chart-grid">
+                        <!-- Líneas verticales de la cuadrícula -->
+                        <div class="grid-lines vertical">
+                          <div class="grid-line" *ngFor="let i of [1,2,3,4,5,6,7,8,9,10,11,12]"></div>
+                        </div>
+                        <!-- Líneas horizontales de la cuadrícula -->
+                        <div class="grid-lines horizontal">
+                          <div class="grid-line" *ngFor="let i of [1,2,3,4]"></div>
+                        </div>
+                      </div>
+
+                      <!-- Ejes del gráfico -->
+                      <div class="chart-axes">
+                        <!-- Eje Y -->
+                        <div class="y-axis">
+                          <span class="axis-label" *ngFor="let value of ['80', '60', '40', '20', '0']">{{ value }}</span>
+                        </div>
+                        <!-- Eje X -->
+                        <div class="x-axis">
+                          <span class="axis-label" *ngFor="let time of ['01:00', '03:00', '05:00', '07:00', '09:00', '11:00', '13:00', '15:00', '17:00', '19:00', '21:00', '23:00']">{{ time }}</span>
+                        </div>
+                      </div>
+
+                      <!-- Mensaje de estado vacío -->
+                      <div class="empty-chart-message">
+                        <div class="empty-icon">
+                          <mat-icon>timeline</mat-icon>
+                        </div>
+                        <h4 class="empty-title">Los sensores de tu planta aún no han recolectado datos.</h4>
+                        <p class="empty-description">
+                          Dales un momento para adaptarse y comenzar a brindarte la información que necesitas; no tomará más de un minuto.
+                        </p>
+                      </div>
+                    </div>
+
+                    <!-- Leyenda del gráfico -->
+                    <div class="chart-legend">
+                      <div class="legend-item">
+                        <div class="legend-color humidity"></div>
+                        <span class="legend-label">Humedad (vol%)</span>
+                      </div>
+                      <div class="legend-item">
+                        <div class="legend-color light"></div>
+                        <span class="legend-label">Luz (lux)</span>
+                      </div>
+                      <div class="legend-item">
+                        <div class="legend-color temperature"></div>
+                        <span class="legend-label">Temperatura (°C)</span>
+                      </div>
+                      <div class="legend-item">
+                        <div class="legend-color acidity"></div>
+                        <span class="legend-label">Acidez (pH)</span>
+                      </div>
+                      <div class="legend-item">
+                        <div class="legend-color salinity"></div>
+                        <span class="legend-label">Salinidad (mS/cm)</span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </mat-tab>
+
             <mat-tab label="Historial">
               <div class="history-content">
                 <div class="history-header">
@@ -224,7 +481,47 @@
                 </div>
               </div>
             </mat-tab>
-            <mat-tab label="Reportes"></mat-tab>
+            <mat-tab label="Reportes">
+              <div class="reports-content">
+                <div class="reports-header">
+                  <h3>Reporte semanal</h3>
+                  <p>Resumen del rendimiento de tu planta a lo largo de toda una semana</p>
+                </div>
+
+                <!-- Navegador de período -->
+                <div class="period-navigator">
+                  <button mat-icon-button class="nav-button" (click)="navigateReportPeriod('prev')">
+                    <mat-icon>chevron_left</mat-icon>
+                  </button>
+                  <span class="period-text">{{ getReportPeriodText() }}</span>
+                  <button mat-icon-button class="nav-button" (click)="navigateReportPeriod('next')">
+                    <mat-icon>chevron_right</mat-icon>
+                  </button>
+                </div>
+
+                <!-- Estado vacío -->
+                <div *ngIf="!hasReportsData" class="reports-empty-state">
+                  <div class="empty-reports-icon">
+                    <mat-icon>search</mat-icon>
+                  </div>
+                  <h4 class="empty-reports-title">Aún no tenemos reportes disponibles.</h4>
+                  <p class="empty-reports-description">
+                    Los datos recolectados por los sensores de tu Monstera Deliciosa todavía no son suficientes para generar un informe semanal. Necesitamos al menos información de los 7 días de la semana para hacerlo.
+                  </p>
+                </div>
+
+                <!-- Contenido de reportes (cuando hay datos) -->
+                <div *ngIf="hasReportsData" class="reports-data">
+                  <!-- Aquí irá el contenido del reporte cuando esté disponible -->
+                  <div class="report-sections">
+                    <mat-card class="report-card">
+                      <h4>Resumen de la semana</h4>
+                      <p>Contenido del reporte semanal...</p>
+                    </mat-card>
+                  </div>
+                </div>
+              </div>
+            </mat-tab>
           </mat-tab-group>
         </mat-card>
       </div>
