@@ -1,0 +1,33 @@
+<app-spinner-error [isLoading]="isLoading" [errorMsg]="errorMsg"></app-spinner-error>
+
+<ng-container *ngIf="!isLoading && !errorMsg && status">
+  <mat-card>
+    <mat-card-title>Estado de tu Membresía</mat-card-title>
+    <mat-card-content>
+      <p><strong>Plan:</strong> {{ status.planId | titlecase }}</p>
+      <p><strong>Estado:</strong> {{ status.status | titlecase }}</p>
+      <p *ngIf="status.startDate">
+        <strong>Fecha de inicio:</strong>
+        {{ status.startDate | date:'longDate' }}
+      </p>
+      <p *ngIf="status.endDate">
+        <strong>Próxima renovación:</strong>
+        {{ status.endDate | date:'longDate' }}
+      </p>
+      <p *ngIf="status.daysRemaining !== undefined">
+        <strong>Días restantes:</strong> {{ status.daysRemaining }}
+      </p>
+    </mat-card-content>
+    <mat-card-actions>
+      <button
+        mat-stroked-button
+        color="warn"
+        (click)="onCancel()"
+        *ngIf="status.planId === 'premium' && status.status === 'active'"
+      >
+        Cancelar Suscripción
+      </button>
+      <button mat-button (click)="onBack()">Volver a Membresías</button>
+    </mat-card-actions>
+  </mat-card>
+</ng-container>

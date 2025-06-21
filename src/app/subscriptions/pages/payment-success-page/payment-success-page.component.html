@@ -1,0 +1,12 @@
+<mat-card class="payment-card">
+  <mat-card-title>¡Pago Exitoso!</mat-card-title>
+  <mat-card-content>
+    <p>Gracias por actualizar a Premium.</p>
+    <p>Tu próxima fecha de pago será el <strong>{{ nextPaymentDate }}</strong>.</p>
+  </mat-card-content>
+  <mat-card-actions>
+    <button mat-raised-button color="primary" (click)="onGoToAccount()">
+      Ir a mi Cuenta
+    </button>
+  </mat-card-actions>
+</mat-card>

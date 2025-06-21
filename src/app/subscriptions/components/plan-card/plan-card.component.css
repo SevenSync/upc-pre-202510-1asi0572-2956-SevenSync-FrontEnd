@@ -1,0 +1,34 @@
+.plan-card {
+  border: 1px solid #E4E4E7;
+}
+
+.plan-card mat-card-title {
+  background-color: #38865D;
+  color: white;
+  padding: 0.5rem;
+  text-align: center;
+}
+
+.plan-card mat-card-content p {
+  margin: 0.5rem 0;
+}
+
+.plan-card mat-card-content ul {
+  margin: 0.5rem 0;
+  padding-left: 1.2rem;
+}
+
+.plan-card mat-card-actions {
+  display: flex;
+  justify-content: center;
+  padding: 0.5rem;
+}
+
+.plan-card button {
+  background-color: #38865D;
+  color: white;
+}
+
+.plan-card button:hover {
+  background-color: #296244;
+}

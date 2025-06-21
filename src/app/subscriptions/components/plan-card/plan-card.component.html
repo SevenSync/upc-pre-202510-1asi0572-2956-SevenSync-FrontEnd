@@ -1,0 +1,25 @@
+<mat-card class="plan-card">
+  <mat-card-title>{{ plan.name }}</mat-card-title>
+  <mat-card-content>
+    <p *ngIf="period === 'monthly'">
+      Mensual: {{ plan.priceMonthly | currency:'PEN' }}
+    </p>
+    <p *ngIf="period === 'annual'">
+      Anual: {{ plan.priceYearly | currency:'PEN' }}
+    </p>
+    <p>Máximo macetas: {{ plan.maxPots }}</p>
+    <ul>
+      <li *ngFor="let feat of plan.features">{{ feat }}</li>
+    </ul>
+  </mat-card-content>
+  <mat-card-actions>
+    <button
+      mat-raised-button
+      color="primary"
+      [disabled]="isLoading"
+      (click)="onSubscribe()"
+    >
+      {{ period === 'monthly' ? 'Actualizar Mensual' : 'Actualizar Anual' }}
+    </button>
+  </mat-card-actions>
+</mat-card>

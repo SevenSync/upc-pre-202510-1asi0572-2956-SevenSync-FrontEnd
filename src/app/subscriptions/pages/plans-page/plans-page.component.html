@@ -1,0 +1,60 @@
+<mat-card class="membership-banner" *ngIf="status">
+  <mat-card-content class="banner-content">
+    <mat-icon class="banner-icon">emoji_events</mat-icon>
+    <span class="banner-text">
+      Tu membresía actual:
+      <strong>
+        {{ status.planId === 'premium' ? 'Premium' : 'Gratuito' }}
+      </strong>
+    </span>
+    <button
+      *ngIf="status.planId === 'free'"
+      mat-stroked-button
+      color="primary"
+      class="banner-button"
+      (click)="onSubscribe({ planId: 'premium', periodicity: selectedPeriod })"
+      [disabled]="isLoading"
+    >
+      Actualizar a Premium
+    </button>
+  </mat-card-content>
+</mat-card>
+
+<app-spinner-error [isLoading]="isLoading" [errorMsg]="errorMsg"></app-spinner-error>
+
+<ng-container *ngIf="!isLoading && !errorMsg">
+  <!-- Selector Mensual / Anual -->
+  <div class="period-toggle">
+    <button
+      mat-button
+      [color]="selectedPeriod === 'monthly' ? 'accent' : undefined"
+      (click)="selectedPeriod = 'monthly'"
+    >
+      Mensual
+    </button>
+    <button
+      mat-button
+      [color]="selectedPeriod === 'annual' ? 'accent' : undefined"
+      (click)="selectedPeriod = 'annual'"
+    >
+      Anual
+    </button>
+  </div>
+
+  <!-- Cartas de Planes -->
+  <div class="plans-container">
+    <app-plan-card
+      *ngFor="let plan of plans"
+      [plan]="plan"
+      [isLoading]="isLoading"
+      [period]="selectedPeriod"
+      (subscribe)="onSubscribe($event)"
+    ></app-plan-card>
+  </div>
+
+  <app-plans-table [plans]="plans"></app-plans-table>
+
+  <div class="faq-link">
+    <a routerLink="faq">&larr; Ver Preguntas Frecuentes</a>
+  </div>
+</ng-container>

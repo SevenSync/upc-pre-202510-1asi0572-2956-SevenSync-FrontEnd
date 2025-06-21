@@ -1,0 +1,39 @@
+:host {
+  display: block;
+  padding: 1rem;
+  font-family: Roboto, sans-serif;
+  color: #3B3C45;
+}
+
+.payment-card {
+  max-width: 400px;
+  margin: 2rem auto;
+  border: 1px solid #E4E4E7;
+}
+
+.payment-card mat-card-title {
+  background-color: #38865D;
+  color: white;
+  padding: 0.5rem;
+  text-align: center;
+  font-size: 1.4rem;
+}
+
+.payment-card mat-card-content p {
+  margin: 0.75rem 0;
+}
+
+.payment-card mat-card-actions {
+  display: flex;
+  justify-content: center;
+  margin-top: 1rem;
+}
+
+.payment-card button {
+  background-color: #38865D;
+  color: white;
+}
+
+.payment-card button:hover {
+  background-color: #296244;
+}

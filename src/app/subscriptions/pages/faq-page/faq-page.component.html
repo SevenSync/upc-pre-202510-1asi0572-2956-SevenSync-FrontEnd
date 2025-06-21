@@ -1,0 +1,17 @@
+<app-spinner-error [isLoading]="isLoading" [errorMsg]="errorMsg"></app-spinner-error>
+
+<ng-container *ngIf="!isLoading && !errorMsg">
+  <div class="faq-page">
+    <h2>Preguntas Frecuentes</h2>
+
+    <app-faq-item
+      *ngFor="let item of faqs"
+      [question]="item.question"
+      [answer]="item.answer"
+    ></app-faq-item>
+
+    <div class="back-link">
+      <a routerLink="/memberships">&larr; Volver a Membresías</a>
+    </div>
+  </div>
+</ng-container>

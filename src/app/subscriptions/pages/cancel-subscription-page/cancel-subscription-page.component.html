@@ -1,0 +1,25 @@
+<app-spinner-error [isLoading]="isLoading" [errorMsg]="errorMsg"></app-spinner-error>
+
+<ng-container *ngIf="!isLoading && !errorMsg">
+  <mat-card>
+    <mat-card-title>Confirmar Cancelación</mat-card-title>
+    <mat-card-content>
+      <p>
+        Estás a punto de cancelar tu suscripción Premium.  
+        Hasta que termine el periodo vigente, seguirás teniendo acceso.
+      </p>
+    </mat-card-content>
+    <mat-card-actions>
+      <button
+        mat-stroked-button
+        color="warn"
+        (click)="onConfirmCancel()"
+      >
+        Confirmar cancelación
+      </button>
+      <button mat-button (click)="onBack()">
+        Volver atrás
+      </button>
+    </mat-card-actions>
+  </mat-card>
+</ng-container>

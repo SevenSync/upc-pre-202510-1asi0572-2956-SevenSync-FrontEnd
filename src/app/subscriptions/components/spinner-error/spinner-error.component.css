@@ -1,0 +1,11 @@
+.spinner-container,
+.error-container {
+  display: flex;
+  justify-content: center;
+  margin-top: 2rem;
+}
+
+mat-card {
+  border: 1px solid #E4E4E7;
+  max-width: 400px;
+}

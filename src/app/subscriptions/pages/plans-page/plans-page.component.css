@@ -1,0 +1,60 @@
+:host {
+  display: block;
+  padding: 1rem;
+  font-family: Roboto, sans-serif;
+  color: #3B3C45;
+  background-color: #FFFFFF;
+}
+
+.membership-banner {
+  border: 1px solid #E4E4E7;
+  margin-bottom: 1rem;
+}
+
+.banner-content {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.banner-icon {
+  color: #38865D;
+  font-size: 24px;
+}
+
+.banner-text strong {
+  color: #38865D;
+}
+
+.banner-button {
+  margin-left: auto;
+}
+
+.period-toggle {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+  margin-bottom: 1rem;
+}
+
+.plans-container {
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+  margin-bottom: 2rem;
+}
+
+.faq-link {
+  text-align: center;
+  margin-top: 2rem;
+}
+
+.faq-link a {
+  color: #38865D;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.faq-link a:hover {
+  text-decoration: underline;
+}

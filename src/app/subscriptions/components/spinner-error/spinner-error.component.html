@@ -1,0 +1,13 @@
+<!-- Spinner -->
+<div *ngIf="isLoading && !errorMsg" class="spinner-container">
+  <mat-progress-spinner mode="indeterminate"></mat-progress-spinner>
+</div>
+
+<!-- Mensaje de error -->
+<div *ngIf="!isLoading && errorMsg" class="error-container">
+  <mat-card>
+    <mat-card-content>
+      {{ errorMsg }}
+    </mat-card-content>
+  </mat-card>
+</div>

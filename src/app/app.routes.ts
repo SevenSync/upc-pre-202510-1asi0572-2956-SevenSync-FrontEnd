@@ -1,48 +1,43 @@
 import { Routes } from '@angular/router';
-import {LoginComponent} from './components/login/login.component';
-import {RegisterComponent} from './components/register/register.component';
-import {ProfileComponent} from './components/profile/profile.component';
-import {MembershipComponent} from './components/membership/membership.component';
-import {PaymentComponent} from './components/payment/payment.component';
-import { PlansComparisonComponent } from './subscriptions/ui/plans-comparison/plans-comparison.component';
-import { FaqComponent }             from './subscriptions/ui/faq/faq.component';
-import { MembershipStatusComponent } from './subscriptions/ui/membership-status/membership-status.component';
-import { CancelSubscriptionComponent } from './subscriptions/ui/cancel-subscription/cancel-subscription.component';
-import { PaymentSuccessComponent } from './subscriptions/ui/payment-success/payment-success.component';
-import { PaymentErrorComponent }   from './subscriptions/ui/payment-error/payment-error.component';
 
+import { LoginComponent } from './components/login/login.component';
+import { RegisterComponent } from './components/register/register.component';
+import { ProfileComponent } from './components/profile/profile.component';
+import { MembershipComponent } from './components/membership/membership.component';
+import { PaymentComponent } from './components/payment/payment.component';
+
+import { PlansPageComponent } from './subscriptions/pages/plans-page/plans-page.component';
+import { FaqPageComponent } from './subscriptions/pages/faq-page/faq-page.component';
+import { MembershipStatusPageComponent } from './subscriptions/pages/membership-status-page/membership-status-page.component';
+import { CancelSubscriptionPageComponent } from './subscriptions/pages/cancel-subscription-page/cancel-subscription-page.component';
+import { PaymentSuccessPageComponent } from './subscriptions/pages/payment-success-page/payment-success-page.component';
+import { PaymentErrorPageComponent } from './subscriptions/pages/payment-error-page/payment-error-page.component';
 
 export const routes: Routes = [
-  
-  { path: 'login', component: LoginComponent },
+  // Rutas principales de autenticación y perfil
+  { path: 'login',    component: LoginComponent },
   { path: 'register', component: RegisterComponent },
-  { path: 'profile', component: ProfileComponent },
-  {path:'membership', component: MembershipComponent },
-  {path:'payment', component: PaymentComponent },
+  { path: 'profile',  component: ProfileComponent },
 
+  // Rutas legacy (si todavía las usas)
+  { path: 'membership', component: MembershipComponent },
+  { path: 'payment',    component: PaymentComponent },
+
+  // Bounded Context: Subscriptions & Payments
   {
     path: 'memberships',
     children: [
-      { path: '', component: PlansComparisonComponent },
-      { path: 'faq', component: FaqComponent },
+      { path: '',    component: PlansPageComponent },
+      { path: 'faq', component: FaqPageComponent }
     ]
   },
-  {
-    path: 'account/subscription',
-    component: MembershipStatusComponent
-  },
-  {
-    path: 'account/cancel',
-    component: CancelSubscriptionComponent
-  },
-  { 
-    path: 'payment/success', 
-    component: PaymentSuccessComponent
-  },
-  { path: 'payment/error',   
-    component: PaymentErrorComponent
-  },
+  { path: 'account/subscription', component: MembershipStatusPageComponent },
+  { path: 'account/cancel',       component: CancelSubscriptionPageComponent },
 
-   { path: '**', redirectTo: 'login', pathMatch: 'full' }
+  // Rutas de retorno de Stripe
+  { path: 'payment/success', component: PaymentSuccessPageComponent },
+  { path: 'payment/error',   component: PaymentErrorPageComponent },
 
+  // Catch-all: redirige a login
+  { path: '**', redirectTo: 'login', pathMatch: 'full' }
 ];

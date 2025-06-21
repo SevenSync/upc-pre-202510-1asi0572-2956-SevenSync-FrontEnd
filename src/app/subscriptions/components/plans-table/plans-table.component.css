@@ -1,0 +1,19 @@
+.comparison-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.comparison-table th.mat-header-cell,
+.comparison-table td.mat-cell {
+  border: 1px solid #E4E4E7;
+  padding: 0.5rem;
+  text-align: center;
+}
+
+.comparison-table th.mat-header-cell {
+  background-color: #E4E4E7;
+}
+
+.comparison-table tr.mat-row:nth-child(even) {
+  background-color: #F5F5F5;
+}
