@@ -207,5 +207,61 @@
   }
 }
 
+.comparison-wrapper {
+  text-align: center;
+  padding: 24px;
+}
+
+.subtitle {
+  color: #20735a;
+  font-weight: 600;
+  margin-bottom: 8px;
+}
+
+.comparison-description {
+  font-size: 14px;
+  margin-bottom: 24px;
+  color: #333;
+}
+
+.comparison-card {
+  background: white;
+  border-radius: 8px;
+  padding: 24px;
+  max-width: 900px;
+  margin: 0 auto 32px auto;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+.comparison-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 14px;
+}
+
+.comparison-table th,
+.comparison-table td {
+  padding: 12px 8px;
+  text-align: center;
+  border-bottom: 1px solid #e0e0e0;
+}
+
+.comparison-table th:first-child,
+.comparison-table td:first-child {
+  text-align: left;
+}
+
+
+.premium-header {
+  color: #e98f00;
+  font-weight: 600;
+}
+
+.footer-title {
+  color: #20735a;
+  font-weight: 600;
+  margin-top: 32px;
+}
+
 
 

@@ -42,7 +42,7 @@
           Cerrar Sesión
         </button>
 
-        <button class="delete_button" (click)="openResetPasswordDialog()" >
+        <button class="delete_button" (click)="openDeleteAccountDialog()" >
           <mat-icon class="material-symbols-outlined">delete_forever</mat-icon>
           <a >Borrar Cuenta</a>
         </button>
@@ -85,7 +85,7 @@
 
               <ng-template #defaultButtons>
                 <div class="buttons">
-                  <button class="edit_button" (click)="openDeleteAccountDialog()">
+                  <button class="edit_button" (click)="openResetPasswordDialog()">
                     <mat-icon class="material-symbols-outlined crown-icon">lock</mat-icon>
                     Cambiar Contraseña
                   </button>

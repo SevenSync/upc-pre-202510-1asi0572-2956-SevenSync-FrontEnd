@@ -1,0 +1,92 @@
+.container{
+  box-sizing: border-box;
+  background-color: #EEF3EF;
+  padding: 30px 40px;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+
+.payment-success-container {
+  max-width: 480px;
+  margin: 40px auto;
+  padding: 32px 24px;
+  background-color: white;
+  border-radius: 12px;
+  border: 1px solid #d0d0d0;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+  text-align: center;
+  font-family: 'Arial', sans-serif;
+}
+
+.success-icon {
+  margin-bottom: 12px;
+}
+
+.check-icon {
+  font-size: 64px;
+  color: #3cb371;
+}
+
+.success-title {
+  color: #3cb371;
+  margin: 0;
+  font-size: 24px;
+  font-weight: 700;
+}
+
+.success-subtitle {
+  font-size: 14px;
+  color: #555;
+  margin-bottom: 24px;
+}
+
+.premium-box {
+  border: 1.5px solid #ffc107;
+  background-color: #fffaf0;
+  padding: 16px;
+  border-radius: 8px;
+  margin-bottom: 24px;
+  text-align: left;
+}
+
+.premium-header {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: #e69500;
+  font-size: 16px;
+  margin-bottom: 8px;
+}
+
+.crown-icon {
+  color: #e69500;
+}
+
+.transaction-details {
+  text-align: left;
+  margin-bottom: 24px;
+  font-size: 14px;
+}
+
+.next-steps {
+  text-align: left;
+  border: 1.5px solid #20735a;
+  background-color: #f5fbf8;
+  padding: 16px;
+  border-radius: 8px;
+  margin-bottom: 32px;
+}
+
+.next-steps ul {
+  margin: 0;
+  padding-left: 20px;
+}
+
+.button-group {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
