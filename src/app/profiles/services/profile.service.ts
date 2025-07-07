@@ -26,10 +26,13 @@ export class ProfileService extends BaseService<Profile> {
 
   hasProfile(token: string): Observable<HasProfileResponse> {
     const headers = this.getAuthHeaders(token);
-    return this.http.request<HasProfileResponse>('HEAD', `${this.resourcePath()}/me`, {
+    return this.http.get<HasProfileResponse>(`${this.resourcePath()}/me/existence`, {
       headers,
       observe: 'body'
-    }).pipe(retry(2), catchError(this.handleError));
+    }).pipe(
+      retry(2),
+      catchError(this.handleError)
+    );
   }
 
   updateProfile(request: UpdateProfileRequest, token: string): Observable<UserUpdatedResponse> {
