@@ -23,7 +23,7 @@ import { Pot } from '../../model/pot.entity';
               [class.status-critical]="pot.healthStatus === 'critical'">
 
       <div class="pot-image-container">
-        <img [src]="'public/demoplant.png'"
+        <img [src]="'demoplant.png'"
              [alt]="pot.name"
              class="pot-image" />
         <div class="status-overlay">

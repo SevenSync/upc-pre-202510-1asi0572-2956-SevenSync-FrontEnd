@@ -23,6 +23,7 @@ import { NotificationsComponent } from './notifications/pages/notifications/noti
 
 // Guards
 import { authenticationGuard, simpleAuthGuard } from './iam/services/authentication.guard';
+import {PotDetailsComponent} from './arm';
 
 export const routes: Routes = [
   // Public routes (no authentication required)
@@ -46,6 +47,11 @@ export const routes: Routes = [
   {
     path: 'pots',
     component: PotsComponent,
+    canActivate: [authenticationGuard]
+  },
+  {
+    path: 'pots/:id',
+    component: PotDetailsComponent,
     canActivate: [authenticationGuard]
   },
   {

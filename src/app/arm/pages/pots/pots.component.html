@@ -18,9 +18,13 @@
       </div>
 
       <div class="header-actions">
-        <button mat-raised-button color="primary" class="add-pot-button" (click)="onAddPot()">
-          <mat-icon>add</mat-icon>
-          Agregar Maceta
+        <button mat-raised-button
+                color="primary"
+                class="add-pot-button"
+                (click)="onAddPot()"
+                [disabled]="isLoading">
+          <mat-icon>add_circle</mat-icon>
+          <span>Agregar Maceta</span>
         </button>
       </div>
     </div>
@@ -36,7 +40,16 @@
       <mat-tab label="Críticas"></mat-tab>
     </mat-tab-group>
 
-    <div class="pots-grid" *ngIf="!isLoading; else loading">
+    <div class="loading-container" *ngIf="isLoading">
+      <p>Cargando macetas...</p>
+    </div>
+
+    <div class="error-container" *ngIf="errorMessage">
+      <p>{{ errorMessage }}</p>
+      <button mat-button (click)="loadPots()">Reintentar</button>
+    </div>
+
+    <div class="pots-grid" *ngIf="!isLoading && !errorMessage">
       <app-pot-card
         *ngFor="let pot of filteredPots"
         [pot]="pot"
@@ -44,27 +57,18 @@
         (viewDetails)="onViewPotDetails($event)">
       </app-pot-card>
 
-      <div *ngIf="filteredPots.length === 0" class="no-pots">
+      <div *ngIf="filteredPots.length === 0 && !isLoading" class="no-pots">
         <mat-icon class="no-pots-icon">eco</mat-icon>
-        <p>No hay macetas en esta categoría</p>
-        <button mat-raised-button color="primary" (click)="onAddPot()">
-          <mat-icon>add</mat-icon>
-          Agregar tu primera maceta
+        <h3>{{ getEmptyStateTitle() }}</h3>
+        <p>{{ getEmptyStateMessage() }}</p>
+        <button mat-raised-button
+                color="primary"
+                (click)="onAddPot()"
+                class="add-first-pot-button">
+          <mat-icon>add_circle</mat-icon>
+          {{ pots.length === 0 ? 'Agregar tu primera maceta' : 'Agregar nueva maceta' }}
         </button>
       </div>
-    </div>
-
-    <ng-template #loading>
-      <div class="loading-container">
-        <mat-icon class="loading-icon">eco</mat-icon>
-        <p>Cargando tus macetas...</p>
-      </div>
-    </ng-template>
-
-    <div *ngIf="errorMessage" class="error-message">
-      <mat-icon>error_outline</mat-icon>
-      <p>{{ errorMessage }}</p>
-      <button mat-button (click)="loadPots()">Reintentar</button>
     </div>
   </div>
 </div>

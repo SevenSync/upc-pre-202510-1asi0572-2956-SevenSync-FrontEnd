@@ -1,5 +1,5 @@
 import { Component, Input, Output, EventEmitter } from '@angular/core';
-import { FormBuilder, FormGroup, Validators, ReactiveFormsModule } from '@angular/forms';
+import {FormBuilder, FormGroup, Validators, ReactiveFormsModule, FormsModule} from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
@@ -13,7 +13,7 @@ import {AssignPotToUserRequest} from '../../model/assign-pot.request';
   standalone: true,
   imports: [
     CommonModule,
-    ReactiveFormsModule,
+    FormsModule,
     MatFormFieldModule,
     MatInputModule,
     MatButtonModule,
@@ -21,113 +21,82 @@ import {AssignPotToUserRequest} from '../../model/assign-pot.request';
     MatDialogModule
   ],
   template: `
-    <form [formGroup]="assignForm" (ngSubmit)="onSubmit()">
-      <h2 mat-dialog-title>Asignar Maceta</h2>
-
-      <mat-dialog-content class="form-content">
+    <div class="assign-form-container">
+      <h2>Asignar Maceta</h2>
+      <form (ngSubmit)="onSubmit()" #assignForm="ngForm">
         <mat-form-field appearance="outline" class="full-width">
-          <mat-label>Nombre de la maceta</mat-label>
-          <input matInput formControlName="name" placeholder="Mi Monstera">
-          <mat-error *ngIf="assignForm.get('name')?.hasError('required')">
-            El nombre es requerido
-          </mat-error>
+          <mat-label>Nombre de la Maceta</mat-label>
+          <input matInput [(ngModel)]="potName" name="potName" required>
         </mat-form-field>
 
         <mat-form-field appearance="outline" class="full-width">
           <mat-label>Ubicación</mat-label>
-          <input matInput formControlName="location" placeholder="Sala de estar">
-          <mat-error *ngIf="assignForm.get('location')?.hasError('required')">
-            La ubicación es requerida
-          </mat-error>
+          <input matInput [(ngModel)]="location" name="location" required>
         </mat-form-field>
 
         <mat-form-field appearance="outline" class="full-width">
-          <mat-label>Estado inicial</mat-label>
-          <mat-select formControlName="status">
+          <mat-label>Estado</mat-label>
+          <mat-select [(ngModel)]="status" name="status" required>
             <mat-option [value]="0">Inactiva</mat-option>
             <mat-option [value]="1">Activa</mat-option>
-            <mat-option [value]="2">En mantenimiento</mat-option>
+            <mat-option [value]="2">Mantenimiento</mat-option>
           </mat-select>
-          <mat-error *ngIf="assignForm.get('status')?.hasError('required')">
-            El estado es requerido
-          </mat-error>
         </mat-form-field>
 
-        <div class="info-message">
-          <p>Esta maceta será asignada a tu cuenta y podrás comenzar a monitorearla inmediatamente.</p>
+        <div class="form-actions">
+          <button type="button" mat-button (click)="onCancel()">Cancelar</button>
+          <button type="submit" mat-raised-button color="primary"
+                  [disabled]="!assignForm.valid || isLoading">
+            {{ isLoading ? 'Asignando...' : 'Asignar Maceta' }}
+          </button>
         </div>
-      </mat-dialog-content>
-
-      <mat-dialog-actions align="end">
-        <button mat-button type="button" (click)="onCancel()">Cancelar</button>
-        <button mat-raised-button color="primary" type="submit" [disabled]="assignForm.invalid || isLoading">
-          {{ isLoading ? 'Asignando...' : 'Asignar Maceta' }}
-        </button>
-      </mat-dialog-actions>
-    </form>
+      </form>
+    </div>
   `,
   styles: [`
-    .form-content {
-      display: flex;
-      flex-direction: column;
-      gap: 16px;
-      min-width: 400px;
-      padding: 16px 0;
+    .assign-form-container {
+      padding: 24px;
+      max-width: 400px;
     }
     .full-width {
       width: 100%;
+      margin-bottom: 16px;
     }
-    .info-message {
-      background-color: #e8f5e8;
-      border: 1px solid #2ecc71;
-      border-radius: 8px;
-      padding: 12px;
-      margin-top: 8px;
+    .form-actions {
+      display: flex;
+      justify-content: flex-end;
+      gap: 12px;
+      margin-top: 24px;
     }
-    .info-message p {
-      margin: 0;
-      color: #296244;
-      font-size: 0.9rem;
+    h2 {
+      margin: 0 0 24px 0;
+      color: #333;
     }
   `]
 })
 export class AssignPotFormComponent {
-  @Input() potId: number = 0;
-  @Output() assignPot = new EventEmitter<AssignPotToUserRequest>();
+  @Input() potId!: number;
+  @Input() isLoading = false;
+  @Output() assign = new EventEmitter<AssignPotToUserRequest>(); // ✅ CORREGIDO
   @Output() cancel = new EventEmitter<void>();
 
-  assignForm: FormGroup;
-  isLoading = false;
-
-  constructor(private fb: FormBuilder) {
-    this.assignForm = this.fb.group({
-      name: ['', [Validators.required, Validators.minLength(2)]],
-      location: ['', [Validators.required, Validators.minLength(2)]],
-      status: [1, [Validators.required]]
-    });
-  }
+  potName = '';
+  location = '';
+  status = 1;
 
   onSubmit(): void {
-    if (this.assignForm.valid) {
-      this.isLoading = true;
-      const formValue = this.assignForm.value;
-
+    if (this.potName && this.location) {
       const request = new AssignPotToUserRequest(
         this.potId,
-        formValue.name,
-        formValue.location,
-        formValue.status
+        this.potName,
+        this.location,
+        this.status
       );
-
-      this.assignPot.emit(request);
+      this.assign.emit(request);
     }
   }
 
   onCancel(): void {
     this.cancel.emit();
-  }
-
-  setLoading(loading: boolean): void {
-    this.isLoading = loading;
   }
 }

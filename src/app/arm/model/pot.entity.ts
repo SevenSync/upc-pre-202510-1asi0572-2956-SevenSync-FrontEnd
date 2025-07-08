@@ -8,7 +8,8 @@ export class Pot {
     public assignedUserId?: string,
     public plantId?: number,
     public metrics?: PotMetrics,
-    public lastWatered?: Date
+    public lastWatered?: Date,
+    public imageUrl?: string
   ) {}
 
   get isAssigned(): boolean {
@@ -33,6 +34,11 @@ export class Pot {
     return this.metrics ? this.metrics.humidity < 30 : false;
   }
 
+  get plantType(): string {
+    // This would come from linked plant data in a real scenario
+    return 'Planta Genérica';
+  }
+
   updateMetrics(metrics: PotMetrics): void {
     this.metrics = metrics;
   }
@@ -51,6 +57,14 @@ export class Pot {
 
   unlinkPlant(): void {
     this.plantId = undefined;
+  }
+
+  // MÉTODO CORREGIDO: waterNow
+  waterNow(): void {
+    if (this.metrics) {
+      this.metrics.humidity = Math.min(this.metrics.humidity + 30, 100);
+      this.lastWatered = new Date();
+    }
   }
 }
 
@@ -76,5 +90,17 @@ export class PotMetrics {
     if (this.humidity >= 60) return 'optimal';
     if (this.humidity >= 30) return 'low';
     return 'critical';
+  }
+
+  get temperatureStatus(): 'optimal' | 'hot' | 'cold' {
+    if (this.temperature >= 18 && this.temperature <= 26) return 'optimal';
+    if (this.temperature > 26) return 'hot';
+    return 'cold';
+  }
+
+  get lightStatus(): 'optimal' | 'low' | 'high' {
+    if (this.luminance >= 40 && this.luminance <= 80) return 'optimal';
+    if (this.luminance < 40) return 'low';
+    return 'high';
   }
 }
