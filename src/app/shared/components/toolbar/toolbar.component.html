@@ -1,0 +1,50 @@
+<mat-toolbar class="toolbar">
+  <div class="logo">
+    <button mat-button class="example-icon" (click)="navigateToHome()" aria-label="Home">
+      <img src="logo.png" alt="Logo" class="logo">
+    </button>
+    <span class="titles">MaceTech</span>
+  </div>
+
+  <div class="buttons" *ngIf="isSignedIn">
+    <button
+      mat-fab extended
+      class="titles"
+      routerLink="/membership"
+      routerLinkActive="active-button">
+      <mat-icon class="material-symbols-outlined"
+                [class.crown-icon]="isPremiumUser"
+                [class.regular-icon]="!isPremiumUser">
+        {{ isPremiumUser ? 'crown' : 'crown' }}
+      </mat-icon>
+      {{ isPremiumUser ? 'Premium' : 'Membresías' }}
+    </button>
+
+    <button
+      mat-fab extended
+      class="titles"
+      routerLink="/pots"
+      routerLinkActive="active-button">
+      <mat-icon class="material-symbols-outlined regular-icon">potted_plant</mat-icon>
+      Macetas
+    </button>
+
+    <button
+      mat-fab extended
+      class="titles"
+      routerLink="/notifications"
+      routerLinkActive="active-button">
+      <mat-icon class="material-symbols-outlined regular-icon">notifications</mat-icon>
+      Notificaciones
+    </button>
+
+    <button
+      mat-fab extended
+      class="titles"
+      routerLink="/profile"
+      routerLinkActive="active-button">
+      <mat-icon class="material-symbols-outlined regular-icon">person</mat-icon>
+      Perfil
+    </button>
+  </div>
+</mat-toolbar>

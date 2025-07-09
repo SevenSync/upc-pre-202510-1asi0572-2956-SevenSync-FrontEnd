@@ -1,5 +1,4 @@
 import { Component } from "@angular/core"
-import { Router } from "@angular/router"
 import { MatTabsModule } from "@angular/material/tabs"
 import { MatButtonModule } from "@angular/material/button"
 import { MatIconModule } from "@angular/material/icon"
@@ -40,8 +39,6 @@ interface Pot {
 })
 export class PotsComponent {
   selectedTabIndex = 0
-
-  constructor(private router: Router) {}
 
   pots: Pot[] = [
     {
@@ -178,9 +175,7 @@ export class PotsComponent {
   }
 
   viewDetails(potId: number): void {
-    this.router.navigate(["/pot-details", potId])
-  }
-  addNewPot(): void {
-    this.router.navigate(["/add-pot"])
+    console.log("Ver detalles de maceta:", potId)
+    // Aquí iría la navegación a la página de detalles
   }
 }

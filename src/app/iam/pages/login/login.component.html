@@ -1,0 +1,32 @@
+<div class="login-container">
+  <div class="login-card">
+    <div class="brand-section">
+      <div class="logo">
+        <img src="logo.png" alt="MaceTech Logo" class="logo-image" width="100px" height="100px">
+      </div>
+      <h1 class="brand-title">MaceTech</h1>
+      <p class="brand-subtitle">Cuida tus plantas inteligentemente</p>
+    </div>
+
+    <div class="form-section">
+      <h2 class="form-title">Bienvenido de vuelta</h2>
+      <p class="form-subtitle">Inicia sesión en tu cuenta</p>
+
+      <app-sign-in
+        (signIn)="onSignIn($event)"
+        #signInComponent>
+      </app-sign-in>
+
+      <div *ngIf="errorMessage" class="error-message">
+        <mat-icon>error_outline</mat-icon>
+        <span>{{ errorMessage }}</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="background-decoration">
+    <div class="decoration-circle circle-1"></div>
+    <div class="decoration-circle circle-2"></div>
+    <div class="decoration-circle circle-3"></div>
+  </div>
+</div>

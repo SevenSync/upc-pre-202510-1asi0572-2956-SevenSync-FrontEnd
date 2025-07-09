@@ -1,0 +1,251 @@
+<app-toolbar></app-toolbar>
+
+<div class="profile-container">
+  <div class="header-section">
+    <h1 class="page-title">Mi Perfil</h1>
+    <p class="subtitle">Gestiona tu información personal y configuraciones</p>
+  </div>
+
+  <div class="content-wrapper" *ngIf="profile; else loading">
+    <div class="profile-layout">
+      <!-- Sidebar con información principal -->
+      <div class="profile-sidebar">
+        <div class="profile-card">
+          <div class="avatar-section">
+            <div class="avatar">
+              <img src="assets/default-avatar.png" alt="Avatar" class="avatar-image">
+              <button mat-fab mini color="primary" class="avatar-edit">
+                <mat-icon>edit</mat-icon>
+              </button>
+            </div>
+            <h2 class="profile-name">{{ profile.fullName }}</h2>
+            <p class="profile-email">{{ email }}</p>
+          </div>
+
+          <div class="profile-stats">
+            <div class="stat-item">
+              <mat-icon class="stat-icon">person</mat-icon>
+              <div class="stat-info">
+                <span class="stat-label">Miembro desde</span>
+                <span class="stat-value">Mayo 2023</span>
+              </div>
+            </div>
+
+            <div class="stat-item">
+              <mat-icon class="stat-icon">eco</mat-icon>
+              <div class="stat-info">
+                <span class="stat-label">Macetas activas</span>
+                <span class="stat-value">4 macetas</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="membership-info">
+            <h3>Membresía Actual</h3>
+            <div class="membership-badge">
+              <mat-icon class="membership-icon">{{ isPremiumUser ? 'crown' : 'eco' }}</mat-icon>
+              <span>{{ isPremiumUser ? 'Plan Premium' : 'Plan Gratuito' }}</span>
+            </div>
+            <button *ngIf="!isPremiumUser"
+                    mat-raised-button
+                    color="primary"
+                    class="upgrade-button"
+                    routerLink="/membership">
+              <mat-icon>crown</mat-icon>
+              Actualizar a Premium
+            </button>
+          </div>
+
+          <div class="profile-actions">
+            <button mat-stroked-button
+                    color="warn"
+                    class="logout-button"
+                    (click)="signOut()">
+              <mat-icon>logout</mat-icon>
+              Cerrar Sesión
+            </button>
+
+            <button mat-stroked-button
+                    color="warn"
+                    class="delete-button"
+                    (click)="openDeleteAccountDialog()">
+              <mat-icon>delete_forever</mat-icon>
+              Eliminar Cuenta
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Contenido principal con tabs -->
+      <div class="profile-main">
+        <mat-tab-group animationDuration="200ms" class="profile-tabs">
+          <!-- Tab: Información Personal -->
+          <mat-tab label="Información Personal">
+            <div class="tab-content">
+              <div class="section-header">
+                <h3>Información Personal</h3>
+                <button *ngIf="!isEditingProfile"
+                        mat-button
+                        (click)="enableProfileEditing()"
+                        class="edit-button">
+                  <mat-icon>edit</mat-icon>
+                  Editar
+                </button>
+              </div>
+
+              <div *ngIf="!isEditingProfile; else editingForm" class="profile-display">
+                <div class="info-grid">
+                  <div class="info-item">
+                    <label>Nombre Completo</label>
+                    <span>{{ profile.fullName }}</span>
+                  </div>
+
+                  <div class="info-item">
+                    <label>Correo Electrónico</label>
+                    <span>{{ email }}</span>
+                  </div>
+
+                  <div class="info-item">
+                    <label>Teléfono</label>
+                    <span>{{ profile.phoneNumber || 'No especificado' }}</span>
+                  </div>
+
+                  <div class="info-item">
+                    <label>Dirección</label>
+                    <span>{{ profile.streetAddress || 'No especificada' }}</span>
+                  </div>
+                </div>
+
+                <div class="security-section">
+                  <h4>Seguridad</h4>
+                  <button mat-button
+                          (click)="openChangePasswordDialog()"
+                          class="security-button">
+                    <mat-icon>lock</mat-icon>
+                    Cambiar Contraseña
+                  </button>
+                </div>
+              </div>
+
+              <ng-template #editingForm>
+                <app-profile-form
+                  [profile]="profile"
+                  [editMode]="true"
+                  [isLoading]="isLoading"
+                  (profileSubmit)="updateProfile($event)"
+                  (cancel)="cancelEditing()">
+                </app-profile-form>
+              </ng-template>
+            </div>
+          </mat-tab>
+
+          <!-- Tab: Notificaciones -->
+          <mat-tab label="Notificaciones">
+            <div class="tab-content">
+              <h3>Preferencias de Notificaciones</h3>
+              <p class="section-description">
+                Configura cómo y cuándo quieres recibir notificaciones sobre tus plantas.
+              </p>
+
+              <div class="notification-settings">
+                <div class="setting-item">
+                  <div class="setting-info">
+                    <h4>Alertas de riego</h4>
+                    <p>Recibe notificaciones cuando tus plantas necesiten agua</p>
+                  </div>
+                  <mat-slide-toggle color="primary" [checked]="true"></mat-slide-toggle>
+                </div>
+
+                <div class="setting-item">
+                  <div class="setting-info">
+                    <h4>Alertas de sensores</h4>
+                    <p>Notificaciones cuando los sensores detecten condiciones anormales</p>
+                  </div>
+                  <mat-slide-toggle color="primary" [checked]="true"></mat-slide-toggle>
+                </div>
+
+                <div class="setting-item">
+                  <div class="setting-info">
+                    <h4>Reportes semanales</h4>
+                    <p>Resumen semanal del estado de tus plantas</p>
+                  </div>
+                  <mat-slide-toggle color="primary" [checked]="false"></mat-slide-toggle>
+                </div>
+
+                <div class="setting-item">
+                  <div class="setting-info">
+                    <h4>Notificaciones por correo</h4>
+                    <p>Recibe todas las notificaciones por correo electrónico</p>
+                  </div>
+                  <mat-slide-toggle color="primary" [checked]="true"></mat-slide-toggle>
+                </div>
+              </div>
+            </div>
+          </mat-tab>
+
+          <!-- Tab: Privacidad -->
+          <mat-tab label="Privacidad">
+            <div class="tab-content">
+              <h3>Configuración de Privacidad</h3>
+              <p class="section-description">
+                Controla cómo se usan tus datos y quién puede acceder a tu información.
+              </p>
+
+              <div class="privacy-settings">
+                <div class="setting-item">
+                  <div class="setting-info">
+                    <h4>Perfil público</h4>
+                    <p>Permite que otros usuarios vean tu perfil básico</p>
+                  </div>
+                  <mat-slide-toggle color="primary" [checked]="false"></mat-slide-toggle>
+                </div>
+
+                <div class="setting-item">
+                  <div class="setting-info">
+                    <h4>Compartir datos de plantas</h4>
+                    <p>Ayuda a mejorar el servicio compartiendo datos anónimos</p>
+                  </div>
+                  <mat-slide-toggle color="primary" [checked]="true"></mat-slide-toggle>
+                </div>
+
+                <div class="setting-item">
+                  <div class="setting-info">
+                    <h4>Análisis de uso</h4>
+                    <p>Permitir análisis de cómo usas la aplicación</p>
+                  </div>
+                  <mat-slide-toggle color="primary" [checked]="true"></mat-slide-toggle>
+                </div>
+              </div>
+
+              <div class="data-management">
+                <h4>Gestión de Datos</h4>
+                <div class="data-actions">
+                  <button mat-button class="data-button">
+                    <mat-icon>download</mat-icon>
+                    Descargar mis datos
+                  </button>
+                  <button mat-button color="warn" class="data-button">
+                    <mat-icon>delete_sweep</mat-icon>
+                    Eliminar todos los datos
+                  </button>
+                </div>
+              </div>
+            </div>
+          </mat-tab>
+        </mat-tab-group>
+      </div>
+    </div>
+  </div>
+
+  <ng-template #loading>
+    <div class="loading-container">
+      <mat-icon class="loading-icon">person</mat-icon>
+      <p>Cargando perfil...</p>
+    </div>
+  </ng-template>
+
+  <div *ngIf="errorMessage" class="error-message">
+    <mat-icon>error_outline</mat-icon>
+    <p>{{ errorMessage }}</p>
+  </div>
+</div>
