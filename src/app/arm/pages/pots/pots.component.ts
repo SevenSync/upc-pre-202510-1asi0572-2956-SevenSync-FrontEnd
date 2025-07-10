@@ -301,27 +301,29 @@ export class PotsComponent implements OnInit {
   }
   getEmptyStateTitle(): string {
     if (this.pots.length === 0) {
-      return '¡Bienvenido a MaceTech!';
+      return 'POTS.EMPTY_STATE.WELCOME';
     }
 
     switch (this.selectedTabIndex) {
-      case 1: return 'No hay macetas saludables';
-      case 2: return 'No hay macetas que necesiten atención';
-      case 3: return 'No hay macetas en estado crítico';
-      default: return 'No hay macetas en esta categoría';
+      case 1: return 'POTS.EMPTY_STATE.HEALTHY';
+      case 2: return 'POTS.EMPTY_STATE.NEEDS_ATTENTION';
+      case 3: return 'POTS.EMPTY_STATE.CRITICAL';
+      default: return 'POTS.EMPTY_STATE.GENERIC';
     }
   }
+
 
   getEmptyStateMessage(): string {
     if (this.pots.length === 0) {
-      return 'Comienza agregando tu primera maceta inteligente para monitorear tus plantas.';
+      return 'POTS.EMPTY_MESSAGE.WELCOME';
     }
 
     switch (this.selectedTabIndex) {
-      case 1: return 'Todas tus macetas necesitan algún tipo de atención.';
-      case 2: return 'Excelente, ninguna de tus macetas necesita atención especial.';
-      case 3: return 'Perfecto, ninguna de tus macetas está en estado crítico.';
-      default: return 'Cambia de categoría para ver otras macetas.';
+      case 1: return 'POTS.EMPTY_MESSAGE.NEEDS_ATTENTION';
+      case 2: return 'POTS.EMPTY_MESSAGE.ALL_GOOD';
+      case 3: return 'POTS.EMPTY_MESSAGE.CRITICAL_OK';
+      default: return 'POTS.EMPTY_MESSAGE.SWITCH_TAB';
     }
   }
+
 }

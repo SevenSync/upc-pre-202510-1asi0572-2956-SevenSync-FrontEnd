@@ -223,6 +223,20 @@
       "FIRST": "Agregar tu primera maceta",
       "NEW": "Agregar nueva maceta"
     },
+    "EMPTY_STATE": {
+      "WELCOME": "¡Bienvenido a MaceTech!",
+      "HEALTHY": "No hay macetas saludables",
+      "NEEDS_ATTENTION": "No hay macetas que necesiten atención",
+      "CRITICAL": "No hay macetas en estado crítico",
+      "GENERIC": "No hay macetas en esta categoría"
+    },
+    "EMPTY_MESSAGE": {
+      "WELCOME": "Comienza agregando tu primera maceta inteligente para monitorear tus plantas.",
+      "NEEDS_ATTENTION": "Todas tus macetas necesitan algún tipo de atención.",
+      "ALL_GOOD": "Excelente, ninguna de tus macetas necesita atención especial.",
+      "CRITICAL_OK": "Perfecto, ninguna de tus macetas está en estado crítico.",
+      "SWITCH_TAB": "Cambia de categoría para ver otras macetas."
+    },
     "CREATE_POT": {
       "TITLE": "Agregar Nueva Maceta",
       "STEP1": {

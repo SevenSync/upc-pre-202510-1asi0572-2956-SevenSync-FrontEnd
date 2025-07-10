@@ -223,6 +223,20 @@
       "FIRST": "Add your first pot",
       "NEW": "Add new pot"
     },
+    "EMPTY_STATE": {
+      "WELCOME": "Welcome to MaceTech!",
+      "HEALTHY": "No healthy pots",
+      "NEEDS_ATTENTION": "No pots need attention",
+      "CRITICAL": "No pots in critical condition",
+      "GENERIC": "No pots in this category"
+    },
+    "EMPTY_MESSAGE": {
+      "WELCOME": "Start by adding your first smart pot to monitor your plants.",
+      "NEEDS_ATTENTION": "All your pots need some kind of attention.",
+      "ALL_GOOD": "Great! None of your pots require special care.",
+      "CRITICAL_OK": "Perfect! None of your pots are in critical condition.",
+      "SWITCH_TAB": "Switch category to view other pots."
+    },
     "CREATE_POT": {
       "TITLE": "Add New Pot",
       "STEP1": {
