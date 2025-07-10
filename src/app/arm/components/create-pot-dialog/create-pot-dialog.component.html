@@ -1,0 +1,166 @@
+<div class="create-pot-dialog">
+  <h2 mat-dialog-title>
+    <mat-icon>add_circle</mat-icon>
+    {{ 'CREATE_POT.TITLE' | translate }}
+  </h2>
+
+  <mat-dialog-content>
+    <mat-stepper #stepper linear="true" orientation="vertical" class="pot-stepper">
+      <!-- Paso 1: Información Básica -->
+      <mat-step [stepControl]="basicInfoForm" [label]="'POTS.CREATE_POT.STEP1.LABEL' | translate">
+        <form [formGroup]="basicInfoForm" class="step-form">
+          <mat-form-field appearance="outline" class="full-width">
+            <mat-label>{{ 'POTS.CREATE_POT.STEP1.NAME_LABEL' | translate }}</mat-label>
+            <input matInput placeholder="{{ 'POTS.CREATE_POT.STEP1.NAME_PLACEHOLDER' | translate }}" formControlName="name" maxlength="50">
+            <mat-hint>{{ 'POTS.CREATE_POT.STEP1.NAME_HINT' | translate }}</mat-hint>
+            <mat-error *ngIf="basicInfoForm.get('name')?.hasError('required')">
+              {{ 'POTS.CREATE_POT.STEP1.NAME_REQUIRED' | translate }}
+            </mat-error>
+            <mat-error *ngIf="basicInfoForm.get('name')?.hasError('minlength')">
+              {{ 'POTS.CREATE_POT.STEP1.NAME_MIN' | translate }}
+            </mat-error>
+          </mat-form-field>
+
+          <mat-form-field appearance="outline" class="full-width">
+            <mat-label>{{ 'POTS.CREATE_POT.STEP1.LOCATION_LABEL' | translate }}</mat-label>
+            <input matInput placeholder="{{ 'POTS.CREATE_POT.STEP1.LOCATION_PLACEHOLDER' | translate }}" formControlName="location" maxlength="100">
+            <mat-hint>{{ 'POTS.CREATE_POT.STEP1.LOCATION_HINT' | translate }}</mat-hint>
+            <mat-error *ngIf="basicInfoForm.get('location')?.hasError('required')">
+              {{ 'POTS.CREATE_POT.STEP1.LOCATION_REQUIRED' | translate }}
+            </mat-error>
+          </mat-form-field>
+
+          <div class="step-actions">
+            <button mat-raised-button color="primary" matStepperNext [disabled]="!basicInfoForm.valid">
+              {{ 'POTS.CREATE_POT.CONTINUE' | translate }}
+            </button>
+          </div>
+        </form>
+      </mat-step>
+
+      <!-- Paso 2: Configuración Técnica -->
+      <mat-step [stepControl]="technicalForm" [label]="'POTS.CREATE_POT.STEP2.LABEL' | translate">
+        <form [formGroup]="technicalForm" class="step-form">
+          <mat-form-field appearance="outline" class="full-width">
+            <mat-label>{{ 'POTS.CREATE_POT.STEP2.DEVICE_ID_LABEL' | translate }}</mat-label>
+            <input matInput placeholder="{{ 'POTS.CREATE_POT.STEP2.DEVICE_ID_PLACEHOLDER' | translate }}" formControlName="deviceId" maxlength="20">
+            <mat-hint>{{ 'POTS.CREATE_POT.STEP2.DEVICE_HINT' | translate }}</mat-hint>
+          </mat-form-field>
+
+          <mat-form-field appearance="outline" class="full-width">
+            <mat-label>{{ 'POTS.CREATE_POT.STEP2.STATUS_LABEL' | translate }}</mat-label>
+            <mat-select formControlName="status">
+              <mat-option [value]="1">
+                <div class="status-option">
+                  <mat-icon class="status-icon active">check_circle</mat-icon>
+                  <div>
+                    <div class="status-name">{{ 'POTS.CREATE_POT.STEP2.STATUS.ACTIVE.NAME' | translate }}</div>
+                    <div class="status-description">{{ 'POTS.CREATE_POT.STEP2.STATUS.ACTIVE.DESC' | translate }}</div>
+                  </div>
+                </div>
+              </mat-option>
+              <mat-option [value]="0">
+                <div class="status-option">
+                  <mat-icon class="status-icon inactive">pause_circle</mat-icon>
+                  <div>
+                    <div class="status-name">{{ 'POTS.CREATE_POT.STEP2.STATUS.INACTIVE.NAME' | translate }}</div>
+                    <div class="status-description">{{ 'POTS.CREATE_POT.STEP2.STATUS.INACTIVE.DESC' | translate }}</div>
+                  </div>
+                </div>
+              </mat-option>
+              <mat-option [value]="2">
+                <div class="status-option">
+                  <mat-icon class="status-icon maintenance">build_circle</mat-icon>
+                  <div>
+                    <div class="status-name">{{ 'POTS.CREATE_POT.STEP2.STATUS.MAINTENANCE.NAME' | translate }}</div>
+                    <div class="status-description">{{ 'POTS.CREATE_POT.STEP2.STATUS.MAINTENANCE.DESC' | translate }}</div>
+                  </div>
+                </div>
+              </mat-option>
+            </mat-select>
+            <mat-hint>{{ 'POTS.CREATE_POT.STEP2.STATUS_HINT' | translate }}</mat-hint>
+          </mat-form-field>
+
+          <div class="info-card">
+            <mat-icon>info</mat-icon>
+            <div>
+              <h4>{{ 'POTS.CREATE_POT.STEP2.INFO_TITLE' | translate }}</h4>
+              <p>{{ 'POTS.CREATE_POT.STEP2.INFO_DESC' | translate }}</p>
+            </div>
+          </div>
+
+          <div class="step-actions">
+            <button mat-button matStepperPrevious>{{ 'POTS.CREATE_POT.BACK' | translate }}</button>
+            <button mat-raised-button color="primary" matStepperNext [disabled]="!technicalForm.valid">
+              {{ 'POTS.CREATE_POT.CONTINUE' | translate }}
+            </button>
+          </div>
+        </form>
+      </mat-step>
+
+      <!-- Paso 3: Confirmación -->
+      <mat-step [label]="'POTS.CREATE_POT.STEP3.LABEL' | translate">
+        <div class="confirmation-step">
+          <div class="summary-card">
+            <h3>
+              <mat-icon>summarize</mat-icon>
+              {{ 'POTS.CREATE_POT.SUMMARY.TITLE' | translate }}
+            </h3>
+
+            <div class="summary-content">
+              <div class="summary-row">
+                <span class="label">{{ 'POTS.CREATE_POT.SUMMARY.NAME' | translate }}:</span>
+                <span class="value">{{ basicInfoForm.get('name')?.value }}</span>
+              </div>
+              <div class="summary-row">
+                <span class="label">{{ 'POTS.CREATE_POT.SUMMARY.LOCATION' | translate }}:</span>
+                <span class="value">{{ basicInfoForm.get('location')?.value }}</span>
+              </div>
+              <div class="summary-row">
+                <span class="label">{{ 'POTS.CREATE_POT.SUMMARY.DEVICE' | translate }}:</span>
+                <span class="value">{{ technicalForm.get('deviceId')?.value || ('POTS.CREATE_POT.SUMMARY.NO_DEVICE' | translate) }}</span>
+              </div>
+              <div class="summary-row">
+                <span class="label">{{ 'POTS.CREATE_POT.SUMMARY.STATUS' | translate }}:</span>
+                <span class="value status" [class]="'status-' + technicalForm.get('status')?.value">
+                  {{ getStatusName(technicalForm.get('status')?.value) }}
+                </span>
+              </div>
+            </div>
+          </div>
+
+          <div class="next-steps-card">
+            <h4>
+              <mat-icon>playlist_add_check</mat-icon>
+              {{ 'POTS.CREATE_POT.NEXT_STEPS.TITLE' | translate }}
+            </h4>
+            <ul>
+              <li>{{ 'POTS.CREATE_POT.NEXT_STEPS.STEP1' | translate }}</li>
+              <li>{{ 'POTS.CREATE_POT.NEXT_STEPS.STEP2' | translate }}</li>
+              <li>{{ 'POTS.CREATE_POT.NEXT_STEPS.STEP3' | translate }}</li>
+              <li>{{ 'POTS.CREATE_POT.NEXT_STEPS.STEP4' | translate }}</li>
+            </ul>
+          </div>
+
+          <div class="step-actions">
+            <button mat-button matStepperPrevious>{{ 'POTS.CREATE_POT.BACK' | translate }}</button>
+            <button mat-raised-button
+                    color="primary"
+                    (click)="onCreatePot()"
+                    [disabled]="isCreating">
+              <mat-icon *ngIf="isCreating">hourglass_empty</mat-icon>
+              <mat-icon *ngIf="!isCreating">add_circle</mat-icon>
+              {{ isCreating ? ('POTS.CREATE_POT.CREATING' | translate) : ('POTS.CREATE_POT.CREATE' | translate) }}
+            </button>
+          </div>
+        </div>
+      </mat-step>
+    </mat-stepper>
+  </mat-dialog-content>
+
+  <mat-dialog-actions class="dialog-actions">
+    <button mat-button [mat-dialog-close]="false" [disabled]="isCreating">
+      {{ 'POTS.CREATE_POT.CANCEL' | translate }}
+    </button>
+  </mat-dialog-actions>
+</div>

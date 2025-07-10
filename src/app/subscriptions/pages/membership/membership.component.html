@@ -1,223 +1,196 @@
 <app-toolbar></app-toolbar>
 <div class="container">
-  <h1 class="titulo">Membresías</h1>
+  <h1 class="titulo">{{ 'MEMBERSHIP.TITLE' | translate }}</h1>
 
   <div class="membership_card">
     <div class="membership_info">
-      <h3>Tu membresía actual</h3>
+      <h3>{{ 'MEMBERSHIP.CURRENT' | translate }}</h3>
       <div class="current_membership">
         <mat-icon class="material-symbols-outlined icon">nest_eco_leaf</mat-icon>
-        <span>Plan Gratuito</span>
+        <span>{{ 'MEMBERSHIP.FREE_PLAN' | translate }}</span>
       </div>
     </div>
     <button class="upgrade_button">
       <mat-icon class="material-symbols-outlined crown-icon">crown</mat-icon>
-      <a routerLink="/payment" >Actualizar a Premium</a>
+      <a routerLink="/payment">{{ 'MEMBERSHIP.UPGRADE' | translate }}</a>
     </button>
   </div>
 
   <div class="comparison-wrapper">
-    <h3 class="subtitle">Nota la diferencia</h3>
+    <h3 class="subtitle">{{ 'MEMBERSHIP.DIFFERENCE_TITLE' | translate }}</h3>
     <p class="comparison-description">
-      Cámbiate a premium y disfruta del control de todas tus macetas con información relevante,
-      actualizada y detallada. Cancela cuando quieras.
+      {{ 'MEMBERSHIP.DIFFERENCE_DESC' | translate }}
     </p>
 
     <div class="comparison-card">
       <table class="comparison-table">
         <thead>
         <tr>
-          <th>Características</th>
-          <th>Plan Gratuito</th>
+          <th>{{ 'MEMBERSHIP.FEATURES' | translate }}</th>
+          <th>{{ 'MEMBERSHIP.PLAN.FREE' | translate }}</th>
           <th class="premium-header">
             <mat-icon class="crown-icon">crown</mat-icon>
-            Plan Premium
+            {{ 'MEMBERSHIP.PLAN.PREMIUM' | translate }}
           </th>
         </tr>
         </thead>
         <tbody>
         <tr>
-          <td><a href="#">Cantidad de macetas inteligentes</a></td>
-          <td>Cuatro (4)</td>
-          <td>Ilimitado</td>
+          <td><a href="#">{{ 'MEMBERSHIP.COMPARE.POTS' | translate }}</a></td>
+          <td>{{ 'MEMBERSHIP.COMPARE.POTS_FREE' | translate }}</td>
+          <td>{{ 'MEMBERSHIP.COMPARE.POTS_PREMIUM' | translate }}</td>
         </tr>
         <tr>
-          <td><a href="#">Monitoreo de sensores</a></td>
-          <td>Funciones básicas</td>
-          <td>Funciones avanzadas</td>
+          <td><a href="#">{{ 'MEMBERSHIP.COMPARE.SENSORS' | translate }}</a></td>
+          <td>{{ 'MEMBERSHIP.COMPARE.SENSORS_FREE' | translate }}</td>
+          <td>{{ 'MEMBERSHIP.COMPARE.SENSORS_PREMIUM' | translate }}</td>
         </tr>
         <tr>
-          <td><a href="#">Alertas de riego</a></td>
-          <td>Alertas básicas</td>
-          <td>Alertas personalizadas</td>
+          <td><a href="#">{{ 'MEMBERSHIP.COMPARE.IRRIGATION_ALERTS' | translate }}</a></td>
+          <td>{{ 'MEMBERSHIP.COMPARE.IRRIGATION_ALERTS_FREE' | translate }}</td>
+          <td>{{ 'MEMBERSHIP.COMPARE.IRRIGATION_ALERTS_PREMIUM' | translate }}</td>
         </tr>
         <tr>
-          <td><a href="#">Historial de datos</a></td>
-          <td>Máximo de 7 días</td>
-          <td>Ilimitado</td>
+          <td><a href="#">{{ 'MEMBERSHIP.COMPARE.DATA_HISTORY' | translate }}</a></td>
+          <td>{{ 'MEMBERSHIP.COMPARE.DATA_HISTORY_FREE' | translate }}</td>
+          <td>{{ 'MEMBERSHIP.COMPARE.DATA_HISTORY_PREMIUM' | translate }}</td>
         </tr>
         <tr>
-          <td><a href="#">Reportes semanales</a></td>
-          <td>✘</td>
-          <td>✔ Disponibles y detallados</td>
+          <td><a href="#">{{ 'MEMBERSHIP.COMPARE.REPORTS' | translate }}</a></td>
+          <td>{{ 'MEMBERSHIP.COMPARE.REPORTS_FREE' | translate }}</td>
+          <td>{{ 'MEMBERSHIP.COMPARE.REPORTS_PREMIUM' | translate }}</td>
         </tr>
         <tr>
-          <td><a href="#">Programación de riego automático</a></td>
-          <td>✘</td>
-          <td>✔ Personalizada</td>
+          <td><a href="#">{{ 'MEMBERSHIP.COMPARE.AUTO_WATERING' | translate }}</a></td>
+          <td>{{ 'MEMBERSHIP.COMPARE.AUTO_WATERING_FREE' | translate }}</td>
+          <td>{{ 'MEMBERSHIP.COMPARE.AUTO_WATERING_PREMIUM' | translate }}</td>
         </tr>
         <tr>
-          <td><a href="#">Recomendaciones personalizadas</a></td>
-          <td>✘</td>
-          <td>✔ Relevantes y detalladas</td>
+          <td><a href="#">{{ 'MEMBERSHIP.COMPARE.RECOMMENDATIONS' | translate }}</a></td>
+          <td>{{ 'MEMBERSHIP.COMPARE.RECOMMENDATIONS_FREE' | translate }}</td>
+          <td>{{ 'MEMBERSHIP.COMPARE.RECOMMENDATIONS_PREMIUM' | translate }}</td>
         </tr>
         <tr>
-          <td><a href="#">Soporte técnico a usuarios</a></td>
-          <td>Menos de 24 horas</td>
-          <td>Menos de 4 horas</td>
+          <td><a href="#">{{ 'MEMBERSHIP.COMPARE.SUPPORT' | translate }}</a></td>
+          <td>{{ 'MEMBERSHIP.COMPARE.SUPPORT_FREE' | translate }}</td>
+          <td>{{ 'MEMBERSHIP.COMPARE.SUPPORT_PREMIUM' | translate }}</td>
         </tr>
         <tr>
-          <td><a href="#">Acceso anticipado a nuevas funciones</a></td>
-          <td>✘</td>
-          <td>✔ Mediante correo</td>
+          <td><a href="#">{{ 'MEMBERSHIP.COMPARE.EARLY_ACCESS' | translate }}</a></td>
+          <td>{{ 'MEMBERSHIP.COMPARE.EARLY_ACCESS_FREE' | translate }}</td>
+          <td>{{ 'MEMBERSHIP.COMPARE.EARLY_ACCESS_PREMIUM' | translate }}</td>
         </tr>
         </tbody>
       </table>
     </div>
 
-    <h3 class="footer-title">Planes accesibles para cada jardinero</h3>
+    <h3 class="footer-title">{{ 'MEMBERSHIP.FOOTER_TITLE' | translate }}</h3>
     <p class="comparison-description">
-      Elige un plan Macetech y cuida tus plantas con monitoreo inteligente, riego automático y alertas personalizadas desde tu móvil o computadora. Disfruta de recomendaciones de cuidado y ajusta tus preferencias fácilmente. Cancela o cambia de plan cuando quieras.
+      {{ 'MEMBERSHIP.FOOTER_DESC' | translate }}
     </p>
   </div>
 
-
   <div class="membership_period">
-    <!-- ngClass permite aplicar una clase dinámica  -->
     <button
       class="period"
       [ngClass]="{ 'active': selectedPeriod === 'monthly' }"
       (click)="selectPeriod('monthly')"
     >
-      Mensual
+      {{ 'MEMBERSHIP.MONTHLY' | translate }}
     </button>
     <button
       class="period"
       [ngClass]="{ 'active': selectedPeriod === 'annual' }"
       (click)="selectPeriod('annual')"
     >
-      Anual
+      {{ 'MEMBERSHIP.ANNUAL' | translate }}
     </button>
-    <span>-17%</span>
+    <span>{{ 'MEMBERSHIP.DISCOUNT' | translate }}</span>
   </div>
-
 
   <div class="membership_plans">
-    <div  class="plan_card_free" >
-        <div class="plan_head ">
-          <div class="plan_title">
-            <h2 class="plan_title">Plan Gratuito</h2>
-            <span>Funcionalidades Básicas</span>
-          </div>
-          <h2>$0</h2>
+    <div class="plan_card_free">
+      <div class="plan_head">
+        <div class="plan_title">
+          <h2 class="plan_title">{{ 'MEMBERSHIP.PLAN.FREE' | translate }}</h2>
+          <span>{{ 'MEMBERSHIP.FREE_LABEL' | translate }}</span>
         </div>
-        <div class="plan_body">
-          <h3>Incluye:</h3>
-           <div class="feature ">
-             <mat-icon class="material-symbols-outlined free_icon ">check</mat-icon>
-             Hasta 4 macetas inteligentes
-           </div>
-          <div class="feature ">
-            <mat-icon class="material-symbols-outlined free_icon ">check</mat-icon>
-            Monitoreo básico de sensores
-          </div>
-          <div class="feature ">
-            <mat-icon class="material-symbols-outlined free_icon ">check</mat-icon>
-            Alertas de riego
-          </div>
-          <div class="feature ">
-            <mat-icon class="material-symbols-outlined free_icon ">check</mat-icon>
-            Historial de datos por 7 días
-          </div>
-          <h3>Limitaciones:</h3>
-          <ul>
-            <li>Sin reportes semanales</li>
-            <li>Sin promación de riego automático</li>
-            <li>Sin recomendaciones avanzadas</li>
-          </ul>
-          <button class="current_membership">Plan Actual</button>
+        <h2>$0</h2>
+      </div>
+      <div class="plan_body">
+        <h3>{{ 'MEMBERSHIP.INCLUDES' | translate }}</h3>
+        <div class="feature">
+          <mat-icon class="material-symbols-outlined free_icon">check</mat-icon>
+          {{ 'MEMBERSHIP.COMPARE.POTS_FREE' | translate }}
         </div>
+        <div class="feature">
+          <mat-icon class="material-symbols-outlined free_icon">check</mat-icon>
+          {{ 'MEMBERSHIP.COMPARE.SENSORS_FREE' | translate }}
+        </div>
+        <div class="feature">
+          <mat-icon class="material-symbols-outlined free_icon">check</mat-icon>
+          {{ 'MEMBERSHIP.COMPARE.IRRIGATION_ALERTS' | translate }}
+        </div>
+        <div class="feature">
+          <mat-icon class="material-symbols-outlined free_icon">check</mat-icon>
+          {{ 'MEMBERSHIP.COMPARE.DATA_HISTORY_FREE' | translate }}
+        </div>
+        <h3>{{ 'MEMBERSHIP.LIMITATIONS' | translate }}</h3>
+        <ul>
+          <li *ngFor="let item of ['LIMITATION_LIST.0', 'LIMITATION_LIST.1', 'LIMITATION_LIST.2']">
+            {{ ('MEMBERSHIP.' + item) | translate }}
+          </li>
+        </ul>
+        <button class="current_membership">
+          {{ 'MEMBERSHIP.CURRENT_BUTTON' | translate }}
+        </button>
+      </div>
     </div>
 
-    <div  class="plan_card_premium" >
-        <div class="plan_head_premium">
-          <div class="plan_title">
-            <div class="crown">
-              <mat-icon class="material-symbols-outlined icon">crown</mat-icon>
-              <h2>Plan Premium</h2>
-            </div>
-            <span>Funcionalidades Básicas</span>
+    <div class="plan_card_premium">
+      <div class="plan_head_premium">
+        <div class="plan_title">
+          <div class="crown">
+            <mat-icon class="material-symbols-outlined icon">crown</mat-icon>
+            <h2>{{ 'MEMBERSHIP.PLAN.PREMIUM' | translate }}</h2>
           </div>
-          <h2>{{ selectedPeriod === 'annual' ? '$99.50':'$9.99'}}</h2>
-
+          <span>{{ 'MEMBERSHIP.PREMIUM_LABEL' | translate }}</span>
         </div>
+        <h2>{{ selectedPeriod === 'annual' ? '$99.50' : '$9.99' }}</h2>
+      </div>
       <div class="plan_body">
-        <h3>Todo lo del plan gratuito, más:</h3>
-        <div class="feature">
-          <mat-icon class="material-symbols-outlined premium_icon ">check</mat-icon>
-          Macetas inteligentes ilimitadas
+        <h3>{{ 'MEMBERSHIP.PREMIUM_ADVANTAGES' | translate }}</h3>
+
+        <div class="feature" *ngFor="let key of [
+          'POTS_PREMIUM', 'SENSORS_PREMIUM', 'IRRIGATION_ALERTS_PREMIUM',
+          'DATA_HISTORY_PREMIUM', 'REPORTS_PREMIUM', 'AUTO_WATERING_PREMIUM',
+          'RECOMMENDATIONS_PREMIUM', 'SUPPORT_PREMIUM', 'EARLY_ACCESS_PREMIUM'
+        ]">
+          <mat-icon class="material-symbols-outlined premium_icon">check</mat-icon>
+          {{ ('MEMBERSHIP.COMPARE.' + key) | translate }}
         </div>
-        <div class="feature ">
-          <mat-icon class="material-symbols-outlined premium_icon ">check</mat-icon>
-          Monitoreo avanzado de sensores
-        </div>
-        <div class="feature ">
-          <mat-icon class="material-symbols-outlined premium_icon ">check</mat-icon>
-          Alertas personalizables
-        </div>
-        <div class="feature ">
-          <mat-icon class="material-symbols-outlined premium_icon ">check</mat-icon>
-          Historial de datos ilimitado
-        </div>
-        <div class="feature ">
-          <mat-icon class="material-symbols-outlined premium_icon ">check</mat-icon>
-          Reportes semanales detallados
-        </div>
-        <div class="feature ">
-          <mat-icon class="material-symbols-outlined premium_icon ">check</mat-icon>
-          Programación de riego automático
-        </div>
-        <div class="feature ">
-          <mat-icon class="material-symbols-outlined premium_icon ">check</mat-icon>
-          Recomendaciones personalizadas
-        </div>
-        <div class="feature ">
-          <mat-icon class="material-symbols-outlined premium_icon ">check</mat-icon>
-          Soporte personalizado
-        </div>
-        <div class="feature ">
-          <mat-icon class="material-symbols-outlined premium_icon ">check</mat-icon>
-          Acceso anticipado a nuevas funciones
-        </div>
+
         <button class="upgrade_button">
           <mat-icon class="material-symbols-outlined crown-icon">crown</mat-icon>
-          <a routerLink="/payment" >Actualizar a Premium</a>
+          <a routerLink="/payment">{{ 'MEMBERSHIP.UPGRADE' | translate }}</a>
         </button>
-
       </div>
+    </div>
   </div>
 
-</div>
-
   <div class="membership_footer">
-    <h1>Preguntas Frecuentes:</h1>
-    <h3>¿Puedo cambiar de plan en cualquier momento?</h3>
-    <p>Sí, puedes actualizar a Premium en cualquier momento. Si decides volver al plan gratuito, el cambio se hará efectivo al final de tu período de facturación.</p>
-    <h3>¿Cómo funciona la facturación anual?</h3>
-    <p>Con la facturación anual, pagas por 12 meses por adelantado y obtienes un descuento del 17% comparado con el pago mensual.</p>
-    <h3>¿Qué métodos de pago aceptan?</h3>
-    <p>Aceptamos todas las tarjetas de crédito y débito principales (Visa, Mastercard, American Express), así como PayPal.</p>
-    <h3>¿Puedo cancelar mi suscripción Premium?</h3>
-    <p>Sí, puedes cancelar tu suscripción en cualquier momento desde la configuración de tu cuenta. Seguirás teniendo acceso a las funciones Premium hasta el final de tu período de facturación.</p>
+    <h1>{{ 'MEMBERSHIP.FAQ_TITLE' | translate }}</h1>
+
+    <h3>{{ 'MEMBERSHIP.FAQ.CHANGE_PLAN_Q' | translate }}</h3>
+    <p>{{ 'MEMBERSHIP.FAQ.CHANGE_PLAN_A' | translate }}</p>
+
+    <h3>{{ 'MEMBERSHIP.FAQ.ANNUAL_BILLING_Q' | translate }}</h3>
+    <p>{{ 'MEMBERSHIP.FAQ.ANNUAL_BILLING_A' | translate }}</p>
+
+    <h3>{{ 'MEMBERSHIP.FAQ.PAYMENT_METHODS_Q' | translate }}</h3>
+    <p>{{ 'MEMBERSHIP.FAQ.PAYMENT_METHODS_A' | translate }}</p>
+
+    <h3>{{ 'MEMBERSHIP.FAQ.CANCEL_PREMIUM_Q' | translate }}</h3>
+    <p>{{ 'MEMBERSHIP.FAQ.CANCEL_PREMIUM_A' | translate }}</p>
   </div>
 </div>

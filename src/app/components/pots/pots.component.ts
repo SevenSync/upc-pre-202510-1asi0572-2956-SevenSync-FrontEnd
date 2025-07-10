@@ -5,8 +5,9 @@ import { MatIconModule } from "@angular/material/icon"
 import { MatCardModule } from "@angular/material/card"
 import { MatChipsModule } from "@angular/material/chips"
 import { MatProgressBarModule } from "@angular/material/progress-bar"
-import { ToolbarComponent } from "../public/toolbar/toolbar.component"
 import { CommonModule } from "@angular/common"
+import {TranslateModule} from '@ngx-translate/core';
+import {ToolbarComponent} from '../../shared/components/toolbar/toolbar.component';
 
 interface Pot {
   id: number

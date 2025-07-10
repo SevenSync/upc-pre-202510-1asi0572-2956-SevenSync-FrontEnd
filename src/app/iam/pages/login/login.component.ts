@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import {Component, inject} from '@angular/core';
 import { Router } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { MatButtonModule } from '@angular/material/button';
@@ -8,6 +8,7 @@ import { SignInComponent } from '../../components/sign-in/sign-in.component';
 import { AuthenticationService } from '../../services/authentication.service';
 import { ProfileService } from '../../../profiles/services/profile.service';
 import { SignInRequest } from '../../model/sign-in.request';
+import {TranslateModule, TranslateService} from '@ngx-translate/core';
 
 @Component({
   selector: 'app-login',
@@ -17,7 +18,8 @@ import { SignInRequest } from '../../model/sign-in.request';
     MatButtonModule,
     MatCardModule,
     MatIconModule,
-    SignInComponent
+    SignInComponent,
+    TranslateModule
   ],
   templateUrl: './login.component.html',
   styleUrl: './login.component.css'
@@ -31,6 +33,11 @@ export class LoginComponent {
     private profileService: ProfileService,
     private router: Router
   ) {}
+
+  translate : TranslateService= inject(TranslateService);
+  setLanguage(lang: string): void {
+    this.translate.use(lang);
+  }
 
   onSignIn(signInRequest: SignInRequest): void {
     this.isLoading = true;

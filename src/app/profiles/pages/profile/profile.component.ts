@@ -20,6 +20,7 @@ import {ProfileFormComponent} from '../../components/profile-form/profile-form.c
 import {Subscription} from '../../../subscriptions/model/subscription.entity';
 import {SubscriptionPlanType, SubscriptionStatus} from '../../../subscriptions/model/subscription.entity';
 import {SubscriptionService} from '../../../subscriptions/services/subscription.service';
+import {TranslateModule} from '@ngx-translate/core';
 
 @Component({
   selector: 'app-profile',
@@ -33,7 +34,8 @@ import {SubscriptionService} from '../../../subscriptions/services/subscription.
     MatSlideToggleModule,
     RouterLink,
     ToolbarComponent,
-    ProfileFormComponent
+    ProfileFormComponent,
+    TranslateModule
   ],
   templateUrl: './profile.component.html',
   styleUrl: './profile.component.css'

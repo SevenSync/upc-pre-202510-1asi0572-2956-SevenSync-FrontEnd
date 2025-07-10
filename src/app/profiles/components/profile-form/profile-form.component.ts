@@ -1,4 +1,4 @@
-import { Component, Input, Output, EventEmitter, OnInit } from '@angular/core';
+import {Component, Input, Output, EventEmitter, OnInit, inject} from '@angular/core';
 import { FormBuilder, FormGroup, Validators, ReactiveFormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { MatFormFieldModule } from '@angular/material/form-field';
@@ -7,6 +7,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { Profile } from '../../model/profile.entity';
 import {UpdateProfileRequest} from '../../model/update-profile.request';
+import {TranslateModule, TranslateService} from '@ngx-translate/core';
 
 @Component({
   selector: 'app-profile-form',
@@ -17,106 +18,107 @@ import {UpdateProfileRequest} from '../../model/update-profile.request';
     MatFormFieldModule,
     MatInputModule,
     MatButtonModule,
-    MatIconModule
+    MatIconModule,
+    TranslateModule
   ],
   template: `
     <form [formGroup]="profileForm" (ngSubmit)="onSubmit()" class="profile-form">
       <div class="form-row">
         <mat-form-field appearance="outline" class="half-width">
-          <mat-label>Nombre</mat-label>
-          <input matInput formControlName="firstName" placeholder="Juan">
+          <mat-label>{{ 'CREATE_PROFILE.PROFILE_FORM.FIRST_NAME.LABEL' | translate }}</mat-label>
+          <input matInput formControlName="firstName" [placeholder]="'CREATE_PROFILE.PROFILE_FORM.FIRST_NAME.PLACEHOLDER' | translate">
           <mat-error *ngIf="profileForm.get('firstName')?.hasError('required')">
-            El nombre es requerido
+            {{ 'CREATE_PROFILE.PROFILE_FORM.FIRST_NAME.REQUIRED' | translate }}
           </mat-error>
           <mat-error *ngIf="profileForm.get('firstName')?.hasError('pattern')">
-            Solo se permiten letras
+            {{ 'CREATE_PROFILE.PROFILE_FORM.FIRST_NAME.PATTERN' | translate }}
           </mat-error>
         </mat-form-field>
 
         <mat-form-field appearance="outline" class="half-width">
-          <mat-label>Apellidos</mat-label>
-          <input matInput formControlName="lastName" placeholder="Pérez García">
+          <mat-label>{{ 'CREATE_PROFILE.PROFILE_FORM.LAST_NAME.LABEL' | translate }}</mat-label>
+          <input matInput formControlName="lastName" [placeholder]="'CREATE_PROFILE.PROFILE_FORM.LAST_NAME.PLACEHOLDER' | translate">
           <mat-error *ngIf="profileForm.get('lastName')?.hasError('required')">
-            Los apellidos son requeridos
+            {{ 'CREATE_PROFILE.PROFILE_FORM.LAST_NAME.REQUIRED' | translate }}
           </mat-error>
           <mat-error *ngIf="profileForm.get('lastName')?.hasError('pattern')">
-            Solo se permiten letras
+            {{ 'CREATE_PROFILE.PROFILE_FORM.LAST_NAME.PATTERN' | translate }}
           </mat-error>
         </mat-form-field>
       </div>
 
       <div class="address-section">
-        <h4 class="section-title">Dirección</h4>
+        <h4 class="section-title">{{ 'CREATE_PROFILE.PROFILE_FORM.ADDRESS.TITLE' | translate }}</h4>
 
         <div class="form-row">
           <mat-form-field appearance="outline" class="three-quarters">
-            <mat-label>Calle</mat-label>
-            <input matInput formControlName="street" placeholder="Av. Principal">
+            <mat-label>{{ 'CREATE_PROFILE.PROFILE_FORM.ADDRESS.STREET' | translate }}</mat-label>
+            <input matInput formControlName="street" [placeholder]="'CREATE_PROFILE.PROFILE_FORM.ADDRESS.STREET_PLACEHOLDER' | translate">
             <mat-error *ngIf="profileForm.get('street')?.hasError('required')">
-              La calle es requerida
+              {{ 'CREATE_PROFILE.PROFILE_FORM.ADDRESS.STREET_REQUIRED' | translate }}
             </mat-error>
           </mat-form-field>
 
           <mat-form-field appearance="outline" class="quarter">
-            <mat-label>Número</mat-label>
-            <input matInput formControlName="number" placeholder="123">
+            <mat-label>{{ 'CREATE_PROFILE.PROFILE_FORM.ADDRESS.NUMBER' | translate }}</mat-label>
+            <input matInput formControlName="number" [placeholder]="'CREATE_PROFILE.PROFILE_FORM.ADDRESS.NUMBER_PLACEHOLDER' | translate">
             <mat-error *ngIf="profileForm.get('number')?.hasError('required')">
-              El número es requerido
+              {{ 'CREATE_PROFILE.PROFILE_FORM.ADDRESS.NUMBER_REQUIRED' | translate }}
             </mat-error>
           </mat-form-field>
         </div>
 
         <div class="form-row">
           <mat-form-field appearance="outline" class="half-width">
-            <mat-label>Ciudad</mat-label>
-            <input matInput formControlName="city" placeholder="Lima">
+            <mat-label>{{ 'CREATE_PROFILE.PROFILE_FORM.ADDRESS.CITY' | translate }}</mat-label>
+            <input matInput formControlName="city" [placeholder]="'CREATE_PROFILE.PROFILE_FORM.ADDRESS.CITY_PLACEHOLDER' | translate">
             <mat-error *ngIf="profileForm.get('city')?.hasError('required')">
-              La ciudad es requerida
+              {{ 'CREATE_PROFILE.PROFILE_FORM.ADDRESS.CITY_REQUIRED' | translate }}
             </mat-error>
           </mat-form-field>
 
           <mat-form-field appearance="outline" class="quarter">
-            <mat-label>Código Postal</mat-label>
-            <input matInput formControlName="postalCode" placeholder="15001">
+            <mat-label>{{ 'CREATE_PROFILE.PROFILE_FORM.ADDRESS.POSTAL_CODE' | translate }}</mat-label>
+            <input matInput formControlName="postalCode" [placeholder]="'CREATE_PROFILE.PROFILE_FORM.ADDRESS.POSTAL_PLACEHOLDER' | translate">
             <mat-error *ngIf="profileForm.get('postalCode')?.hasError('required')">
-              El código postal es requerido
+              {{ 'CREATE_PROFILE.PROFILE_FORM.ADDRESS.POSTAL_REQUIRED' | translate }}
             </mat-error>
           </mat-form-field>
 
           <mat-form-field appearance="outline" class="quarter">
-            <mat-label>País</mat-label>
-            <input matInput formControlName="country" placeholder="Perú">
+            <mat-label>{{ 'CREATE_PROFILE.PROFILE_FORM.ADDRESS.COUNTRY' | translate }}</mat-label>
+            <input matInput formControlName="country" [placeholder]="'CREATE_PROFILE.PROFILE_FORM.ADDRESS.COUNTRY_PLACEHOLDER' | translate">
             <mat-error *ngIf="profileForm.get('country')?.hasError('required')">
-              El país es requerido
+              {{ 'CREATE_PROFILE.PROFILE_FORM.ADDRESS.COUNTRY_REQUIRED' | translate }}
             </mat-error>
           </mat-form-field>
         </div>
       </div>
 
       <div class="contact-section">
-        <h4 class="section-title">Información de Contacto</h4>
+        <h4 class="section-title">{{ 'CREATE_PROFILE.PROFILE_FORM.CONTACT.TITLE' | translate }}</h4>
 
         <div class="form-row">
           <mat-form-field appearance="outline" class="quarter">
-            <mat-label>Código País</mat-label>
-            <input matInput formControlName="countryCode" placeholder="+51">
+            <mat-label>{{ 'CREATE_PROFILE.PROFILE_FORM.CONTACT.CODE' | translate }}</mat-label>
+            <input matInput formControlName="countryCode" [placeholder]="'CREATE_PROFILE.PROFILE_FORM.CONTACT.CODE_PLACEHOLDER' | translate">
             <mat-error *ngIf="profileForm.get('countryCode')?.hasError('required')">
-              El código es requerido
+              {{ 'CREATE_PROFILE.PROFILE_FORM.CONTACT.CODE_REQUIRED' | translate }}
             </mat-error>
             <mat-error *ngIf="profileForm.get('countryCode')?.hasError('pattern')">
-              Formato: +51
+              {{ 'CREATE_PROFILE.PROFILE_FORM.CONTACT.CODE_PATTERN' | translate }}
             </mat-error>
           </mat-form-field>
 
           <mat-form-field appearance="outline" class="three-quarters">
-            <mat-label>Número de teléfono</mat-label>
-            <input matInput formControlName="phoneNumber" placeholder="987-654-321">
+            <mat-label>{{ 'CREATE_PROFILE.PROFILE_FORM.CONTACT.PHONE' | translate }}</mat-label>
+            <input matInput formControlName="phoneNumber" [placeholder]="'CREATE_PROFILE.PROFILE_FORM.CONTACT.PHONE_PLACEHOLDER' | translate">
             <mat-icon matSuffix>phone</mat-icon>
             <mat-error *ngIf="profileForm.get('phoneNumber')?.hasError('required')">
-              El teléfono es requerido
+              {{ 'CREATE_PROFILE.PROFILE_FORM.CONTACT.PHONE_REQUIRED' | translate }}
             </mat-error>
             <mat-error *ngIf="profileForm.get('phoneNumber')?.hasError('pattern')">
-              Formato: 987-654-321
+              {{ 'CREATE_PROFILE.PROFILE_FORM.CONTACT.PHONE_PATTERN' | translate }}
             </mat-error>
           </mat-form-field>
         </div>
@@ -127,14 +129,14 @@ import {UpdateProfileRequest} from '../../model/update-profile.request';
                 mat-button
                 (click)="onCancel()"
                 [disabled]="isLoading">
-          Cancelar
+          {{ 'CREATE_PROFILE.PROFILE_FORM.CANCEL' | translate }}
         </button>
 
         <button type="submit"
                 mat-raised-button
                 color="primary"
                 [disabled]="profileForm.invalid || isLoading">
-          {{ isLoading ? 'Guardando...' : (editMode ? 'Actualizar Perfil' : 'Crear Perfil') }}
+          {{ isLoading ? ('CREATE_PROFILE.PROFILE_FORM.LOADING' | translate) : (editMode ? ('CREATE_PROFILE.PROFILE_FORM.UPDATE' | translate) : ('CREATE_PROFILE.PROFILE_FORM.CREATE' | translate)) }}
         </button>
       </div>
     </form>
@@ -245,6 +247,10 @@ export class ProfileFormComponent implements OnInit {
       countryCode: ['', [Validators.required, Validators.pattern(/^\+\d{1,4}$/)]],
       phoneNumber: ['', [Validators.required, Validators.pattern(/^\d{3}-\d{3}-\d{3}$/)]]
     });
+  }
+  translate : TranslateService= inject(TranslateService);
+  setLanguage(lang: string): void {
+    this.translate.use(lang);
   }
 
   ngOnInit(): void {

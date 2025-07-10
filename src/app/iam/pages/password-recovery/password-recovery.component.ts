@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import {Component, inject} from '@angular/core';
 import { FormBuilder, FormGroup, Validators, ReactiveFormsModule } from '@angular/forms';
 import { Router, RouterLink } from '@angular/router';
 import { CommonModule } from '@angular/common';
@@ -9,6 +9,7 @@ import { MatInputModule } from '@angular/material/input';
 import { MatIconModule } from '@angular/material/icon';
 import { AuthenticationService } from '../../services/authentication.service';
 import { PasswordResetRequest } from '../../model/password-reset.request';
+import {TranslateModule, TranslateService} from '@ngx-translate/core';
 
 @Component({
   selector: 'app-password-recovery',
@@ -21,7 +22,8 @@ import { PasswordResetRequest } from '../../model/password-reset.request';
     MatFormFieldModule,
     MatInputModule,
     MatIconModule,
-    RouterLink
+    RouterLink,
+    TranslateModule
   ],
   templateUrl: './password-recovery.component.html',
   styleUrl: './password-recovery.component.css'
@@ -40,6 +42,11 @@ export class PasswordRecoveryComponent {
     this.recoveryForm = this.fb.group({
       email: ['', [Validators.required, Validators.email]]
     });
+  }
+
+  translate : TranslateService= inject(TranslateService);
+  setLanguage(lang: string): void {
+    this.translate.use(lang);
   }
 
   onSubmit(): void {

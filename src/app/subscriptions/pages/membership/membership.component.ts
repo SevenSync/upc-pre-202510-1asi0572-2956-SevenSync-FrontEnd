@@ -8,6 +8,7 @@ import { MembershipCardComponent } from '../../components/membership-card/member
 import { PricingPlanComponent, PricingPlan } from '../../components/pricing-plan/pricing-plan.component';
 import { SubscriptionService } from '../../services/subscription.service';
 import { Subscription, SubscriptionPlanType, SubscriptionStatus } from '../../model/subscription.entity';
+import {TranslateModule} from '@ngx-translate/core';
 
 @Component({
   selector: 'app-membership',
@@ -18,6 +19,7 @@ import { Subscription, SubscriptionPlanType, SubscriptionStatus } from '../../mo
     MatTabsModule,
     RouterLink,
     ToolbarComponent,
+    TranslateModule
   ],
   templateUrl: './membership.component.html',
   styleUrl: './membership.component.css'

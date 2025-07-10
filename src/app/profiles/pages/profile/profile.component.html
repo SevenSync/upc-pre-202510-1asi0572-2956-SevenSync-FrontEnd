@@ -2,8 +2,8 @@
 
 <div class="profile-container">
   <div class="header-section">
-    <h1 class="page-title">Mi Perfil</h1>
-    <p class="subtitle">Gestiona tu información personal y configuraciones</p>
+    <h1 class="page-title">{{ 'PROFILE.TITLE' | translate }}</h1>
+    <p class="subtitle">{{ 'PROFILE.SUBTITLE' | translate }}</p>
   </div>
 
   <div class="content-wrapper" *ngIf="profile; else loading">
@@ -26,7 +26,7 @@
             <div class="stat-item">
               <mat-icon class="stat-icon">person</mat-icon>
               <div class="stat-info">
-                <span class="stat-label">Miembro desde</span>
+                <span class="stat-label">{{ 'PROFILE.STATS.MEMBER_SINCE' | translate }}</span>
                 <span class="stat-value">Mayo 2023</span>
               </div>
             </div>
@@ -34,17 +34,17 @@
             <div class="stat-item">
               <mat-icon class="stat-icon">eco</mat-icon>
               <div class="stat-info">
-                <span class="stat-label">Macetas activas</span>
+                <span class="stat-label">{{ 'PROFILE.STATS.ACTIVE_POTS' | translate }}</span>
                 <span class="stat-value">4 macetas</span>
               </div>
             </div>
           </div>
 
           <div class="membership-info">
-            <h3>Membresía Actual</h3>
+            <h3>{{ 'PROFILE.MEMBERSHIP.TITLE' | translate }}</h3>
             <div class="membership-badge">
               <mat-icon class="membership-icon">{{ isPremiumUser ? 'crown' : 'eco' }}</mat-icon>
-              <span>{{ isPremiumUser ? 'Plan Premium' : 'Plan Gratuito' }}</span>
+              <span>{{ isPremiumUser ? ('PROFILE.MEMBERSHIP.PREMIUM' | translate) : ('PROFILE.MEMBERSHIP.FREE' | translate) }}</span>
             </div>
             <button *ngIf="!isPremiumUser"
                     mat-raised-button
@@ -52,7 +52,7 @@
                     class="upgrade-button"
                     routerLink="/membership">
               <mat-icon>crown</mat-icon>
-              Actualizar a Premium
+              {{ 'PROFILE.ACTIONS.UPGRADE' | translate }}
             </button>
           </div>
 
@@ -62,7 +62,7 @@
                     class="logout-button"
                     (click)="signOut()">
               <mat-icon>logout</mat-icon>
-              Cerrar Sesión
+              {{ 'PROFILE.ACTIONS.SIGN_OUT' | translate }}
             </button>
 
             <button mat-stroked-button
@@ -70,7 +70,7 @@
                     class="delete-button"
                     (click)="openDeleteAccountDialog()">
               <mat-icon>delete_forever</mat-icon>
-              Eliminar Cuenta
+              {{ 'PROFILE.ACTIONS.DELETE_ACCOUNT' | translate }}
             </button>
           </div>
         </div>
@@ -80,15 +80,15 @@
       <div class="profile-main">
         <mat-tab-group animationDuration="200ms" class="profile-tabs">
           <!-- Tab: Información Personal -->
-          <mat-tab label="Información Personal">
+          <mat-tab label="{{ 'PROFILE.TABS.PERSONAL_INFO' | translate }}">
             <div class="tab-content">
               <div class="section-header">
-                <h3>Información Personal</h3>
+                <h3>{{ 'PROFILE.TABS.PERSONAL_INFO' | translate }}</h3>
                 <button *ngIf="!isEditingProfile"
                         mat-button
                         (click)="enableProfileEditing()"
                         class="edit-button">
-                  <mat-icon>edit</mat-icon>
+                  <mat-icon>edit {{ 'PROFILE.EDIT.EDIT_BUTTON' | translate }}</mat-icon>
                   Editar
                 </button>
               </div>
@@ -96,33 +96,33 @@
               <div *ngIf="!isEditingProfile; else editingForm" class="profile-display">
                 <div class="info-grid">
                   <div class="info-item">
-                    <label>Nombre Completo</label>
+                    <label>{{ 'PROFILE.EDIT.FULL_NAME' | translate }}</label>
                     <span>{{ profile.fullName }}</span>
                   </div>
 
                   <div class="info-item">
-                    <label>Correo Electrónico</label>
+                    <label>{{ 'PROFILE.EDIT.EMAIL' | translate }}</label>
                     <span>{{ email }}</span>
                   </div>
 
                   <div class="info-item">
-                    <label>Teléfono</label>
-                    <span>{{ profile.phoneNumber || 'No especificado' }}</span>
+                    <label>{{ 'PROFILE.EDIT.PHONE' | translate }}</label>
+                    <span>{{ profile.phoneNumber || ('PROFILE.EDIT.NOT_SPECIFIED' | translate) }}</span>
                   </div>
 
                   <div class="info-item">
-                    <label>Dirección</label>
-                    <span>{{ profile.streetAddress || 'No especificada' }}</span>
+                    <label>{{ 'PROFILE.EDIT.ADDRESS' | translate }}</label>
+                    <span>{{ profile.streetAddress || ('PROFILE.EDIT.NOT_SPECIFIED' | translate) }}</span>
                   </div>
                 </div>
 
                 <div class="security-section">
-                  <h4>Seguridad</h4>
+                  <h4>{{ 'PROFILE.EDIT.CHANGE_PASSWORD' | translate }}</h4>
                   <button mat-button
                           (click)="openChangePasswordDialog()"
                           class="security-button">
                     <mat-icon>lock</mat-icon>
-                    Cambiar Contraseña
+                    {{ 'PROFILE.EDIT.CHANGE_PASSWORD' | translate }}
                   </button>
                 </div>
               </div>
@@ -140,38 +140,35 @@
           </mat-tab>
 
           <!-- Tab: Notificaciones -->
-          <mat-tab label="Notificaciones">
+          <mat-tab label="{{ 'PROFILE.TABS.NOTIFICATIONS' | translate }}">
             <div class="tab-content">
-              <h3>Preferencias de Notificaciones</h3>
+              <h3>{{ 'PROFILE.NOTIFICATIONS_SETTINGS.TITLE' | translate }}</h3>
               <p class="section-description">
-                Configura cómo y cuándo quieres recibir notificaciones sobre tus plantas.
+                {{ 'PROFILE.NOTIFICATIONS_SETTINGS.DESCRIPTION' | translate }}
               </p>
 
               <div class="notification-settings">
-                <div class="setting-item">
-                  <mat-slide-toggle color="primary" [checked]="true"></mat-slide-toggle>
-                </div>
 
                 <div class="setting-item">
                   <div class="setting-info">
-                    <h4>Alertas de sensores</h4>
-                    <p>Notificaciones cuando los sensores detecten condiciones anormales</p>
+                    <h4>{{ 'PROFILE.NOTIFICATIONS_SETTINGS.SENSOR_ALERTS' | translate }}</h4>
+                    <p>{{ 'PROFILE.NOTIFICATIONS_SETTINGS.SENSOR_ALERTS_DESC' | translate }}</p>
                   </div>
                   <mat-slide-toggle color="primary" [checked]="true"></mat-slide-toggle>
                 </div>
 
                 <div class="setting-item">
                   <div class="setting-info">
-                    <h4>Reportes semanales</h4>
-                    <p>Resumen semanal del estado de tus plantas</p>
+                    <h4>{{ 'PROFILE.NOTIFICATIONS_SETTINGS.WEEKLY_REPORTS' | translate }}</h4>
+                    <p>{{ 'PROFILE.NOTIFICATIONS_SETTINGS.WEEKLY_REPORTS_DESC' | translate }}</p>
                   </div>
                   <mat-slide-toggle color="primary" [checked]="false"></mat-slide-toggle>
                 </div>
 
                 <div class="setting-item">
                   <div class="setting-info">
-                    <h4>Notificaciones por correo</h4>
-                    <p>Recibe todas las notificaciones por correo electrónico</p>
+                    <h4>{{ 'PROFILE.NOTIFICATIONS_SETTINGS.EMAIL_NOTIFICATIONS' | translate }}</h4>
+                    <p>{{ 'PROFILE.NOTIFICATIONS_SETTINGS.EMAIL_NOTIFICATIONS_DESC' | translate }}</p>
                   </div>
                   <mat-slide-toggle color="primary" [checked]="true"></mat-slide-toggle>
                 </div>
@@ -180,49 +177,49 @@
           </mat-tab>
 
           <!-- Tab: Privacidad -->
-          <mat-tab label="Privacidad">
+          <mat-tab label="{{ 'PROFILE.TABS.PRIVACY' | translate }}">
             <div class="tab-content">
-              <h3>Configuración de Privacidad</h3>
+              <h3>{{ 'PROFILE.PRIVACY_SETTINGS.TITLE' | translate }}</h3>
               <p class="section-description">
-                Controla cómo se usan tus datos y quién puede acceder a tu información.
+                {{ 'PROFILE.PRIVACY_SETTINGS.DESCRIPTION' | translate }}
               </p>
 
               <div class="privacy-settings">
                 <div class="setting-item">
                   <div class="setting-info">
-                    <h4>Perfil público</h4>
-                    <p>Permite que otros usuarios vean tu perfil básico</p>
+                    <h4>{{ 'PROFILE.PRIVACY_SETTINGS.PUBLIC_PROFILE' | translate }}</h4>
+                    <p>{{ 'PROFILE.PRIVACY_SETTINGS.PUBLIC_PROFILE_DESC' | translate }}</p>
                   </div>
                   <mat-slide-toggle color="primary" [checked]="false"></mat-slide-toggle>
                 </div>
 
                 <div class="setting-item">
                   <div class="setting-info">
-                    <h4>Compartir datos de plantas</h4>
-                    <p>Ayuda a mejorar el servicio compartiendo datos anónimos</p>
+                    <h4>{{ 'PROFILE.PRIVACY_SETTINGS.SHARE_PLANT_DATA' | translate }}</h4>
+                    <p>{{ 'PROFILE.PRIVACY_SETTINGS.SHARE_PLANT_DATA_DESC' | translate }}</p>
                   </div>
                   <mat-slide-toggle color="primary" [checked]="true"></mat-slide-toggle>
                 </div>
 
                 <div class="setting-item">
                   <div class="setting-info">
-                    <h4>Análisis de uso</h4>
-                    <p>Permitir análisis de cómo usas la aplicación</p>
+                    <h4>{{ 'PROFILE.PRIVACY_SETTINGS.USAGE_ANALYTICS' | translate }}</h4>
+                    <p>{{ 'PROFILE.PRIVACY_SETTINGS.USAGE_ANALYTICS_DESC' | translate }}</p>
                   </div>
                   <mat-slide-toggle color="primary" [checked]="true"></mat-slide-toggle>
                 </div>
               </div>
 
               <div class="data-management">
-                <h4>Gestión de Datos</h4>
+                <h4>{{ 'PROFILE.PRIVACY_SETTINGS.DATA_MANAGEMENT' | translate }}</h4>
                 <div class="data-actions">
                   <button mat-button class="data-button">
                     <mat-icon>download</mat-icon>
-                    Descargar mis datos
+                    {{ 'PROFILE.PRIVACY_SETTINGS.DOWNLOAD_DATA' | translate }}
                   </button>
                   <button mat-button color="warn" class="data-button">
                     <mat-icon>delete_sweep</mat-icon>
-                    Eliminar todos los datos
+                    {{ 'PROFILE.PRIVACY_SETTINGS.DELETE_DATA' | translate }}
                   </button>
                 </div>
               </div>

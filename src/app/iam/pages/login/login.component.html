@@ -1,16 +1,21 @@
 <div class="login-container">
+  <div class="language-switch">
+    <button mat-button (click)="setLanguage('es')">ES</button>
+    <button mat-button (click)="setLanguage('en')">EN</button>
+  </div>
+
   <div class="login-card">
     <div class="brand-section">
       <div class="logo">
         <img src="logo.png" alt="MaceTech Logo" class="logo-image" width="100px" height="100px">
       </div>
       <h1 class="brand-title">MaceTech</h1>
-      <p class="brand-subtitle">Cuida tus plantas inteligentemente</p>
+      <p class="brand-subtitle">{{ 'LOGIN.TAGLINE' | translate }}</p>
     </div>
 
     <div class="form-section">
-      <h2 class="form-title">Bienvenido de vuelta</h2>
-      <p class="form-subtitle">Inicia sesión en tu cuenta</p>
+      <h2 class="form-title">{{ 'LOGIN.TITLE' | translate }}</h2>
+      <p class="form-subtitle">{{ 'LOGIN.SUBTITLE' | translate }}</p>
 
       <app-sign-in
         (signIn)="onSignIn($event)"

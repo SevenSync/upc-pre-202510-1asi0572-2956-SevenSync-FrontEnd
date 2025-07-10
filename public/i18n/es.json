@@ -1,0 +1,393 @@
+{
+  "LOGIN": {
+    "TAGLINE": "Cuida tus plantas inteligentemente",
+    "TITLE": "Bienvenido de vuelta",
+    "SUBTITLE": "Inicia sesión en tu cuenta",
+    "SIGN_IN": {
+      "EMAIL_LABEL": "Correo electrónico",
+      "EMAIL_PLACEHOLDER": "tu@email.com",
+      "EMAIL_REQUIRED": "El correo es requerido",
+      "EMAIL_INVALID": "Ingresa un correo válido",
+
+      "PASSWORD_LABEL": "Contraseña",
+      "PASSWORD_PLACEHOLDER": "Tu contraseña",
+      "PASSWORD_REQUIRED": "La contraseña es requerida",
+      "PASSWORD_MINLENGTH": "La contraseña debe tener al menos 6 caracteres",
+
+      "FORGOT_PASSWORD": "¿Olvidaste tu contraseña?",
+      "LOADING": "Iniciando sesión...",
+      "SUBMIT": "Iniciar Sesión",
+      "NO_ACCOUNT": "¿No tienes cuenta?",
+      "REGISTER": "Regístrate aquí"
+    }
+  },
+  "REGISTER": {
+    "TAGLINE": "Únete a la revolución del cuidado inteligente de plantas",
+    "TITLE": "Crear cuenta",
+    "SUBTITLE": "Completa tus datos para comenzar",
+
+    "EMAIL_LABEL": "Correo electrónico",
+    "EMAIL_PLACEHOLDER": "tu@email.com",
+    "EMAIL_REQUIRED": "El correo es requerido",
+    "EMAIL_INVALID": "Ingresa un correo válido",
+
+    "PASSWORD_LABEL": "Contraseña",
+    "PASSWORD_PLACEHOLDER": "Mínimo 6 caracteres",
+    "PASSWORD_REQUIRED": "La contraseña es requerida",
+    "PASSWORD_MINLENGTH": "La contraseña debe tener al menos 6 caracteres",
+
+    "CONFIRM_LABEL": "Confirmar contraseña",
+    "CONFIRM_PLACEHOLDER": "Repite tu contraseña",
+    "CONFIRM_REQUIRED": "Confirma tu contraseña",
+    "CONFIRM_MISMATCH": "Las contraseñas no coinciden",
+
+    "ACCEPT_TERMS": "Acepto los",
+    "TERMS_LINK": "términos y condiciones",
+    "AND": "y la",
+    "PRIVACY_LINK": "política de privacidad",
+    "TERMS_REQUIRED": "Debes aceptar los términos y condiciones",
+
+    "LOADING": "Creando cuenta...",
+    "SUBMIT": "Crear Cuenta",
+    "HAVE_ACCOUNT": "¿Ya tienes cuenta?",
+    "LOGIN_LINK": "Inicia sesión aquí"
+  },
+  "RECOVERY": {
+    "TITLE": "¿Olvidaste tu contraseña?",
+    "SUBTITLE": "No te preocupes, te enviaremos un enlace para restablecer tu contraseña.",
+    "EMAIL_LABEL": "Correo electrónico",
+    "EMAIL_PLACEHOLDER": "tu@email.com",
+    "EMAIL_REQUIRED": "El correo es requerido",
+    "EMAIL_INVALID": "Ingresa un correo válido",
+    "LOADING": "Enviando...",
+    "SUBMIT": "Enviar enlace de recuperación",
+    "REMEMBERED": "¿Recordaste tu contraseña?",
+    "BACK_TO_LOGIN": "Volver al inicio de sesión"
+  },
+  "CREATE_PROFILE": {
+    "TITLE": "Completar Perfil",
+    "SUBTITLE": "Para comenzar a usar MaceTech, necesitamos algunos datos adicionales sobre ti.",
+    "ERROR": "Ocurrió un error al guardar tu perfil.",
+    "SUCCESS": "Perfil creado exitosamente.",
+    "PROFILE_FORM": {
+      "FIRST_NAME": {
+        "LABEL": "Nombre",
+        "PLACEHOLDER": " Juan",
+        "REQUIRED": "El nombre es requerido",
+        "PATTERN": "Solo se permiten letras"
+      },
+      "LAST_NAME": {
+        "LABEL": "Apellidos",
+        "PLACEHOLDER": " Pérez García",
+        "REQUIRED": "Los apellidos son requeridos",
+        "PATTERN": "Solo se permiten letras"
+      },
+      "ADDRESS": {
+        "TITLE": "Dirección",
+        "STREET": "Calle",
+        "STREET_PLACEHOLDER": " Av. Principal",
+        "STREET_REQUIRED": "La calle es requerida",
+        "NUMBER": "Número",
+        "NUMBER_PLACEHOLDER": " 123",
+        "NUMBER_REQUIRED": "El número es requerido",
+        "CITY": "Ciudad",
+        "CITY_PLACEHOLDER": " Lima",
+        "CITY_REQUIRED": "La ciudad es requerida",
+        "POSTAL_CODE": "Código Postal",
+        "POSTAL_PLACEHOLDER": " 15001",
+        "POSTAL_REQUIRED": "El código postal es requerido",
+        "COUNTRY": "País",
+        "COUNTRY_PLACEHOLDER": " Perú",
+        "COUNTRY_REQUIRED": "El país es requerido"
+      },
+      "CONTACT": {
+        "TITLE": "Información de Contacto",
+        "CODE": "Código País",
+        "CODE_PLACEHOLDER": " +51",
+        "CODE_REQUIRED": "El código es requerido",
+        "CODE_PATTERN": " Formato: +51",
+        "PHONE": "Número de teléfono",
+        "PHONE_PLACEHOLDER": " 987-654-321",
+        "PHONE_REQUIRED": "El teléfono es requerido",
+        "PHONE_PATTERN": "Formato: 987-654-321"
+      },
+      "CANCEL": "Cancelar",
+      "CREATE": "Crear Perfil",
+      "UPDATE": "Actualizar Perfil",
+      "LOADING": "Guardando..."
+    }
+  },
+  "TOOLBAR": {
+    "APP_NAME": "MaceTech",
+    "MEMBERSHIP": {
+      "PREMIUM": "Premium",
+      "DEFAULT": "Membresías"
+    },
+    "POTS": "Macetas",
+    "NOTIFICATIONS": "Notificaciones",
+    "PROFILE": "Perfil",
+    "LANGUAGE": {
+      "ES": "ES",
+      "EN": "EN"
+    }
+  },
+  "MEMBERSHIP": {
+    "TITLE": "Membresías",
+    "CURRENT": "Tu membresía actual",
+    "FREE_PLAN": "Plan Gratuito",
+    "UPGRADE": "Actualizar a Premium",
+    "DIFFERENCE_TITLE": "Nota la diferencia",
+    "DIFFERENCE_DESC": "Cámbiate a premium y disfruta del control de todas tus macetas con información relevante, actualizada y detallada. Cancela cuando quieras.",
+    "FEATURES": "Características",
+    "PLAN": {
+      "FREE": "Plan Gratuito",
+      "PREMIUM": "Plan Premium"
+    },
+    "PREMIUM_HEADER": "Plan Premium",
+    "PREMIUM_ADVANTAGES": "Todo lo del plan gratuito, más:",
+    "MONTHLY": "Mensual",
+    "ANNUAL": "Anual",
+    "DISCOUNT": "-17%",
+    "FREE_LABEL": "Funcionalidades Básicas",
+    "INCLUDES": "Incluye:",
+    "LIMITATIONS": "Limitaciones:",
+    "LIMITATION_LIST": [
+      "Sin reportes semanales",
+      "Sin promación de riego automático",
+      "Sin recomendaciones avanzadas"
+    ],
+    "CURRENT_BUTTON": "Plan Actual",
+    "PREMIUM_LABEL": "Funcionalidades Avanzadas",
+    "COMPARE": {
+      "POTS": "Cantidad de macetas inteligentes",
+      "POTS_FREE": "Cuatro (4)",
+      "POTS_PREMIUM": "Ilimitado",
+      "SENSORS": "Monitoreo de sensores",
+      "SENSORS_FREE": "Funciones básicas",
+      "SENSORS_PREMIUM": "Funciones avanzadas",
+      "IRRIGATION_ALERTS": "Alertas de riego",
+      "IRRIGATION_ALERTS_FREE": "Alertas básicas",
+      "IRRIGATION_ALERTS_PREMIUM": "Alertas personalizadas",
+      "DATA_HISTORY": "Historial de datos",
+      "DATA_HISTORY_FREE": "Máximo de 7 días",
+      "DATA_HISTORY_PREMIUM": "Ilimitado",
+      "REPORTS": "Reportes semanales",
+      "REPORTS_FREE": "✘",
+      "REPORTS_PREMIUM": "✔ Disponibles y detallados",
+      "AUTO_WATERING": "Programación de riego automático",
+      "AUTO_WATERING_FREE": "✘",
+      "AUTO_WATERING_PREMIUM": "✔ Personalizada",
+      "RECOMMENDATIONS": "Recomendaciones personalizadas",
+      "RECOMMENDATIONS_FREE": "✘",
+      "RECOMMENDATIONS_PREMIUM": "✔ Relevantes y detalladas",
+      "SUPPORT": "Soporte técnico a usuarios",
+      "SUPPORT_FREE": "Menos de 24 horas",
+      "SUPPORT_PREMIUM": "Menos de 4 horas",
+      "EARLY_ACCESS": "Acceso anticipado a nuevas funciones",
+      "EARLY_ACCESS_FREE": "✘",
+      "EARLY_ACCESS_PREMIUM": "✔ Mediante correo"
+    },
+    "FOOTER_TITLE": "Planes accesibles para cada jardinero",
+    "FOOTER_DESC": "Elige un plan Macetech y cuida tus plantas con monitoreo inteligente, riego automático y alertas personalizadas desde tu móvil o computadora. Disfruta de recomendaciones de cuidado y ajusta tus preferencias fácilmente. Cancela o cambia de plan cuando quieras.",
+    "FAQ_TITLE": "Preguntas Frecuentes:",
+    "FAQ": {
+      "CHANGE_PLAN_Q": "¿Puedo cambiar de plan en cualquier momento?",
+      "CHANGE_PLAN_A": "Sí, puedes actualizar a Premium en cualquier momento. Si decides volver al plan gratuito, el cambio se hará efectivo al final de tu período de facturación.",
+      "ANNUAL_BILLING_Q": "¿Cómo funciona la facturación anual?",
+      "ANNUAL_BILLING_A": "Con la facturación anual, pagas por 12 meses por adelantado y obtienes un descuento del 17% comparado con el pago mensual.",
+      "PAYMENT_METHODS_Q": "¿Qué métodos de pago aceptan?",
+      "PAYMENT_METHODS_A": "Aceptamos todas las tarjetas de crédito y débito principales (Visa, Mastercard, American Express), así como PayPal.",
+      "CANCEL_PREMIUM_Q": "¿Puedo cancelar mi suscripción Premium?",
+      "CANCEL_PREMIUM_A": "Sí, puedes cancelar tu suscripción en cualquier momento desde la configuración de tu cuenta. Seguirás teniendo acceso a las funciones Premium hasta el final de tu período de facturación."
+    }
+  },
+  "POTS": {
+    "TITLE": "Mis Macetas",
+    "SUBTITLE": "Monitorea y cuida tus plantas inteligentes",
+    "POT_COUNT": "macetas",
+    "STATUS": {
+      "HEALTHY": "saludables",
+      "WARNING": "necesitan atención",
+      "CRITICAL": "críticas"
+    },
+    "ADD_POT": "Agregar Maceta",
+    "TABS": {
+      "ALL": "Todas",
+      "HEALTHY": "Saludables",
+      "WARNING": "Necesitan atención",
+      "CRITICAL": "Críticas"
+    },
+    "LOADING": "Cargando macetas...",
+    "RETRY": "Reintentar",
+    "NO_POTS": {
+      "FIRST": "Agregar tu primera maceta",
+      "NEW": "Agregar nueva maceta"
+    },
+    "CREATE_POT": {
+      "TITLE": "Agregar Nueva Maceta",
+      "STEP1": {
+        "LABEL": "Información Básica",
+        "NAME_LABEL": "Nombre de la Maceta",
+        "NAME_PLACEHOLDER": "Ej: Monstera del Salón",
+        "NAME_HINT": "Dale un nombre descriptivo a tu maceta",
+        "NAME_REQUIRED": "El nombre es obligatorio",
+        "NAME_MIN": "El nombre debe tener al menos 2 caracteres",
+        "LOCATION_LABEL": "Ubicación",
+        "LOCATION_PLACEHOLDER": "Ej: Sala de estar, junto a la ventana",
+        "LOCATION_HINT": "¿Dónde estará ubicada la maceta?",
+        "LOCATION_REQUIRED": "La ubicación es obligatoria"
+      },
+      "STEP2": {
+        "LABEL": "Configuración Técnica",
+        "DEVICE_ID_LABEL": "ID del Dispositivo",
+        "DEVICE_ID_PLACEHOLDER": "Ej: MACETECH_001",
+        "DEVICE_HINT": "Identificador único del dispositivo IoT (opcional)",
+        "STATUS_LABEL": "Estado Inicial",
+        "STATUS_HINT": "Estado inicial de la maceta en el sistema",
+        "STATUS": {
+          "ACTIVE": {
+            "NAME": "Activa",
+            "DESC": "La maceta estará lista para monitoreo"
+          },
+          "INACTIVE": {
+            "NAME": "Inactiva",
+            "DESC": "La maceta no enviará datos hasta activarla"
+          },
+          "MAINTENANCE": {
+            "NAME": "Mantenimiento",
+            "DESC": "La maceta está en proceso de configuración"
+          }
+        },
+        "INFO_TITLE": "Configuración del Dispositivo",
+        "INFO_DESC": "Una vez creada la maceta, podrás vincular sensores específicos y configurar umbrales personalizados desde la página de detalles."
+      },
+      "STEP3": {
+        "LABEL": "Confirmación"
+      },
+      "SUMMARY": {
+        "TITLE": "Resumen de la Nueva Maceta",
+        "NAME": "Nombre",
+        "LOCATION": "Ubicación",
+        "DEVICE": "Dispositivo",
+        "NO_DEVICE": "No especificado",
+        "STATUS": "Estado"
+      },
+      "NEXT_STEPS": {
+        "TITLE": "Próximos Pasos",
+        "STEP1": "La maceta será creada y asignada automáticamente a tu cuenta",
+        "STEP2": "Podrás configurar sensores y umbrales desde los detalles",
+        "STEP3": "Si tienes un dispositivo físico, sincronízalo usando el ID del dispositivo",
+        "STEP4": "Vincula una planta específica para obtener recomendaciones personalizadas"
+      },
+      "CANCEL": "Cancelar",
+      "BACK": "Atrás",
+      "CONTINUE": "Continuar",
+      "CREATE": "Crear Maceta",
+      "CREATING": "Creando..."
+    },
+    "ASSIGN_POT": {
+      "TITLE": "Asignar Maceta",
+      "NAME_LABEL": "Nombre de la Maceta",
+      "LOCATION_LABEL": "Ubicación",
+      "STATUS_LABEL": "Estado",
+      "STATUS": {
+        "ACTIVE": "Activa",
+        "INACTIVE": "Inactiva",
+        "MAINTENANCE": "Mantenimiento"
+      },
+      "CANCEL": "Cancelar",
+      "SUBMIT": "Asignar Maceta",
+      "ASSIGNING": "Asignando..."
+    }
+  },
+  "NOTIFICATIONS": {
+    "TITLE": "Centro de Notificaciones",
+    "ALL": "Todas las notificaciones",
+    "UNREAD_COUNT": "Tienes {{count}} notificaciones sin leer",
+    "FILTER": "Filtrar",
+    "MARK_ALL_AS_READ": "Marcar todas como leídas",
+    "TABS": {
+      "ALL": "Todas",
+      "IRRIGATION": "Riego",
+      "ENVIRONMENT": "Ambiente",
+      "SYSTEM": "Sistema",
+      "UNREAD": "No leídas"
+    },
+    "TOOLTIP": {
+      "READ": "Marcar como leída",
+      "DELETE": "Eliminar notificación"
+    },
+    "NO_NOTIFICATIONS": "No hay notificaciones en esta categoría"
+  },
+  "PROFILE": {
+    "TITLE": "Mi Perfil",
+    "SUBTITLE": "Gestiona tu información personal y configuraciones",
+    "STATS": {
+      "MEMBER_SINCE": "Miembro desde",
+      "ACTIVE_POTS": "Macetas activas"
+    },
+    "MEMBERSHIP": {
+      "TITLE": "Membresía Actual",
+      "FREE": "Plan Gratuito",
+      "PREMIUM": "Plan Premium"
+    },
+    "ACTIONS": {
+      "SIGN_OUT": "Cerrar Sesión",
+      "DELETE_ACCOUNT": "Eliminar Cuenta",
+      "UPGRADE": "Actualizar a Premium"
+    },
+    "TABS": {
+      "PERSONAL_INFO": "Información Personal",
+      "NOTIFICATIONS": "Notificaciones",
+      "PRIVACY": "Privacidad"
+    },
+    "EDIT": {
+      "EDIT_BUTTON": "Editar",
+      "FULL_NAME": "Nombre Completo",
+      "EMAIL": "Correo Electrónico",
+      "PHONE": "Teléfono",
+      "ADDRESS": "Dirección",
+      "NOT_SPECIFIED": "No especificado",
+      "CHANGE_PASSWORD": "Cambiar Contraseña"
+    },
+    "NOTIFICATIONS_SETTINGS": {
+      "TITLE": "Preferencias de Notificaciones",
+      "DESCRIPTION": "Configura cómo y cuándo quieres recibir notificaciones sobre tus plantas.",
+      "SENSOR_ALERTS": "Alertas de sensores",
+      "SENSOR_ALERTS_DESC": "Notificaciones cuando los sensores detecten condiciones anormales",
+      "WEEKLY_REPORTS": "Reportes semanales",
+      "WEEKLY_REPORTS_DESC": "Resumen semanal del estado de tus plantas",
+      "EMAIL_NOTIFICATIONS": "Notificaciones por correo",
+      "EMAIL_NOTIFICATIONS_DESC": "Recibe todas las notificaciones por correo electrónico"
+    },
+    "PRIVACY_SETTINGS": {
+      "TITLE": "Configuración de Privacidad",
+      "DESCRIPTION": "Controla cómo se usan tus datos y quién puede acceder a tu información.",
+      "PUBLIC_PROFILE": "Perfil público",
+      "PUBLIC_PROFILE_DESC": "Permite que otros usuarios vean tu perfil básico",
+      "SHARE_PLANT_DATA": "Compartir datos de plantas",
+      "SHARE_PLANT_DATA_DESC": "Ayuda a mejorar el servicio compartiendo datos anónimos",
+      "USAGE_ANALYTICS": "Análisis de uso",
+      "USAGE_ANALYTICS_DESC": "Permitir análisis de cómo usas la aplicación",
+      "DATA_MANAGEMENT": "Gestión de Datos",
+      "DOWNLOAD_DATA": "Descargar mis datos",
+      "DELETE_DATA": "Eliminar todos los datos"
+    },
+    "LOADING": "Cargando perfil...",
+    "CHANGE_PASSWORD": {
+      "TITLE": "Cambiar de contraseña",
+      "SUBTITLE": "Ingresa tu nueva contraseña (mínimo 6 caracteres)",
+      "NEW_PASSWORD": "Nueva contraseña",
+      "CONFIRM_PASSWORD": "Confirmar nueva contraseña",
+      "SAVE": "Guardar",
+      "CANCEL": "Cancelar"
+    },
+    "DELETE_ACCOUNT": {
+      "TITLE": "Borrar Cuenta",
+      "CONFIRMATION": "¿Está seguro de que desea borrar su cuenta? Esta acción no se puede deshacer.",
+      "DELETE_BUTTON": "Borrar cuenta",
+      "CANCEL_BUTTON": "Cancelar"
+    }
+  }
+
+}

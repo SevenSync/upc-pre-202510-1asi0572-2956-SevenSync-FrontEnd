@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import {Component, inject} from '@angular/core';
 import { Router } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { MatButtonModule } from '@angular/material/button';
@@ -8,6 +8,7 @@ import { ProfileFormComponent } from '../../components/profile-form/profile-form
 import { ProfileService } from '../../services/profile.service';
 import {UpdateProfileRequest} from '../../model/update-profile.request';
 import {CreateProfileRequest} from '../../model/create-profile.request';
+import {TranslateModule, TranslateService} from '@ngx-translate/core';
 
 @Component({
   selector: 'app-create-profile',
@@ -17,7 +18,8 @@ import {CreateProfileRequest} from '../../model/create-profile.request';
     MatButtonModule,
     MatCardModule,
     MatIconModule,
-    ProfileFormComponent
+    ProfileFormComponent,
+    TranslateModule
   ],
   templateUrl: './create-profile.component.html',
   styleUrl: './create-profile.component.css'
@@ -31,6 +33,11 @@ export class CreateProfileComponent {
     private profileService: ProfileService,
     private router: Router
   ) {}
+
+  translate : TranslateService= inject(TranslateService);
+  setLanguage(lang: string): void {
+    this.translate.use(lang);
+  }
 
   onProfileSubmit(profileRequest: UpdateProfileRequest): void {
     const token = localStorage.getItem('token');
@@ -47,7 +54,7 @@ export class CreateProfileComponent {
       profileRequest.firstName,
       profileRequest.lastName,
       profileRequest.street,
-      profileRequest.number,
+      profileRequest.buildingNumber,
       profileRequest.city,
       profileRequest.postalCode,
       profileRequest.country,

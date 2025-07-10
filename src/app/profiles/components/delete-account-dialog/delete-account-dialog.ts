@@ -1,24 +1,30 @@
-import { Component } from '@angular/core';
+import {Component, inject} from '@angular/core';
 import { MatDialogRef, MatDialogContent, MatDialogActions, MatDialogClose } from '@angular/material/dialog';
 import { MatButtonModule } from '@angular/material/button';
 import { Router } from '@angular/router';
 import { UserService } from '../../../iam/services/user.service';
+import {TranslateModule, TranslateService} from '@ngx-translate/core';
 
 @Component({
   selector: 'app-delete-account-dialog',
   standalone: true,
-  imports: [MatDialogContent, MatDialogActions, MatDialogClose, MatButtonModule],
+  imports: [MatDialogContent, MatDialogActions, MatDialogClose, MatButtonModule,TranslateModule],
   template: `
     <div class="container">
       <mat-dialog-content class="mat-typography">
-        <h2>Borrar Cuenta</h2>
-        <p class="subtitle">¿Está seguro de que desea borrar su cuenta? Esta acción no se puede deshacer.</p>
+        <h2>{{ 'PROFILE.DELETE_ACCOUNT.TITLE' | translate }}</h2>
+        <p class="subtitle">{{ 'PROFILE.DELETE_ACCOUNT.CONFIRMATION' | translate }}</p>
         <mat-dialog-actions class="button-row">
-          <button class="save" mat-button (click)="deleteAccount()">Borrar cuenta</button>
-          <button class="cancel" mat-button [mat-dialog-close]="true">Cancelar</button>
+          <button class="save" mat-button (click)="deleteAccount()">
+            {{ 'PROFILE.DELETE_ACCOUNT.DELETE_BUTTON' | translate }}
+          </button>
+          <button class="cancel" mat-button [mat-dialog-close]="true">
+            {{ 'PROFILE.DELETE_ACCOUNT.CANCEL_BUTTON' | translate }}
+          </button>
         </mat-dialog-actions>
       </mat-dialog-content>
     </div>
+
   `,
   styles: [`
     .container { padding: .5rem; background-color: #f9f9f9; border-radius: 15px; }
@@ -34,6 +40,7 @@ export class DeleteAccountDialogComponent {
     private dialogRef: MatDialogRef<DeleteAccountDialogComponent>,
     private router: Router
   ) {}
+
 
   deleteAccount(): void {
     const token = localStorage.getItem('token');
