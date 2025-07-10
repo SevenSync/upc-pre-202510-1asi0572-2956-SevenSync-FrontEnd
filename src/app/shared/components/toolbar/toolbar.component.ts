@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, inject, OnInit} from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatIconModule } from '@angular/material/icon';
@@ -8,6 +8,8 @@ import {Subscription} from '../../../subscriptions/model/subscription.entity';
 import {AuthenticationService} from '../../../iam/services/authentication.service';
 import {SubscriptionService} from '../../../subscriptions/services/subscription.service';
 import {SubscriptionPlanType, SubscriptionStatus} from '../../../subscriptions/model/subscription.entity';
+import {TranslateModule, TranslateService} from '@ngx-translate/core';
+
 
 @Component({
   selector: 'app-toolbar',
@@ -18,7 +20,8 @@ import {SubscriptionPlanType, SubscriptionStatus} from '../../../subscriptions/m
     MatButtonModule,
     MatIconModule,
     RouterLink,
-    RouterLinkActive
+    RouterLinkActive,
+    TranslateModule
   ],
   templateUrl: './toolbar.component.html',
   styleUrl: './toolbar.component.css'
@@ -30,8 +33,14 @@ export class ToolbarComponent implements OnInit {
   constructor(
     private authService: AuthenticationService,
     private subscriptionService: SubscriptionService,
-    private router: Router
+    private router: Router,
+
   ) {}
+
+  translate : TranslateService= inject(TranslateService);
+  setLanguage(lang: string): void {
+    this.translate.use(lang);
+  }
 
   ngOnInit(): void {
     this.authService.isSignedIn.subscribe(signedIn => {

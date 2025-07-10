@@ -7,6 +7,7 @@ import { MatChipsModule } from "@angular/material/chips"
 import { ToolbarComponent } from "../../../shared/components/toolbar/toolbar.component"
 import { CommonModule } from "@angular/common"
 import {MatTooltip} from '@angular/material/tooltip';
+import {TranslateModule} from '@ngx-translate/core';
 
 interface Notification {
   id: number
@@ -29,6 +30,7 @@ interface Notification {
     ToolbarComponent,
     CommonModule,
     MatTooltip,
+    TranslateModule
   ],
   templateUrl: "./notifications.component.html",
   styleUrl: "./notifications.component.css",

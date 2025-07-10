@@ -2,18 +2,18 @@
 
 <div class="pots-container">
   <div class="header-section">
-    <h1 class="page-title">Mis Macetas</h1>
-    <p class="subtitle">Monitorea y cuida tus plantas inteligentes</p>
+    <h1 class="page-title">{{ 'POTS.TITLE' | translate }}</h1>
+    <p class="subtitle">{{ 'POTS.SUBTITLE' | translate }}</p>
   </div>
 
   <div class="content-wrapper">
     <div class="pots-header">
       <div class="header-info">
-        <h2 class="section-title">{{ filteredPots.length }} macetas</h2>
+        <h2 class="section-title">{{ filteredPots.length }} {{ 'POTS.POT_COUNT' | translate }}</h2>
         <p class="status-summary">
-          {{ healthyCount }} saludables •
-          {{ warningCount }} necesitan atención •
-          {{ criticalCount }} críticas
+          {{ healthyCount }} {{ 'POTS.STATUS.HEALTHY' | translate }} •
+          {{ warningCount }} {{ 'POTS.STATUS.WARNING' | translate }} •
+          {{ criticalCount }} {{ 'POTS.STATUS.CRITICAL' | translate }}
         </p>
       </div>
 
@@ -24,7 +24,7 @@
                 (click)="onAddPot()"
                 [disabled]="isLoading">
           <mat-icon>add_circle</mat-icon>
-          <span>Agregar Maceta</span>
+          <span>{{ 'POTS.ADD_POT' | translate }}</span>
         </button>
       </div>
     </div>
@@ -33,20 +33,19 @@
       class="pots-tabs"
       (selectedTabChange)="onTabChange($event.index)"
       animationDuration="200ms">
-
-      <mat-tab label="Todas"></mat-tab>
-      <mat-tab label="Saludables"></mat-tab>
-      <mat-tab label="Necesitan atención"></mat-tab>
-      <mat-tab label="Críticas"></mat-tab>
+      <mat-tab label="{{ 'POTS.TABS.ALL' | translate }}"></mat-tab>
+      <mat-tab label="{{ 'POTS.TABS.HEALTHY' | translate }}"></mat-tab>
+      <mat-tab label="{{ 'POTS.TABS.WARNING' | translate }}"></mat-tab>
+      <mat-tab label="{{ 'POTS.TABS.CRITICAL' | translate }}"></mat-tab>
     </mat-tab-group>
 
     <div class="loading-container" *ngIf="isLoading">
-      <p>Cargando macetas...</p>
+      <p>{{ 'POTS.LOADING' | translate }}</p>
     </div>
 
     <div class="error-container" *ngIf="errorMessage">
       <p>{{ errorMessage }}</p>
-      <button mat-button (click)="loadPots()">Reintentar</button>
+      <button mat-button (click)="loadPots()">{{ 'POTS.RETRY' | translate }}</button>
     </div>
 
     <div class="pots-grid" *ngIf="!isLoading && !errorMessage">
@@ -66,7 +65,7 @@
                 (click)="onAddPot()"
                 class="add-first-pot-button">
           <mat-icon>add_circle</mat-icon>
-          {{ pots.length === 0 ? 'Agregar tu primera maceta' : 'Agregar nueva maceta' }}
+          {{ pots.length === 0 ? ('POTS.NO_POTS.FIRST' | translate) : ('POTS.NO_POTS.NEW' | translate) }}
         </button>
       </div>
     </div>

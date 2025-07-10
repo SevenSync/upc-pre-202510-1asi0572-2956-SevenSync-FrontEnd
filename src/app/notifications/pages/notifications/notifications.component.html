@@ -2,24 +2,26 @@
 
 <div class="notifications-container">
   <div class="header-section">
-    <h1 class="page-title">Centro de Notificaciones</h1>
+    <h1 class="page-title">{{ 'NOTIFICATIONS.TITLE' | translate }}</h1>
   </div>
 
   <div class="content-wrapper">
     <div class="notifications-header">
       <div class="header-info">
-        <h2 class="section-title">Todas las notificaciones</h2>
-        <p class="unread-count">Tienes {{ unreadCount }} notificaciones sin leer</p>
+        <h2 class="section-title">{{ 'NOTIFICATIONS.ALL' | translate }}</h2>
+        <p class="unread-count">
+          {{ 'NOTIFICATIONS.UNREAD_COUNT' | translate:{ count: unreadCount } }}
+        </p>
       </div>
 
       <div class="header-actions">
         <button mat-stroked-button class="filter-button">
           <mat-icon>tune</mat-icon>
-          Filtrar
+          {{ 'NOTIFICATIONS.FILTER' | translate }}
         </button>
         <button mat-stroked-button class="mark-read-button" (click)="markAllAsRead()">
           <mat-icon>done_all</mat-icon>
-          Marcar todas como leídas
+          {{ 'NOTIFICATIONS.MARK_ALL_AS_READ' | translate }}
         </button>
       </div>
     </div>
@@ -29,11 +31,11 @@
       (selectedTabChange)="onTabChange($event.index)"
       animationDuration="200ms">
 
-      <mat-tab label="Todas"></mat-tab>
-      <mat-tab label="Riego"></mat-tab>
-      <mat-tab label="Ambiente"></mat-tab>
-      <mat-tab label="Sistema"></mat-tab>
-      <mat-tab label="No leídas"></mat-tab>
+      <mat-tab label="{{ 'NOTIFICATIONS.TABS.ALL' | translate }}"></mat-tab>
+      <mat-tab label="{{ 'NOTIFICATIONS.TABS.IRRIGATION' | translate }}"></mat-tab>
+      <mat-tab label="{{ 'NOTIFICATIONS.TABS.ENVIRONMENT' | translate }}"></mat-tab>
+      <mat-tab label="{{ 'NOTIFICATIONS.TABS.SYSTEM' | translate }}"></mat-tab>
+      <mat-tab label="{{ 'NOTIFICATIONS.TABS.UNREAD' | translate }}"></mat-tab>
     </mat-tab-group>
 
     <div class="notifications-list">
@@ -63,14 +65,14 @@
                 mat-icon-button
                 class="action-button mark-read"
                 (click)="markAsRead(notification.id)"
-                matTooltip="Marcar como leída">
+                [matTooltip]="'NOTIFICATIONS.TOOLTIP.READ' | translate">
                 <mat-icon>check</mat-icon>
               </button>
               <button
                 mat-icon-button
                 class="action-button delete"
                 (click)="deleteNotification(notification.id)"
-                matTooltip="Eliminar notificación">
+                [matTooltip]="'NOTIFICATIONS.TOOLTIP.DELETE' | translate">
                 <mat-icon>delete_outline</mat-icon>
               </button>
             </div>
@@ -80,7 +82,7 @@
 
       <div *ngIf="filteredNotifications.length === 0" class="no-notifications">
         <mat-icon class="no-notifications-icon">notifications_off</mat-icon>
-        <p>No hay notificaciones en esta categoría</p>
+        <p>{{ 'NOTIFICATIONS.NO_NOTIFICATIONS' | translate }}</p>
       </div>
     </div>
   </div>

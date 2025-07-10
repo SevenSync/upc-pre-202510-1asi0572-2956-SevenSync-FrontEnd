@@ -1,39 +1,57 @@
-import { Component } from '@angular/core';
+import {Component, inject} from '@angular/core';
 import { MatDialogRef, MatDialogContent, MatDialogActions, MatDialogClose } from '@angular/material/dialog';
 import { MatButtonModule } from '@angular/material/button';
 import { FormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
 import { UserService } from '../../../iam/services/user.service';
+import {TranslateModule, TranslateService} from '@ngx-translate/core';
 
 @Component({
   selector: 'app-change-password-dialog',
   standalone: true,
-  imports: [MatDialogContent, MatDialogActions, MatDialogClose, MatButtonModule, FormsModule],
+  imports: [MatDialogContent, MatDialogActions, MatDialogClose, MatButtonModule, FormsModule,TranslateModule],
   template: `
     <div class="container">
       <mat-dialog-content class="mat-typography">
-        <h2>Cambiar de contraseña</h2>
-        <p class="subtitle">Ingresa tu nueva contraseña (mínimo 6 caracteres)</p>
+        <h2>{{ 'PROFILE.CHANGE_PASSWORD.TITLE' | translate }}</h2>
+        <p class="subtitle">{{ 'CHANGE_PASSWORD.SUBTITLE' | translate }}</p>
+
         <form (ngSubmit)="changePassword()" #passwordForm="ngForm">
           <div class="field">
-            <h3>Nueva contraseña</h3>
-            <input type="password" required [(ngModel)]="newPassword" name="newPassword" minlength="6">
+            <h3>{{ 'PROFILE.CHANGE_PASSWORD.NEW_PASSWORD' | translate }}</h3>
+            <input type="password"
+                   required
+                   [(ngModel)]="newPassword"
+                   name="newPassword"
+                   minlength="6">
           </div>
 
           <div class="field">
-            <h3>Confirmar nueva contraseña</h3>
-            <input type="password" required [(ngModel)]="confirmPassword" name="confirmPassword" minlength="6">
+            <h3>{{ 'PROFILE.CHANGE_PASSWORD.CONFIRM_PASSWORD' | translate }}</h3>
+            <input type="password"
+                   required
+                   [(ngModel)]="confirmPassword"
+                   name="confirmPassword"
+                   minlength="6">
           </div>
 
           <mat-dialog-actions class="button-row">
-            <button class="save" type="submit" [disabled]="!passwordForm.valid || newPassword !== confirmPassword">
-              Guardar
+            <button class="save"
+                    type="submit"
+                    [disabled]="!passwordForm.valid || newPassword !== confirmPassword">
+              {{ 'PROFILE.CHANGE_PASSWORD.SAVE' | translate }}
             </button>
-            <button class="cancel" mat-dialog-close type="button">Cancelar</button>
+
+            <button class="cancel"
+                    mat-dialog-close
+                    type="button">
+              {{ 'PROFILE.CHANGE_PASSWORD.CANCEL' | translate }}
+            </button>
           </mat-dialog-actions>
         </form>
       </mat-dialog-content>
     </div>
+
   `,
   styles: [`
     .container { padding: .5rem; background-color: #f9f9f9; border-radius: 15px; }
@@ -55,6 +73,8 @@ export class ChangePasswordDialogComponent {
     private dialogRef: MatDialogRef<ChangePasswordDialogComponent>,
     private router: Router
   ) {}
+
+
 
   changePassword(): void {
     if (this.newPassword !== this.confirmPassword || this.newPassword.length < 6) {

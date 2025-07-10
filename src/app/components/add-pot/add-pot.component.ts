@@ -8,10 +8,10 @@ import { MatFormFieldModule } from "@angular/material/form-field"
 import { MatInputModule } from "@angular/material/input"
 import { MatSelectModule } from "@angular/material/select"
 import { MatStepperModule } from "@angular/material/stepper"
-import { ToolbarComponent } from "../public/toolbar/toolbar.component"
 import { CommonModule } from "@angular/common"
 import { MatDialog } from "@angular/material/dialog"
 import {PotLimitDialogComponent} from './pot-limit-dialog.component';
+import {ToolbarComponent} from '../../shared/components/toolbar/toolbar.component';
 
 @Component({
   selector: "app-add-pot",

@@ -14,6 +14,7 @@ import {MatSnackBar} from '@angular/material/snack-bar';
 import {Router} from '@angular/router';
 import {CreatePotRequest} from '../../model/create-pot.request';
 import {CreatePotDialogComponent} from '../../components/create-pot-dialog/create-pot-dialog.component';
+import {TranslateModule} from '@ngx-translate/core';
 
 @Component({
   selector: 'app-pots',
@@ -24,7 +25,8 @@ import {CreatePotDialogComponent} from '../../components/create-pot-dialog/creat
     MatButtonModule,
     MatIconModule,
     ToolbarComponent,
-    PotCardComponent
+    PotCardComponent,
+    TranslateModule
   ],
   templateUrl: './pots.component.html',
   styleUrl: './pots.component.css'

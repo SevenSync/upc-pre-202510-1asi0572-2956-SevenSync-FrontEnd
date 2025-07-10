@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import {Component, inject} from '@angular/core';
 import { FormBuilder, FormGroup, Validators, ReactiveFormsModule } from '@angular/forms';
 import { Router, RouterLink } from '@angular/router';
 import { CommonModule } from '@angular/common';
@@ -10,6 +10,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { AuthenticationService } from '../../services/authentication.service';
 import { SignUpRequest } from '../../model/sign-up.request';
 import {MatCheckboxModule} from '@angular/material/checkbox';
+import {TranslateModule, TranslateService} from '@ngx-translate/core';
 
 @Component({
   selector: 'app-register',
@@ -22,7 +23,8 @@ import {MatCheckboxModule} from '@angular/material/checkbox';
     MatFormFieldModule,
     MatInputModule,
     MatIconModule,
-    MatCheckboxModule
+    MatCheckboxModule,
+    TranslateModule
   ],
   templateUrl: './register.component.html',
   styleUrl: './register.component.css'
@@ -46,6 +48,11 @@ export class RegisterComponent {
       confirmPassword: ['', [Validators.required]],
       acceptTerms: [false, [Validators.requiredTrue]]
     }, { validators: this.passwordMatchValidator });
+  }
+
+  translate : TranslateService= inject(TranslateService);
+  setLanguage(lang: string): void {
+    this.translate.use(lang);
   }
 
   passwordMatchValidator(form: FormGroup) {
