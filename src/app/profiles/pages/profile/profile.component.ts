@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, inject, OnInit} from '@angular/core';
 import {FormsModule} from '@angular/forms';
 import {CommonModule, NgIf} from '@angular/common';
 import {MatButtonModule} from '@angular/material/button';
@@ -20,7 +20,9 @@ import {ProfileFormComponent} from '../../components/profile-form/profile-form.c
 import {Subscription} from '../../../subscriptions/model/subscription.entity';
 import {SubscriptionPlanType, SubscriptionStatus} from '../../../subscriptions/model/subscription.entity';
 import {SubscriptionService} from '../../../subscriptions/services/subscription.service';
-import {TranslateModule} from '@ngx-translate/core';
+import {TranslateModule, TranslateService} from '@ngx-translate/core';
+import {MatButtonToggleModule} from '@angular/material/button-toggle';
+import { ThemeService } from '../../../shared/services/theme.service';
 
 @Component({
   selector: 'app-profile',
@@ -35,7 +37,8 @@ import {TranslateModule} from '@ngx-translate/core';
     RouterLink,
     ToolbarComponent,
     ProfileFormComponent,
-    TranslateModule
+    TranslateModule,
+    MatButtonToggleModule
   ],
   templateUrl: './profile.component.html',
   styleUrl: './profile.component.css'
@@ -47,21 +50,34 @@ export class ProfileComponent implements OnInit {
   isEditingProfile = false;
   isLoading = false;
   errorMessage = '';
+  currentLang: string;
 
-  constructor(
-    private profileService: ProfileService,
-    private authService: AuthenticationService,
-    private userService: UserService,
-    private subscriptionService: SubscriptionService,
-    private router: Router,
-    private dialog: MatDialog
-  ) {}
+  private profileService = inject(ProfileService);
+  private authService = inject(AuthenticationService);
+  private userService = inject(UserService);
+  private subscriptionService = inject(SubscriptionService);
+  private router = inject(Router);
+  private dialog = inject(MatDialog);
+  private translate = inject(TranslateService);
+  private themeService = inject(ThemeService);
+
+  isDarkMode = this.themeService.isDarkTheme;
+
+  constructor() {
+
+    this.currentLang = this.translate.currentLang || this.translate.defaultLang;
+  }
 
   ngOnInit(): void {
     this.loadProfile();
     this.loadUserEmail();
     this.loadSubscriptionStatus();
   }
+
+  toggleTheme(): void {
+    this.themeService.toggleTheme();
+  }
+
 
   loadProfile(): void {
     const token = localStorage.getItem('token');
@@ -87,6 +103,11 @@ export class ProfileComponent implements OnInit {
         this.errorMessage = 'Error al cargar el perfil';
       }
     });
+  }
+
+  setLanguage(lang: string): void {
+    this.translate.use(lang);
+    this.currentLang = lang; // Actualiza la propiedad local para reflejar el cambio en la vista
   }
 
   loadUserEmail(): void {

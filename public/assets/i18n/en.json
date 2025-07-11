@@ -339,7 +339,9 @@
     "TABS": {
       "PERSONAL_INFO": "Personal Information",
       "NOTIFICATIONS": "Notifications",
-      "PRIVACY": "Privacy"
+      "PRIVACY": "Settings",
+      "LANGUAGE": "Language",
+      "LANGUAGE_DESC": "Select your preferred language for the app"
     },
     "EDIT": {
       "EDIT_BUTTON": "Edit",

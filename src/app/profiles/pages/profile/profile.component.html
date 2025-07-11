@@ -1,6 +1,7 @@
 <app-toolbar></app-toolbar>
 
 <div class="profile-container">
+  <!-- Encabezado de la página -->
   <div class="header-section">
     <h1 class="page-title">{{ 'PROFILE.TITLE' | translate }}</h1>
     <p class="subtitle">{{ 'PROFILE.SUBTITLE' | translate }}</p>
@@ -8,15 +9,14 @@
 
   <div class="content-wrapper" *ngIf="profile; else loading">
     <div class="profile-layout">
+      <!-- ================================= -->
       <!-- Sidebar con información principal -->
+      <!-- ================================= -->
       <div class="profile-sidebar">
         <div class="profile-card">
           <div class="avatar-section">
             <div class="avatar">
-              <img src="default-avatar.png" alt="Avatar" class="avatar-image">
-              <button mat-fab mini color="primary" class="avatar-edit">
-                <mat-icon>edit</mat-icon>
-              </button>
+              <img src="/assets/images/default-avatar.png" alt="Avatar" class="avatar-image">
             </div>
             <h2 class="profile-name">{{ profile.fullName }}</h2>
             <p class="profile-email">{{ email }}</p>
@@ -27,15 +27,14 @@
               <mat-icon class="stat-icon">person</mat-icon>
               <div class="stat-info">
                 <span class="stat-label">{{ 'PROFILE.STATS.MEMBER_SINCE' | translate }}</span>
-                <span class="stat-value">Mayo 2023</span>
+                <span class="stat-value">Mayo 2023</span> <!-- Este valor probablemente debería ser dinámico -->
               </div>
             </div>
-
             <div class="stat-item">
               <mat-icon class="stat-icon">eco</mat-icon>
               <div class="stat-info">
                 <span class="stat-label">{{ 'PROFILE.STATS.ACTIVE_POTS' | translate }}</span>
-                <span class="stat-value">4 macetas</span>
+                <span class="stat-value">4 macetas</span> <!-- Este valor probablemente debería ser dinámico -->
               </div>
             </div>
           </div>
@@ -43,32 +42,21 @@
           <div class="membership-info">
             <h3>{{ 'PROFILE.MEMBERSHIP.TITLE' | translate }}</h3>
             <div class="membership-badge">
-              <mat-icon class="membership-icon">{{ isPremiumUser ? 'crown' : 'eco' }}</mat-icon>
+              <mat-icon class="membership-icon">{{ isPremiumUser ? 'workspace_premium' : 'eco' }}</mat-icon>
               <span>{{ isPremiumUser ? ('PROFILE.MEMBERSHIP.PREMIUM' | translate) : ('PROFILE.MEMBERSHIP.FREE' | translate) }}</span>
             </div>
-            <button *ngIf="!isPremiumUser"
-                    mat-raised-button
-                    color="primary"
-                    class="upgrade-button"
-                    routerLink="/membership">
-              <mat-icon>crown</mat-icon>
+            <button *ngIf="!isPremiumUser" mat-raised-button class="upgrade-button" routerLink="/membership">
+              <mat-icon>workspace_premium</mat-icon>
               {{ 'PROFILE.ACTIONS.UPGRADE' | translate }}
             </button>
           </div>
 
           <div class="profile-actions">
-            <button mat-stroked-button
-                    color="warn"
-                    class="logout-button"
-                    (click)="signOut()">
+            <button mat-stroked-button class="logout-button" (click)="signOut()">
               <mat-icon>logout</mat-icon>
               {{ 'PROFILE.ACTIONS.SIGN_OUT' | translate }}
             </button>
-
-            <button mat-stroked-button
-                    color="warn"
-                    class="delete-button"
-                    (click)="openDeleteAccountDialog()">
+            <button mat-stroked-button color="warn" class="delete-button" (click)="openDeleteAccountDialog()">
               <mat-icon>delete_forever</mat-icon>
               {{ 'PROFILE.ACTIONS.DELETE_ACCOUNT' | translate }}
             </button>
@@ -76,20 +64,19 @@
         </div>
       </div>
 
-      <!-- Contenido principal con tabs -->
+      <!-- ================================= -->
+      <!-- Contenido principal con tabs      -->
+      <!-- ================================= -->
       <div class="profile-main">
         <mat-tab-group animationDuration="200ms" class="profile-tabs">
-          <!-- Tab: Información Personal -->
+          <!-- Pestaña de Información Personal -->
           <mat-tab label="{{ 'PROFILE.TABS.PERSONAL_INFO' | translate }}">
             <div class="tab-content">
               <div class="section-header">
                 <h3>{{ 'PROFILE.TABS.PERSONAL_INFO' | translate }}</h3>
-                <button *ngIf="!isEditingProfile"
-                        mat-button
-                        (click)="enableProfileEditing()"
-                        class="edit-button">
-                  <mat-icon>edit {{ 'PROFILE.EDIT.EDIT_BUTTON' | translate }}</mat-icon>
-                  Editar
+                <button *ngIf="!isEditingProfile" mat-button (click)="enableProfileEditing()" class="edit-button">
+                  <mat-icon>edit</mat-icon>
+                  {{ 'PROFILE.EDIT.EDIT_BUTTON' | translate }}
                 </button>
               </div>
 
@@ -99,17 +86,14 @@
                     <label>{{ 'PROFILE.EDIT.FULL_NAME' | translate }}</label>
                     <span>{{ profile.fullName }}</span>
                   </div>
-
                   <div class="info-item">
                     <label>{{ 'PROFILE.EDIT.EMAIL' | translate }}</label>
                     <span>{{ email }}</span>
                   </div>
-
                   <div class="info-item">
                     <label>{{ 'PROFILE.EDIT.PHONE' | translate }}</label>
                     <span>{{ profile.phoneNumber || ('PROFILE.EDIT.NOT_SPECIFIED' | translate) }}</span>
                   </div>
-
                   <div class="info-item">
                     <label>{{ 'PROFILE.EDIT.ADDRESS' | translate }}</label>
                     <span>{{ profile.streetAddress || ('PROFILE.EDIT.NOT_SPECIFIED' | translate) }}</span>
@@ -117,10 +101,8 @@
                 </div>
 
                 <div class="security-section">
-                  <h4>{{ 'PROFILE.EDIT.CHANGE_PASSWORD' | translate }}</h4>
-                  <button mat-button
-                          (click)="openChangePasswordDialog()"
-                          class="security-button">
+                  <h4 class="section-title">Seguridad</h4>
+                  <button mat-button (click)="openChangePasswordDialog()" class="security-button">
                     <mat-icon>lock</mat-icon>
                     {{ 'PROFILE.EDIT.CHANGE_PASSWORD' | translate }}
                   </button>
@@ -128,101 +110,63 @@
               </div>
 
               <ng-template #editingForm>
-                <app-profile-form
-                  [profile]="profile"
-                  [editMode]="true"
-                  [isLoading]="isLoading"
-                  (profileSubmit)="updateProfile($event)"
-                  (cancel)="cancelEditing()">
-                </app-profile-form>
+                <app-profile-form [profile]="profile" [editMode]="true" [isLoading]="isLoading" (profileSubmit)="updateProfile($event)" (cancel)="cancelEditing()"></app-profile-form>
               </ng-template>
             </div>
           </mat-tab>
 
-          <!-- Tab: Notificaciones -->
-          <mat-tab label="{{ 'PROFILE.TABS.NOTIFICATIONS' | translate }}">
-            <div class="tab-content">
-              <h3>{{ 'PROFILE.NOTIFICATIONS_SETTINGS.TITLE' | translate }}</h3>
-              <p class="section-description">
-                {{ 'PROFILE.NOTIFICATIONS_SETTINGS.DESCRIPTION' | translate }}
-              </p>
-
-              <div class="notification-settings">
-
-                <div class="setting-item">
-                  <div class="setting-info">
-                    <h4>{{ 'PROFILE.NOTIFICATIONS_SETTINGS.SENSOR_ALERTS' | translate }}</h4>
-                    <p>{{ 'PROFILE.NOTIFICATIONS_SETTINGS.SENSOR_ALERTS_DESC' | translate }}</p>
-                  </div>
-                  <mat-slide-toggle color="primary" [checked]="true"></mat-slide-toggle>
-                </div>
-
-                <div class="setting-item">
-                  <div class="setting-info">
-                    <h4>{{ 'PROFILE.NOTIFICATIONS_SETTINGS.WEEKLY_REPORTS' | translate }}</h4>
-                    <p>{{ 'PROFILE.NOTIFICATIONS_SETTINGS.WEEKLY_REPORTS_DESC' | translate }}</p>
-                  </div>
-                  <mat-slide-toggle color="primary" [checked]="false"></mat-slide-toggle>
-                </div>
-
-                <div class="setting-item">
-                  <div class="setting-info">
-                    <h4>{{ 'PROFILE.NOTIFICATIONS_SETTINGS.EMAIL_NOTIFICATIONS' | translate }}</h4>
-                    <p>{{ 'PROFILE.NOTIFICATIONS_SETTINGS.EMAIL_NOTIFICATIONS_DESC' | translate }}</p>
-                  </div>
-                  <mat-slide-toggle color="primary" [checked]="true"></mat-slide-toggle>
-                </div>
-              </div>
-            </div>
-          </mat-tab>
-
-          <!-- Tab: Privacidad -->
+          <!-- Pestaña de Ajustes -->
           <mat-tab label="{{ 'PROFILE.TABS.PRIVACY' | translate }}">
             <div class="tab-content">
-              <h3>{{ 'PROFILE.PRIVACY_SETTINGS.TITLE' | translate }}</h3>
-              <p class="section-description">
-                {{ 'PROFILE.PRIVACY_SETTINGS.DESCRIPTION' | translate }}
-              </p>
-
-              <div class="privacy-settings">
-                <div class="setting-item">
-                  <div class="setting-info">
-                    <h4>{{ 'PROFILE.PRIVACY_SETTINGS.PUBLIC_PROFILE' | translate }}</h4>
-                    <p>{{ 'PROFILE.PRIVACY_SETTINGS.PUBLIC_PROFILE_DESC' | translate }}</p>
-                  </div>
-                  <mat-slide-toggle color="primary" [checked]="false"></mat-slide-toggle>
+              <!-- Sección: Tema de la Aplicación -->
+              <div class="settings-section">
+                <div class="section-text-content">
+                  <h3 class="section-title">Tema de la Aplicación</h3> <!-- Esta clave no estaba en tu JSON, la he mantenido literal -->
+                  <p class="section-description">Elige entre el modo claro y oscuro.</p> <!-- Esta clave no estaba en tu JSON, la he mantenido literal -->
                 </div>
-
-                <div class="setting-item">
-                  <div class="setting-info">
-                    <h4>{{ 'PROFILE.PRIVACY_SETTINGS.SHARE_PLANT_DATA' | translate }}</h4>
-                    <p>{{ 'PROFILE.PRIVACY_SETTINGS.SHARE_PLANT_DATA_DESC' | translate }}</p>
-                  </div>
-                  <mat-slide-toggle color="primary" [checked]="true"></mat-slide-toggle>
-                </div>
-
-                <div class="setting-item">
-                  <div class="setting-info">
-                    <h4>{{ 'PROFILE.PRIVACY_SETTINGS.USAGE_ANALYTICS' | translate }}</h4>
-                    <p>{{ 'PROFILE.PRIVACY_SETTINGS.USAGE_ANALYTICS_DESC' | translate }}</p>
-                  </div>
-                  <mat-slide-toggle color="primary" [checked]="true"></mat-slide-toggle>
+                <div class="section-control">
+                  <mat-slide-toggle color="primary" [checked]="isDarkMode()" (change)="toggleTheme()"></mat-slide-toggle>
                 </div>
               </div>
 
-              <div class="data-management">
-                <h4>{{ 'PROFILE.PRIVACY_SETTINGS.DATA_MANAGEMENT' | translate }}</h4>
-                <div class="data-actions">
-                  <button mat-button class="data-button">
-                    <mat-icon>download</mat-icon>
-                    {{ 'PROFILE.PRIVACY_SETTINGS.DOWNLOAD_DATA' | translate }}
-                  </button>
-                  <button mat-button color="warn" class="data-button">
-                    <mat-icon>delete_sweep</mat-icon>
-                    {{ 'PROFILE.PRIVACY_SETTINGS.DELETE_DATA' | translate }}
-                  </button>
+              <!-- Sección: Idioma -->
+              <div class="settings-section">
+                <div class="section-text-content">
+                  <h3 class="section-title">{{ 'PROFILE.TABS.LANGUAGE' | translate }}</h3>
+                  <p class="section-description">{{ 'PROFILE.TABS.LANGUAGE_DESC' | translate }}</p>
+                </div>
+                <div class="section-control language-switch">
+                  <mat-button-toggle-group [value]="currentLang" (change)="setLanguage($event.value)" aria-label="Selección de idioma">
+                    <mat-button-toggle value="es">ES</mat-button-toggle>
+                    <mat-button-toggle value="en">EN</mat-button-toggle>
+                  </mat-button-toggle-group>
                 </div>
               </div>
+
+              <!-- Sección: Preferencias de Notificaciones -->
+              <div class="settings-section section-vertical">
+                <div class="section-text-content">
+                  <h3 class="section-title">{{ 'PROFILE.NOTIFICATIONS_SETTINGS.TITLE' | translate }}</h3>
+                  <p class="section-description">{{ 'PROFILE.NOTIFICATIONS_SETTINGS.DESCRIPTION' | translate }}</p>
+                </div>
+                <div class="settings-list">
+                  <div class="setting-item">
+                    <div class="setting-info">
+                      <h4>{{ 'PROFILE.NOTIFICATIONS_SETTINGS.SENSOR_ALERTS' | translate }}</h4>
+                      <p>{{ 'PROFILE.NOTIFICATIONS_SETTINGS.SENSOR_ALERTS_DESC' | translate }}</p>
+                    </div>
+                    <mat-slide-toggle color="primary" [checked]="true"></mat-slide-toggle>
+                  </div>
+                  <div class="setting-item">
+                    <div class="setting-info">
+                      <h4>{{ 'PROFILE.NOTIFICATIONS_SETTINGS.WEEKLY_REPORTS' | translate }}</h4>
+                      <p>{{ 'PROFILE.NOTIFICATIONS_SETTINGS.WEEKLY_REPORTS_DESC' | translate }}</p>
+                    </div>
+                    <mat-slide-toggle color="primary" [checked]="false"></mat-slide-toggle>
+                  </div>
+                </div>
+              </div>
+
             </div>
           </mat-tab>
         </mat-tab-group>
@@ -230,13 +174,12 @@
     </div>
   </div>
 
+  <!-- Templates de Carga y Error -->
   <ng-template #loading>
     <div class="loading-container">
-      <mat-icon class="loading-icon">person</mat-icon>
-      <p>Cargando perfil...</p>
+      <p>{{ 'PROFILE.LOADING' | translate }}</p>
     </div>
   </ng-template>
-
   <div *ngIf="errorMessage" class="error-message">
     <mat-icon>error_outline</mat-icon>
     <p>{{ errorMessage }}</p>

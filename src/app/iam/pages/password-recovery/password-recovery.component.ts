@@ -1,5 +1,5 @@
-import {Component, inject} from '@angular/core';
-import { FormBuilder, FormGroup, Validators, ReactiveFormsModule } from '@angular/forms';
+import { Component, inject, signal } from '@angular/core';
+import { FormBuilder, FormControl, FormGroup, Validators, ReactiveFormsModule } from '@angular/forms'; // Importa FormControl
 import { Router, RouterLink } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { MatButtonModule } from '@angular/material/button';
@@ -7,82 +7,84 @@ import { MatCardModule } from '@angular/material/card';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatIconModule } from '@angular/material/icon';
+import { MatButtonToggleModule } from '@angular/material/button-toggle';
 import { AuthenticationService } from '../../services/authentication.service';
 import { PasswordResetRequest } from '../../model/password-reset.request';
-import {TranslateModule, TranslateService} from '@ngx-translate/core';
+import { TranslateModule, TranslateService } from '@ngx-translate/core';
+import { finalize } from 'rxjs/operators';
 
 @Component({
   selector: 'app-password-recovery',
   standalone: true,
   imports: [
-    CommonModule,
-    ReactiveFormsModule,
-    MatButtonModule,
-    MatCardModule,
-    MatFormFieldModule,
-    MatInputModule,
-    MatIconModule,
-    RouterLink,
-    TranslateModule
+    CommonModule, ReactiveFormsModule, MatButtonModule, MatCardModule,
+    MatFormFieldModule, MatInputModule, MatIconModule, MatButtonToggleModule,
+    RouterLink, TranslateModule
   ],
   templateUrl: './password-recovery.component.html',
-  styleUrl: './password-recovery.component.css'
+  styleUrls: ['./password-recovery.component.css']
 })
 export class PasswordRecoveryComponent {
-  recoveryForm: FormGroup;
-  errorMessage = '';
-  successMessage = '';
-  isLoading = false;
+  private fb = inject(FormBuilder);
+  private authService = inject(AuthenticationService);
+  private router = inject(Router);
+  private translate = inject(TranslateService);
 
-  constructor(
-    private fb: FormBuilder,
-    private authService: AuthenticationService,
-    private router: Router
-  ) {
-    this.recoveryForm = this.fb.group({
-      email: ['', [Validators.required, Validators.email]]
-    });
+  errorMessage = signal('');
+  successMessage = signal('');
+  isLoading = signal(false);
+
+  recoveryForm: FormGroup = this.fb.group({
+    email: ['', [Validators.required, Validators.email]]
+  });
+
+  currentLang: string;
+
+  constructor() {
+    const defaultLang = 'en';
+    this.currentLang = defaultLang;
+    this.translate.use(defaultLang);
   }
 
-  translate : TranslateService= inject(TranslateService);
-  setLanguage(lang: string): void {
+  // ✅ CORRECCIÓN: Añade un getter para acceder al control 'email' de forma segura
+  get email(): FormControl {
+    return this.recoveryForm.get('email') as FormControl;
+  }
+
+  setLanguage(event: { value: string }): void {
+    const lang = event.value;
     this.translate.use(lang);
+    this.currentLang = lang;
   }
 
   onSubmit(): void {
     if (this.recoveryForm.invalid) {
-      this.errorMessage = 'Por favor ingresa un email válido.';
+      // Marca el campo como "tocado" para que los errores se muestren inmediatamente
+      this.recoveryForm.markAllAsTouched();
       return;
     }
 
-    this.isLoading = true;
-    this.errorMessage = '';
-    this.successMessage = '';
+    this.isLoading.set(true);
+    this.errorMessage.set('');
+    this.successMessage.set('');
 
-    const formValues = this.recoveryForm.value;
-    const request = new PasswordResetRequest(formValues.email);
+    const request = new PasswordResetRequest(this.recoveryForm.value.email);
 
-    this.authService.requestPasswordReset(request).subscribe({
-      next: (response) => {
-        this.isLoading = false;
-        if (response.sent) {
-          this.successMessage = 'Se ha enviado un enlace de recuperación a tu email.';
-          setTimeout(() => {
-            this.router.navigate(['/login']);
-          }, 3000);
-        } else {
-          this.errorMessage = 'No se pudo enviar el email de recuperación.';
-        }
+    this.authService.requestPasswordReset(request).pipe(
+      finalize(() => this.isLoading.set(false))
+    ).subscribe({
+      next: () => {
+        this.successMessage.set('Se ha enviado un enlace de recuperación a tu email.');
+        this.recoveryForm.reset();
+        setTimeout(() => this.router.navigate(['/login']), 4000);
       },
       error: (error) => {
-        this.isLoading = false;
         console.error('Password recovery error:', error);
-
-        if (error.status === 404) {
-          this.errorMessage = 'No se encontró una cuenta con ese email.';
-        } else {
-          this.errorMessage = 'Error al enviar el email de recuperación.';
-        }
+        this.errorMessage.set(
+          error.status === 404
+            ? 'No se encontró una cuenta con ese email.'
+            : 'Error al enviar el email de recuperación.'
+        );
       }
     });
   }

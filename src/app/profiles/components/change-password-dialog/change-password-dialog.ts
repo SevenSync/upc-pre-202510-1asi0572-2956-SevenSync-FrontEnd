@@ -14,7 +14,7 @@ import {TranslateModule, TranslateService} from '@ngx-translate/core';
     <div class="container">
       <mat-dialog-content class="mat-typography">
         <h2>{{ 'PROFILE.CHANGE_PASSWORD.TITLE' | translate }}</h2>
-        <p class="subtitle">{{ 'CHANGE_PASSWORD.SUBTITLE' | translate }}</p>
+        <p class="subtitle">{{ 'PROFILE.CHANGE_PASSWORD.SUBTITLE' | translate }}</p>
 
         <form (ngSubmit)="changePassword()" #passwordForm="ngForm">
           <div class="field">

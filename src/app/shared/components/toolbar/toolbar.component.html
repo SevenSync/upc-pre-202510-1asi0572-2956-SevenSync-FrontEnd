@@ -1,10 +1,11 @@
 <mat-toolbar class="toolbar">
   <div class="logo">
     <button mat-button class="example-icon" (click)="navigateToHome()" aria-label="Home">
-      <img src="logo.png" alt="Logo" class="logo">
+      <img src="/assets/images/Macetech-Logo_1.png" alt="Logo" class="logo">
     </button>
-    <span class="titles">{{ 'TOOLBAR.APP_NAME' | translate }}</span>
+    <span (click)="navigateToHome()" class="titles" >{{ 'TOOLBAR.APP_NAME' | translate }}</span>
   </div>
+
 
   <div class="buttons" *ngIf="isSignedIn">
     <button
@@ -47,8 +48,5 @@
       {{ 'TOOLBAR.PROFILE' | translate }}
     </button>
   </div>
-  <div class="language-switch">
-    <button mat-button (click)="setLanguage('es')" >ES</button>
-    <button mat-button (click)="setLanguage('en')" >EN</button>
-  </div>
+
 </mat-toolbar>

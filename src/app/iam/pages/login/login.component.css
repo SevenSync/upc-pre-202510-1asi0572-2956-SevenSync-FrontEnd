@@ -1,118 +1,88 @@
+/* login.component.css */
+
+:host {
+  --brand-green-light: #f0fdf4;
+  --brand-green-dark: #2c6b4f;
+  --text-primary: #1f2937;
+  --text-secondary: #6b7280;
+  --surface-card: #ffffff;
+  --error-bg: #fee2e2;
+  --error-text: #dc2626;
+  --shadow-color: rgba(45, 212, 191, 0.1);
+}
+
+/* ✅ CORRECCIÓN CLAVE: Layout de SPA sin scroll */
 .login-container {
   display: flex;
   align-items: center;
   justify-content: center;
-  min-height: 100vh;
-  background: linear-gradient(135deg, #eef3ef 0%, #d4f1d4 100%);
-  padding: 20px;
+  height: 100vh; /* Fallback para navegadores antiguos */
+  height: 100dvh !important; /* Altura dinámica del viewport, la mejor opción */
+  background-color: var(--brand-green-light);
+  padding: 24px;
   position: relative;
-  overflow: hidden;
+  overflow: hidden; /* Oculta cualquier cosa que se salga */
 }
+
 .language-switch {
   position: absolute;
   top: 24px;
   right: 32px;
   z-index: 10;
-  display: flex;
-  gap: 8px;
-}
-.language-switch button {
-  background-color: #28ba28;
-  color: #296244;
-  border-radius: 20px;
-  font-weight: bold;
-  border: none;
-  padding: 6px 18px;
-  transition: background 0.2s, color 0.2s;
-  box-shadow: 0 2px 4px rgba(41,98,68,0.08);
 }
 
-.language-switch button:hover:not([disabled]) {
-  background-color: #296244;
-  color: #fff;
-}
-
-.language-switch button[disabled] {
-  background-color: #bdbdbd;
-  color: #fff;
-  cursor: default;
-  opacity: 0.7;
-}
 .login-card {
-  background: white;
+  background: var(--surface-card);
   border-radius: 24px;
-  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 10px 40px var(--shadow-color);
   padding: 40px;
   width: 100%;
-  max-width: 480px;
+  max-width: 450px;
   position: relative;
   z-index: 2;
+  text-align: center;
 }
 
 .brand-section {
-  text-align: center;
-  margin-bottom: 40px;
-}
-
-.logo {
-  margin-bottom: 16px;
+  margin-bottom: 32px;
 }
 
 .logo-image {
-
-  border-radius: 16px;
-}
-
-.brand-title {
-  color: #296244;
-  font-size: 2rem;
-  font-weight: 700;
-  margin: 0 0 8px 0;
-}
-
-.brand-subtitle {
-  color: #666;
-  font-size: 1rem;
-  margin: 0;
-}
-
-.form-section {
-  margin-top: 32px;
+  width: 120px;
+  height: auto;
+  margin-bottom: 24px;
 }
 
 .form-title {
-  color: #333;
-  font-size: 1.5rem;
+  color: var(--text-primary);
+  font-size: 1.75rem;
   font-weight: 600;
   margin: 0 0 8px 0;
-  text-align: center;
 }
 
 .form-subtitle {
-  color: #666;
-  font-size: 0.9rem;
-  margin: 0 0 32px 0;
-  text-align: center;
+  color: var(--text-secondary);
+  font-size: 1rem;
+  margin: 0;
 }
 
 .error-message {
   display: flex;
   align-items: center;
+  text-align: left;
   gap: 8px;
-  background-color: #ffebee;
-  color: #e74c3c;
+  background-color: var(--error-bg);
+  color: var(--error-text);
   padding: 12px 16px;
   border-radius: 8px;
   margin-top: 16px;
   font-size: 0.9rem;
+  font-weight: 500;
 }
 
-.error-message mat-icon {
-  font-size: 20px;
-  width: 20px;
-  height: 20px;
-}
+.error-message mat-icon { font-size: 20px; width: 20px; height: 20px; }
 
+/* Decoración del fondo */
 .background-decoration {
   position: absolute;
   top: 0;
@@ -126,46 +96,9 @@
 .decoration-circle {
   position: absolute;
   border-radius: 50%;
-  background: rgba(46, 204, 113, 0.1);
+  background: linear-gradient(180deg, rgba(200, 240, 220, 0.6), rgba(168, 230, 207, 0.3));
+  filter: blur(20px);
 }
 
-.circle-1 {
-  width: 300px;
-  height: 300px;
-  top: -150px;
-  right: -150px;
-}
-
-.circle-2 {
-  width: 200px;
-  height: 200px;
-  bottom: -100px;
-  left: -100px;
-  background: rgba(46, 204, 113, 0.05);
-}
-
-.circle-3 {
-  width: 150px;
-  height: 150px;
-  top: 50%;
-  left: -75px;
-  background: rgba(46, 204, 113, 0.03);
-}
-
-@media (max-width: 768px) {
-  .login-container {
-    padding: 16px;
-  }
-
-  .login-card {
-    padding: 32px 24px;
-  }
-
-  .brand-title {
-    font-size: 1.75rem;
-  }
-
-  .form-title {
-    font-size: 1.25rem;
-  }
-}
+.circle-1 { width: 400px; height: 400px; top: -150px; right: -150px; }
+.circle-2 { width: 350px; height: 350px; bottom: -180px; left: -120px; }

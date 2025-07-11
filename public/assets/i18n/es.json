@@ -339,7 +339,9 @@
     "TABS": {
       "PERSONAL_INFO": "Información Personal",
       "NOTIFICATIONS": "Notificaciones",
-      "PRIVACY": "Privacidad"
+      "PRIVACY": "Ajustes",
+      "LANGUAGE": "Idioma",
+      "LANGUAGE_DESC": "Selecciona el idioma de tu preferencia"
     },
     "EDIT": {
       "EDIT_BUTTON": "Editar",

@@ -1,116 +1,98 @@
-/* You can add global styles to this file, and also import other style files */
-/* Global Styles */
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap');
+/* src/styles.css */
 
+/* ================================================== */
+/* PALETAS DE COLORES CON VARIABLES CSS (THEMING)     */
+/* ================================================== */
+
+/* TEMA CLARO (POR DEFECTO) */
 :root {
-  /* Color System */
   --primary-color: #2B614B;
   --primary-light: #3C7A61;
-  --primary-dark: #1E4636;
-  --accent-color: #FFDB58;
-  --accent-dark: #E6C64F;
-  --text-light: #FFFFFF;
-  --text-dark: #333333;
-  --text-gray: #666666;
-  --background-light: #FFFFFF;
-  --background-gray: #F5F5F5;
-  --border-color: #E1E1E1;
-  --error-color: #DC2626;
-
-  /* Spacing System (based on 8px) */
-  --space-xs: 4px;
-  --space-sm: 8px;
-  --space-md: 16px;
-  --space-lg: 24px;
-  --space-xl: 32px;
-  --space-xxl: 48px;
-
-  /* Border Radius */
-  --radius-sm: 4px;
-  --radius-md: 8px;
-  --radius-lg: 16px;
-  --radius-full: 9999px;
+  --text-dark: #1f2937;
+  --text-secondary: #6b7280;
+  --surface-ground: #f9fafb; /* Fondo principal de la app */
+  --surface-card: #ffffff;   /* Fondo de tarjetas y sidebar */
+  --surface-border: #e5e7eb; /* Color de los bordes */
+  --surface-overlay: #f3f4f6;/* Fondo de elementos interactivos (badges, etc) */
+  --error-color: #ef4444;
+  --error-color-light: #fee2e2;
+  --accent-green: #00d854;
 }
 
-/* Reset and Base Styles */
-* {
+/* TEMA OSCURO */
+.dark-theme {
+  --primary-color: #34d399;
+  --primary-light: #6ee7b7;
+  --text-dark: #f9fafb;
+  --text-secondary: #9ca3af;
+  --surface-ground: #111827;
+  --surface-card: #1f2937;
+  --surface-border: #374151;
+  --surface-overlay: #374151;
+  --premium-yellow: #f59e0b;
+  --error-color: #f87171;
+  --error-color-light: #4b1f1f;
+  --accent-green: #2dd4bf;
+}
+
+html, body {
   margin: 0;
   padding: 0;
-  box-sizing: border-box;
+  height: 100%;
+  overflow: hidden; /* Evita que cualquier cosa provoque un scroll en el body */
 }
 
 body {
   font-family: 'Rubik', sans-serif;
-  font-size: 16px;
-  line-height: 1.5;
+  background-color: var(--surface-ground);
   color: var(--text-dark);
-  background-color: var(--background-light);
+  transition: background-color 0.3s, color 0.3s;
+}
+
+/* src/styles.css */
+
+/* ======================================================= */
+/* ESTILOS GLOBALES PARA EL COMPONENTE MAT-BUTTON-TOGGLE   */
+/* (Necesario para el Language Switch de la página Login)  */
+/* ======================================================= */
+
+.language-switch .mat-button-toggle-group {
+  background-color: var(--surface-overlay);
+  border-radius: 999px; /* Forma de píldora */
+  border: 1px solid var(--surface-border);
+  overflow: hidden;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+}
+
+.language-switch .mat-button-toggle .mat-button-toggle-button {
+  background-color: transparent;
+  color: var(--text-secondary);
+  transition: all 0.2s ease-in-out;
+  font-weight: 600;
+  padding: 8px 20px !important; /* Ajuste de padding para mejor apariencia */
+  border: none !important;
+  line-height: normal !important;
+}
+
+/* Estilo del botón ACTIVO (verde) */
+.language-switch .mat-button-toggle-checked .mat-button-toggle-button {
+  background-color: var(--accent-green) !important; /* Verde brillante */
+  color: #ffffff !important;
+  border-radius: 999px;
+}
+
+/* ✅ CORRECCIÓN CLAVE: Oculta el icono de check por defecto de Material */
+.language-switch .mat-icon {
+  display: none !important;
+}
+
+
+body {
+  font-family: 'Rubik', sans-serif;
+  background-color: var(--surface-ground); /* Usa la variable de fondo */
+  color: var(--text-dark); /* Usa la variable de texto */
+  margin: 0;
+  transition: background-color 0.3s, color 0.3s;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-}
-
-button {
-  cursor: pointer;
-  font-family: 'Rubik', sans-serif;
-}
-
-input, button {
-  font-size: 16px;
-}
-
-a {
-  text-decoration: none;
-  color: var(--primary-color);
-  transition: color 0.2s ease;
-}
-
-a:hover {
-  color: var(--primary-light);
-}
-
-/* Utility Classes */
-.text-center {
-  text-align: center;
-}
-
-.mt-sm { margin-top: var(--space-sm); }
-.mt-md { margin-top: var(--space-md); }
-.mt-lg { margin-top: var(--space-lg); }
-
-.mb-sm { margin-bottom: var(--space-sm); }
-.mb-md { margin-bottom: var(--space-md); }
-.mb-lg { margin-bottom: var(--space-lg); }
-
-/* Animation Classes */
-.fade-in {
-  animation: fadeIn 0.3s ease-in-out;
-}
-
-@keyframes fadeIn {
-  from {
-    opacity: 0;
-    transform: translateY(10px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-/* ——— Estilos globales para mat-select (MDC) ——— */
-
-/* Fondo blanco al panel */
-.mat-mdc-select-panel {
-  background-color: #fff !important;
-}
-
-/* Texto de todas las opciones en color primary */
-.mat-mdc-select-panel .mat-mdc-option {
-  background-color: white;         /* u otro fondo si lo quieres */
-}
-
-/* Hover & selected con tintado suave de primary */
-.mat-mdc-select-panel .mat-mdc-option:hover,
-.mat-mdc-select-panel .mat-mdc-option.mat-mdc-selected {
-  background-color: rgba(63,81,181,0.08) !important; /* 8% primary */
 }

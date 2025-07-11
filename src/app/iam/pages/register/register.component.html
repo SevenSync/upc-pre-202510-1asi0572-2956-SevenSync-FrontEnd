@@ -1,114 +1,36 @@
 <div class="register-container">
   <div class="language-switch">
-    <button mat-button (click)="setLanguage('es')">ES</button>
-    <button mat-button (click)="setLanguage('en')">EN</button>
+    <mat-button-toggle-group [value]="currentLang" (change)="setLanguage($event)" aria-label="Selección de idioma">
+      <mat-button-toggle value="es">ES</mat-button-toggle>
+      <mat-button-toggle value="en">EN</mat-button-toggle>
+    </mat-button-toggle-group>
   </div>
 
   <div class="register-card">
     <div class="brand-section">
       <div class="logo">
-        <img src="logo.png" alt="MaceTech Logo" class="logo-image" width="100" height="100">
+        <img src="/assets/images/Macetech-Logo.png" alt="MaceTech Logo" class="logo-image">
       </div>
-      <h1 class="brand-title">MaceTech</h1>
-      <p class="brand-subtitle">{{ 'REGISTER.TAGLINE' | translate }}</p>
-
     </div>
 
     <div class="form-section">
       <h2 class="form-title">{{ 'REGISTER.TITLE' | translate }}</h2>
       <p class="form-subtitle">{{ 'REGISTER.SUBTITLE' | translate }}</p>
 
+      <!-- Aquí se llama al componente hijo -->
+      <app-sign-up
+        [isLoading]="isLoading"
+        (signUp)="onSignUp($event)">
+      </app-sign-up>
 
-      <form [formGroup]="registerForm" (ngSubmit)="onSubmit()" class="register-form">
-        <div class="form-field">
-          <mat-form-field appearance="outline" class="full-width">
-            <mat-label>{{ 'REGISTER.EMAIL_LABEL' | translate }}</mat-label>
-            <input matInput type="email" formControlName="email" [placeholder]="'REGISTER.EMAIL_PLACEHOLDER' | translate">
-            <mat-icon matSuffix>email</mat-icon>
-            <mat-error *ngIf="registerForm.get('email')?.hasError('required')">
-              {{ 'REGISTER.EMAIL_REQUIRED' | translate }}
-            </mat-error>
-            <mat-error *ngIf="registerForm.get('email')?.hasError('email')">
-              {{ 'REGISTER.EMAIL_INVALID' | translate }}
-            </mat-error>
-          </mat-form-field>
-        </div>
-
-        <div class="form-field">
-          <mat-form-field appearance="outline" class="full-width">
-            <mat-label>{{ 'REGISTER.PASSWORD_LABEL' | translate }}</mat-label>
-            <input matInput
-                   [type]="hidePassword ? 'password' : 'text'"
-                   formControlName="password"
-                   [placeholder]="'REGISTER.PASSWORD_PLACEHOLDER' | translate">
-            <button mat-icon-button matSuffix (click)="togglePasswordVisibility()" type="button">
-              <mat-icon>{{ hidePassword ? 'visibility_off' : 'visibility' }}</mat-icon>
-            </button>
-            <mat-error *ngIf="registerForm.get('password')?.hasError('required')">
-              {{ 'REGISTER.PASSWORD_REQUIRED' | translate }}
-            </mat-error>
-            <mat-error *ngIf="registerForm.get('password')?.hasError('minlength')">
-              {{ 'REGISTER.PASSWORD_MINLENGTH' | translate }}
-            </mat-error>
-          </mat-form-field>
-        </div>
-
-        <div class="form-field">
-          <mat-form-field appearance="outline" class="full-width">
-            <mat-label>{{ 'REGISTER.CONFIRM_LABEL' | translate }}</mat-label>
-            <input matInput
-                   [type]="hideConfirmPassword ? 'password' : 'text'"
-                   formControlName="confirmPassword"
-                   [placeholder]="'REGISTER.CONFIRM_PLACEHOLDER' | translate">
-            <button mat-icon-button matSuffix (click)="toggleConfirmPasswordVisibility()" type="button">
-              <mat-icon>{{ hideConfirmPassword ? 'visibility_off' : 'visibility' }}</mat-icon>
-            </button>
-            <mat-error *ngIf="registerForm.get('confirmPassword')?.hasError('required')">
-              {{ 'REGISTER.CONFIRM_REQUIRED' | translate }}
-            </mat-error>
-            <mat-error *ngIf="registerForm.get('confirmPassword')?.hasError('passwordMismatch')">
-              {{ 'REGISTER.CONFIRM_MISMATCH' | translate }}
-            </mat-error>
-          </mat-form-field>
-        </div>
-
-        <div class="form-field">
-          <mat-checkbox formControlName="acceptTerms" color="primary">
-            {{ 'REGISTER.ACCEPT_TERMS' | translate }}
-            <a href="#" target="_blank">{{ 'REGISTER.TERMS_LINK' | translate }}</a> {{ 'REGISTER.AND' | translate }}
-            <a href="#" target="_blank">{{ 'REGISTER.PRIVACY_LINK' | translate }}</a>
-          </mat-checkbox>
-          <mat-error *ngIf="registerForm.get('acceptTerms')?.hasError('required') && registerForm.get('acceptTerms')?.touched"
-                     class="checkbox-error">
-            {{ 'REGISTER.TERMS_REQUIRED' | translate }}
-          </mat-error>
-        </div>
-
-        <div class="form-actions">
-          <button mat-raised-button
-                  color="primary"
-                  type="submit"
-                  class="register-button"
-                  [disabled]="registerForm.invalid || isLoading">
-            {{ isLoading ? ('REGISTER.LOADING' | translate) : ('REGISTER.SUBMIT' | translate) }}
-          </button>
-        </div>
-
-        <div class="login-link">
-          <p>{{ 'REGISTER.HAVE_ACCOUNT' | translate }}
-            <a (click)="navigateToLogin()" class="link-button">{{ 'REGISTER.LOGIN_LINK' | translate }}</a>
-          </p>
-        </div>
-      </form>
-
-      <div *ngIf="errorMessage" class="error-message">
+      <!-- Mensajes de éxito y error gestionados por el padre -->
+      <div *ngIf="errorMessage()" class="error-message">
         <mat-icon>error_outline</mat-icon>
-        <span>{{ errorMessage }}</span>
+        <span>{{ errorMessage() }}</span>
       </div>
-
-      <div *ngIf="successMessage" class="success-message">
+      <div *ngIf="successMessage()" class="success-message">
         <mat-icon>check_circle</mat-icon>
-        <span>{{ successMessage }}</span>
+        <span>{{ successMessage() }}</span>
       </div>
     </div>
   </div>
@@ -116,6 +38,5 @@
   <div class="background-decoration">
     <div class="decoration-circle circle-1"></div>
     <div class="decoration-circle circle-2"></div>
-    <div class="decoration-circle circle-3"></div>
   </div>
 </div>

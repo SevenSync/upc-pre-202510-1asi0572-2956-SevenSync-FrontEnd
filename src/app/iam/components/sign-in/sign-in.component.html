@@ -1,1 +1,44 @@
-<p>sign-in works!</p>
+<form [formGroup]="signInForm" (ngSubmit)="onSubmit()" class="sign-in-form">
+
+  <!-- Campo de Correo Electrónico -->
+  <mat-form-field appearance="outline" class="w-full">
+    <mat-label>{{ 'LOGIN.SIGN_IN.EMAIL_LABEL' | translate }}</mat-label>
+    <input matInput formControlName="email" type="email" required>
+    <mat-icon matSuffix>email</mat-icon>
+    <mat-error *ngIf="email.hasError('required')">
+      {{ 'LOGIN.SIGN_IN.EMAIL_REQUIRED' | translate }}
+    </mat-error>
+    <mat-error *ngIf="email.hasError('email')">
+      {{ 'LOGIN.SIGN_IN.EMAIL_INVALID' | translate }}
+    </mat-error>
+  </mat-form-field>
+
+  <!-- Campo de Contraseña -->
+  <mat-form-field appearance="outline" class="w-full">
+    <mat-label>{{ 'LOGIN.SIGN_IN.PASSWORD_LABEL' | translate }}</mat-label>
+    <input matInput formControlName="password" [type]="hidePassword() ? 'password' : 'text'" required>
+    <button mat-icon-button matSuffix (click)="togglePasswordVisibility()" type="button" aria-label="Toggle password visibility">
+      <mat-icon>{{ hidePassword() ? 'visibility_off' : 'visibility' }}</mat-icon>
+    </button>
+    <mat-error *ngIf="password.hasError('required')">
+      {{ 'LOGIN.SIGN_IN.PASSWORD_REQUIRED' | translate }}
+    </mat-error>
+  </mat-form-field>
+
+  <!-- Enlace "Olvidaste tu contraseña" -->
+  <div class="forgot-password-container">
+    <a routerLink="/password-recovery" class="forgot-password-link">{{ 'LOGIN.SIGN_IN.FORGOT_PASSWORD' | translate }}</a>
+  </div>
+
+  <!-- Botón de Iniciar Sesión -->
+  <!-- ✅ El estado [disabled] y el texto ahora leen el signal `isLoading()` del padre -->
+  <button mat-raised-button color="primary" type="submit" [disabled]="signInForm.invalid || isLoading()" class="login-button">
+    {{ isLoading() ? ('LOGIN.SIGN_IN.LOADING' | translate) : ('LOGIN.SIGN_IN.SUBMIT' | translate) }}
+  </button>
+
+  <!-- Enlace de Registro -->
+  <div class="register-link-container">
+    <span>{{ 'LOGIN.SIGN_IN.NO_ACCOUNT' | translate }}</span>
+    <a routerLink="/register" class="register-link">{{ 'LOGIN.SIGN_IN.REGISTER' | translate }}</a>
+  </div>
+</form>
