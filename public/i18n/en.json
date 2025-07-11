@@ -19,6 +19,9 @@
       "SUBMIT": "Sign In",
       "NO_ACCOUNT": "Don't have an account?",
       "REGISTER": "Register here"
+    },
+    "ERROR": {
+      "INVALID_CREDENTIALS": "Invalid credentials. Please try again."
     }
   },
   "REGISTER": {
@@ -50,7 +53,16 @@
     "LOADING": "Creating account...",
     "SUBMIT": "Create Account",
     "HAVE_ACCOUNT": "Already have an account?",
-    "LOGIN_LINK": "Sign in here"
+    "LOGIN_LINK": "Sign in here",
+    "ERROR": {
+      "INCOMPLETE_FORM": "Please complete all fields correctly.",
+      "CREATION_FAILED": "Could not create the account. Please try again.",
+      "ALREADY_EXISTS": "An account with this email already exists.",
+      "GENERIC": "Error creating account. Please try again."
+    },
+    "SUCCESS": {
+      "ACCOUNT_CREATED": "Account created successfully. Check your email to verify your account."
+    }
   },
   "RECOVERY": {
     "TITLE": "Forgot your password?",
@@ -62,7 +74,16 @@
     "LOADING": "Sending...",
     "SUBMIT": "Send recovery link",
     "REMEMBERED": "Remembered your password?",
-    "BACK_TO_LOGIN": "Back to login"
+    "BACK_TO_LOGIN": "Back to login",
+    "ERROR": {
+      "INVALID_EMAIL": "Please enter a valid email.",
+      "SEND_FAILED": "Could not send the recovery email.",
+      "NOT_FOUND": "No account found with that email.",
+      "GENERIC": "Error sending recovery email."
+    },
+    "SUCCESS": {
+      "EMAIL_SENT": "A recovery link has been sent to your email."
+    }
   },
   "CREATE_PROFILE": {
     "TITLE": "Complete Profile",

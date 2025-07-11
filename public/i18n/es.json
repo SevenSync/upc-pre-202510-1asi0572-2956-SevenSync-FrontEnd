@@ -19,6 +19,9 @@
       "SUBMIT": "Iniciar Sesión",
       "NO_ACCOUNT": "¿No tienes cuenta?",
       "REGISTER": "Regístrate aquí"
+    },
+    "ERROR": {
+      "INVALID_CREDENTIALS": "Credenciales inválidas. Por favor intenta nuevamente."
     }
   },
   "REGISTER": {
@@ -50,7 +53,16 @@
     "LOADING": "Creando cuenta...",
     "SUBMIT": "Crear Cuenta",
     "HAVE_ACCOUNT": "¿Ya tienes cuenta?",
-    "LOGIN_LINK": "Inicia sesión aquí"
+    "LOGIN_LINK": "Inicia sesión aquí",
+    "ERROR": {
+      "INCOMPLETE_FORM": "Por favor completa todos los campos correctamente.",
+      "CREATION_FAILED": "No se pudo crear la cuenta. Intenta nuevamente.",
+      "ALREADY_EXISTS": "Ya existe una cuenta con este email.",
+      "GENERIC": "Error al crear la cuenta. Intenta nuevamente."
+    },
+    "SUCCESS": {
+      "ACCOUNT_CREATED": "Cuenta creada exitosamente. Revisa tu email para verificar tu cuenta."
+    }
   },
   "RECOVERY": {
     "TITLE": "¿Olvidaste tu contraseña?",
@@ -62,7 +74,16 @@
     "LOADING": "Enviando...",
     "SUBMIT": "Enviar enlace de recuperación",
     "REMEMBERED": "¿Recordaste tu contraseña?",
-    "BACK_TO_LOGIN": "Volver al inicio de sesión"
+    "BACK_TO_LOGIN": "Volver al inicio de sesión",
+    "ERROR": {
+      "INVALID_EMAIL": "Por favor ingresa un email válido.",
+      "SEND_FAILED": "No se pudo enviar el email de recuperación.",
+      "NOT_FOUND": "No se encontró una cuenta con ese email.",
+      "GENERIC": "Error al enviar el email de recuperación."
+    },
+    "SUCCESS": {
+      "EMAIL_SENT": "Se ha enviado un enlace de recuperación a tu email."
+    }
   },
   "CREATE_PROFILE": {
     "TITLE": "Completar Perfil",

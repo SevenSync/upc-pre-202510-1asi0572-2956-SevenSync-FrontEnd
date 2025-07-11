@@ -51,7 +51,7 @@ export class PasswordRecoveryComponent {
 
   onSubmit(): void {
     if (this.recoveryForm.invalid) {
-      this.errorMessage = 'Por favor ingresa un email válido.';
+      this.errorMessage = this.translate.instant('RECOVERY.ERROR.INVALID_EMAIL');
       return;
     }
 
@@ -66,12 +66,12 @@ export class PasswordRecoveryComponent {
       next: (response) => {
         this.isLoading = false;
         if (response.sent) {
-          this.successMessage = 'Se ha enviado un enlace de recuperación a tu email.';
+          this.successMessage = this.translate.instant('RECOVERY.SUCCESS.EMAIL_SENT');
           setTimeout(() => {
             this.router.navigate(['/login']);
           }, 3000);
         } else {
-          this.errorMessage = 'No se pudo enviar el email de recuperación.';
+          this.errorMessage = this.translate.instant('RECOVERY.ERROR.SEND_FAILED');
         }
       },
       error: (error) => {
@@ -79,11 +79,12 @@ export class PasswordRecoveryComponent {
         console.error('Password recovery error:', error);
 
         if (error.status === 404) {
-          this.errorMessage = 'No se encontró una cuenta con ese email.';
+          this.errorMessage = this.translate.instant('RECOVERY.ERROR.NOT_FOUND');
         } else {
-          this.errorMessage = 'Error al enviar el email de recuperación.';
+          this.errorMessage = this.translate.instant('RECOVERY.ERROR.GENERIC');
         }
       }
     });
   }
+
 }

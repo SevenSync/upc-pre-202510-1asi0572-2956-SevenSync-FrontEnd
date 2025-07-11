@@ -69,7 +69,7 @@ export class RegisterComponent {
 
   onSubmit(): void {
     if (this.registerForm.invalid) {
-      this.errorMessage = 'Por favor completa todos los campos correctamente.';
+      this.errorMessage = this.translate.instant('REGISTER.ERROR.INCOMPLETE_FORM');
       return;
     }
 
@@ -84,12 +84,12 @@ export class RegisterComponent {
       next: (response) => {
         this.isLoading = false;
         if (response.created) {
-          this.successMessage = 'Cuenta creada exitosamente. Revisa tu email para verificar tu cuenta.';
+          this.successMessage = this.translate.instant('REGISTER.SUCCESS.ACCOUNT_CREATED');
           setTimeout(() => {
             this.router.navigate(['/login']);
           }, 3000);
         } else {
-          this.errorMessage = 'No se pudo crear la cuenta. Intenta nuevamente.';
+          this.errorMessage = this.translate.instant('REGISTER.ERROR.CREATION_FAILED');
         }
       },
       error: (error) => {
@@ -97,13 +97,14 @@ export class RegisterComponent {
         console.error('Registration error:', error);
 
         if (error.status === 400 && error.error?.message?.includes('already exists')) {
-          this.errorMessage = 'Ya existe una cuenta con este email.';
+          this.errorMessage = this.translate.instant('REGISTER.ERROR.ALREADY_EXISTS');
         } else {
-          this.errorMessage = 'Error al crear la cuenta. Intenta nuevamente.';
+          this.errorMessage = this.translate.instant('REGISTER.ERROR.GENERIC');
         }
       }
     });
   }
+
 
   togglePasswordVisibility(): void {
     this.hidePassword = !this.hidePassword;
