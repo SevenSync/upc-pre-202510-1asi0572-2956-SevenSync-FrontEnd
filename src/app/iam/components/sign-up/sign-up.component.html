@@ -1,0 +1,52 @@
+<form [formGroup]="signUpForm" (ngSubmit)="onSubmit()" class="sign-up-form">
+  <mat-form-field appearance="outline" class="w-full">
+    <mat-label>{{ 'REGISTER.EMAIL_LABEL' | translate }}</mat-label>
+    <input matInput type="email" formControlName="email" required>
+    <mat-icon matSuffix>email</mat-icon>
+    <mat-error *ngIf="email.hasError('required')">{{ 'REGISTER.EMAIL_REQUIRED' | translate }}</mat-error>
+    <mat-error *ngIf="email.hasError('email')">{{ 'REGISTER.EMAIL_INVALID' | translate }}</mat-error>
+  </mat-form-field>
+
+  <mat-form-field appearance="outline" class="w-full">
+    <mat-label>{{ 'REGISTER.PASSWORD_LABEL' | translate }}</mat-label>
+    <input matInput [type]="hidePassword() ? 'password' : 'text'" formControlName="password" required>
+    <button mat-icon-button matSuffix (click)="togglePasswordVisibility()" type="button">
+      <mat-icon>{{ hidePassword() ? 'visibility_off' : 'visibility' }}</mat-icon>
+    </button>
+    <mat-error *ngIf="password.hasError('required')">{{ 'REGISTER.PASSWORD_REQUIRED' | translate }}</mat-error>
+    <mat-error *ngIf="password.hasError('minlength')">{{ 'REGISTER.PASSWORD_MINLENGTH' | translate }}</mat-error>
+  </mat-form-field>
+
+  <mat-form-field appearance="outline" class="w-full">
+    <mat-label>{{ 'REGISTER.CONFIRM_LABEL' | translate }}</mat-label>
+    <input matInput [type]="hideConfirmPassword() ? 'password' : 'text'" formControlName="confirmPassword" required>
+    <button mat-icon-button matSuffix (click)="toggleConfirmPasswordVisibility()" type="button">
+      <mat-icon>{{ hideConfirmPassword() ? 'visibility_off' : 'visibility' }}</mat-icon>
+    </button>
+    <mat-error *ngIf="confirmPassword.hasError('required')">{{ 'REGISTER.CONFIRM_REQUIRED' | translate }}</mat-error>
+    <mat-error *ngIf="confirmPassword.hasError('passwordMismatch')">{{ 'REGISTER.CONFIRM_MISMATCH' | translate }}</mat-error>
+  </mat-form-field>
+
+  <div class="terms-container">
+    <mat-checkbox formControlName="acceptTerms" color="primary">
+      <span class="checkbox-label">
+        {{ 'REGISTER.ACCEPT_TERMS' | translate }}
+        <a href="/terms" target="_blank">{{ 'REGISTER.TERMS_LINK' | translate }}</a>
+        {{ 'REGISTER.AND' | translate }}
+        <a href="/privacy" target="_blank">{{ 'REGISTER.PRIVACY_LINK' | translate }}</a>
+      </span>
+    </mat-checkbox>
+    <mat-error *ngIf="acceptTerms.touched && acceptTerms.hasError('required')">
+      {{ 'REGISTER.TERMS_REQUIRED' | translate }}
+    </mat-error>
+  </div>
+
+  <button mat-raised-button type="submit" [disabled]="signUpForm.invalid || isLoading()" class="sign-up-button">
+    {{ isLoading() ? ('REGISTER.LOADING' | translate) : ('REGISTER.SUBMIT' | translate) }}
+  </button>
+
+  <div class="login-link-container">
+    <span>{{ 'REGISTER.HAVE_ACCOUNT' | translate }}</span>
+    <a routerLink="/login" class="login-link">{{ 'REGISTER.LOGIN_LINK' | translate }}</a>
+  </div>
+</form>

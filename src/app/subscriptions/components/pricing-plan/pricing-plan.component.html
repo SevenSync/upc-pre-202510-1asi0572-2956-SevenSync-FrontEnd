@@ -1,0 +1,48 @@
+<div class="plan_card"
+     [class.plan_card_free]="plan.id === 'free'"
+     [class.plan_card_premium]="plan.id !== 'free'">
+
+  <div class="plan_head"
+       [class.plan_head_premium]="plan.id !== 'free'">
+    <div class="plan_title">
+      <div class="crown" *ngIf="plan.id !== 'free'">
+        <mat-icon class="material-symbols-outlined icon">crown</mat-icon>
+        <h2>{{ plan.name }}</h2>
+      </div>
+      <h2 *ngIf="plan.id === 'free'">{{ plan.name }}</h2>
+      <span>{{ getSubtitle() }}</span>
+    </div>
+    <h2>{{ getFormattedPrice() }}</h2>
+  </div>
+
+  <div class="plan_body">
+    <h3>{{ getIncludesText() }}</h3>
+
+    <div *ngFor="let feature of plan.features" class="feature">
+      <mat-icon class="material-symbols-outlined"
+                [class.free_icon]="plan.id === 'free'"
+                [class.premium_icon]="plan.id !== 'free'">
+        check
+      </mat-icon>
+      {{ feature }}
+    </div>
+
+    <div *ngIf="plan.limitations && plan.limitations.length > 0">
+      <h3>Limitaciones:</h3>
+      <ul>
+        <li *ngFor="let limitation of plan.limitations">{{ limitation }}</li>
+      </ul>
+    </div>
+
+    <button *ngIf="plan.isCurrent" class="current_membership">
+      Plan Actual
+    </button>
+
+    <button *ngIf="!plan.isCurrent && plan.id !== 'free'"
+            class="upgrade_button"
+            (click)="onSelectPlan()">
+      <mat-icon class="material-symbols-outlined crown-icon">crown</mat-icon>
+      Actualizar a Premium
+    </button>
+  </div>
+</div>

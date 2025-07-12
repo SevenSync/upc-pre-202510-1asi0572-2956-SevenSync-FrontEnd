@@ -1,0 +1,51 @@
+<app-toolbar></app-toolbar>
+<div class="container">
+  <div class="payment-success-container">
+    <div class="success-icon">
+      <mat-icon class="check-icon">check_circle</mat-icon>
+    </div>
+
+    <h1 class="success-title">¡Pago exitoso!</h1>
+    <p class="success-subtitle">
+      Tu membresía Premium ha sido activada correctamente
+    </p>
+
+    <div class="premium-box">
+      <div class="premium-header">
+        <mat-icon class="crown-icon">crown</mat-icon>
+        <strong>Membresía Premium</strong>
+      </div>
+      <p>Ahora tienes acceso a todas las funcionalidades premium de PlantCare.</p>
+      <p><strong>¡Disfruta de una experiencia completa para el cuidado de tus plantas!</strong></p>
+    </div>
+
+    <div class="transaction-details">
+      <p><strong>Detalles de la transacción:</strong></p>
+      <p><strong>ID de transacción:</strong> TRX-41823</p>
+      <p><strong>Fecha:</strong> 02/06/2025</p>
+      <p><strong>Método de pago:</strong> Tarjeta (Termina con 4521)</p>
+    </div>
+
+    <div class="next-steps">
+      <p><strong>¿Qué sigue?</strong></p>
+      <ul>
+        <li>Explora todas las nuevas funcionalidades disponibles</li>
+        <li>Configura la programación de riego automático</li>
+        <li>Añade más macetas inteligentes a tu cuenta</li>
+        <li>Revisa tus reportes semanales detallados</li>
+      </ul>
+    </div>
+
+    <div class="button-group">
+      <button mat-flat-button color="primary" routerLink="/home">
+        <mat-icon>home</mat-icon>
+        Regresar a Home
+      </button>
+
+      <button mat-stroked-button color="primary" routerLink="/membership">
+        Ver detalles de membresía
+      </button>
+    </div>
+  </div>
+
+</div>

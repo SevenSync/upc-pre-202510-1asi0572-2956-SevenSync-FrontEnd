@@ -1,12 +1,13 @@
 import { Component } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
+import {TranslateModule} from '@ngx-translate/core';
 
 @Component({
-  selector: 'app-root', //esto es el nombre de etiqueta que se va a usar en el html
-  imports: [RouterOutlet], // esto es para que funcione el router outlet,
+  selector: 'app-root',
+  imports: [RouterOutlet, TranslateModule],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css'
 })
 export class AppComponent {
-  title = 'WebApp-Frontend';
+  title = 'Maceteech-Frontend';
 }

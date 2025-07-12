@@ -1,0 +1,394 @@
+{
+  "LOGIN": {
+    "TAGLINE": "Take care of your plants intelligently",
+    "TITLE": "Welcome back",
+    "SUBTITLE": "Sign in to your account",
+    "SIGN_IN": {
+      "EMAIL_LABEL": "Email",
+      "EMAIL_PLACEHOLDER": "your@email.com",
+      "EMAIL_REQUIRED": "Email is required",
+      "EMAIL_INVALID": "Enter a valid email",
+
+      "PASSWORD_LABEL": "Password",
+      "PASSWORD_PLACEHOLDER": "Your password",
+      "PASSWORD_REQUIRED": "Password is required",
+      "PASSWORD_MINLENGTH": "Password must be at least 6 characters",
+
+      "FORGOT_PASSWORD": "Forgot your password?",
+      "LOADING": "Signing in...",
+      "SUBMIT": "Sign In",
+      "NO_ACCOUNT": "Don't have an account?",
+      "REGISTER": "Register here"
+    }
+  },
+  "REGISTER": {
+    "TAGLINE": "Join the smart plant care revolution",
+    "TITLE": "Create Account",
+    "SUBTITLE": "Fill in your details to get started",
+
+    "EMAIL_LABEL": "Email",
+    "EMAIL_PLACEHOLDER": "your@email.com",
+    "EMAIL_REQUIRED": "Email is required",
+    "EMAIL_INVALID": "Enter a valid email",
+
+    "PASSWORD_LABEL": "Password",
+    "PASSWORD_PLACEHOLDER": "Minimum 6 characters",
+    "PASSWORD_REQUIRED": "Password is required",
+    "PASSWORD_MINLENGTH": "Password must be at least 6 characters",
+
+    "CONFIRM_LABEL": "Confirm password",
+    "CONFIRM_PLACEHOLDER": "Repeat your password",
+    "CONFIRM_REQUIRED": "Please confirm your password",
+    "CONFIRM_MISMATCH": "Passwords do not match",
+
+    "ACCEPT_TERMS": "I accept the",
+    "TERMS_LINK": "terms and conditions",
+    "AND": "and the",
+    "PRIVACY_LINK": "privacy policy",
+    "TERMS_REQUIRED": "You must accept the terms and conditions",
+
+    "LOADING": "Creating account...",
+    "SUBMIT": "Create Account",
+    "HAVE_ACCOUNT": "Already have an account?",
+    "LOGIN_LINK": "Sign in here"
+  },
+  "RECOVERY": {
+    "TITLE": "Forgot your password?",
+    "SUBTITLE": "Don't worry, we'll send you a link to reset your password.",
+    "EMAIL_LABEL": "Email",
+    "EMAIL_PLACEHOLDER": "your@email.com",
+    "EMAIL_REQUIRED": "Email is required",
+    "EMAIL_INVALID": "Enter a valid email",
+    "LOADING": "Sending...",
+    "SUBMIT": "Send recovery link",
+    "REMEMBERED": "Remembered your password?",
+    "BACK_TO_LOGIN": "Back to login"
+  },
+  "CREATE_PROFILE": {
+    "TITLE": "Complete Profile",
+    "SUBTITLE": "To start using MaceTech, we need some additional information about you.",
+    "ERROR": "An error occurred while saving your profile.",
+    "SUCCESS": "Profile created successfully.",
+    "PROFILE_FORM": {
+      "FIRST_NAME": {
+        "LABEL": "First Name",
+        "PLACEHOLDER": " John",
+        "REQUIRED": "First name is required",
+        "PATTERN": "Only letters are allowed"
+      },
+      "LAST_NAME": {
+        "LABEL": "Last Name",
+        "PLACEHOLDER": " Smith",
+        "REQUIRED": "Last name is required",
+        "PATTERN": "Only letters are allowed"
+      },
+      "ADDRESS": {
+        "TITLE": "Address",
+        "STREET": "Street",
+        "STREET_PLACEHOLDER": " Main St.",
+        "STREET_REQUIRED": "Street is required",
+        "NUMBER": "Number",
+        "NUMBER_PLACEHOLDER": " 123",
+        "NUMBER_REQUIRED": "Number is required",
+        "CITY": "City",
+        "CITY_PLACEHOLDER": " New York",
+        "CITY_REQUIRED": "City is required",
+        "POSTAL_CODE": "Postal Code",
+        "POSTAL_PLACEHOLDER": " 10001",
+        "POSTAL_REQUIRED": "Postal code is required",
+        "COUNTRY": "Country",
+        "COUNTRY_PLACEHOLDER": " USA",
+        "COUNTRY_REQUIRED": "Country is required"
+      },
+      "CONTACT": {
+        "TITLE": "Contact Information",
+        "CODE": "Country Code",
+        "CODE_PLACEHOLDER": " +51",
+        "CODE_REQUIRED": "Code is required",
+        "CODE_PATTERN": "Format: +51",
+        "PHONE": "Phone Number",
+        "PHONE_PLACEHOLDER": " 987-654-321",
+        "PHONE_REQUIRED": "Phone number is required",
+        "PHONE_PATTERN": "Format: 987-654-321"
+      },
+      "CANCEL": "Cancel",
+      "CREATE": "Create Profile",
+      "UPDATE": "Update Profile",
+      "LOADING": "Saving..."
+    }
+  },
+  "TOOLBAR": {
+    "APP_NAME": "MaceTech",
+    "MEMBERSHIP": {
+      "PREMIUM": "Premium",
+      "DEFAULT": "Memberships"
+    },
+    "POTS": "Pots",
+    "NOTIFICATIONS": "Notifications",
+    "PROFILE": "Profile",
+    "LANGUAGE": {
+      "ES": "ES",
+      "EN": "EN"
+    }
+  },
+  "MEMBERSHIP": {
+    "TITLE": "Memberships",
+    "CURRENT": "Your current membership",
+    "FREE_PLAN": "Free Plan",
+    "UPGRADE": "Upgrade to Premium",
+    "DIFFERENCE_TITLE": "See the difference",
+    "DIFFERENCE_DESC": "Switch to premium and enjoy control of all your pots with relevant, updated and detailed information. Cancel anytime.",
+    "FEATURES": "Features",
+    "PLAN": {
+      "FREE": "Free Plan",
+      "PREMIUM": "Premium Plan"
+    },
+    "PREMIUM_HEADER": "Premium Plan",
+    "PREMIUM_ADVANTAGES": "Everything from the free plan, plus:",
+    "MONTHLY": "Monthly",
+    "ANNUAL": "Annual",
+    "DISCOUNT": "-17%",
+    "FREE_LABEL": "Basic Features",
+    "INCLUDES": "Includes:",
+    "LIMITATIONS": "Limitations:",
+    "LIMITATION_LIST": [
+      "No weekly reports",
+      "No auto-watering scheduling",
+      "No advanced recommendations"
+    ],
+    "CURRENT_BUTTON": "Current Plan",
+    "PREMIUM_LABEL": "Advanced Features",
+    "COMPARE": {
+      "POTS": "Number of smart pots",
+      "POTS_FREE": "Four (4)",
+      "POTS_PREMIUM": "Unlimited",
+      "SENSORS": "Sensor monitoring",
+      "SENSORS_FREE": "Basic functions",
+      "SENSORS_PREMIUM": "Advanced functions",
+      "IRRIGATION_ALERTS": "Watering alerts",
+      "IRRIGATION_ALERTS_FREE": "Basic alerts",
+      "IRRIGATION_ALERTS_PREMIUM": "Custom alerts",
+      "DATA_HISTORY": "Data history",
+      "DATA_HISTORY_FREE": "Up to 7 days",
+      "DATA_HISTORY_PREMIUM": "Unlimited",
+      "REPORTS": "Weekly reports",
+      "REPORTS_FREE": "✘",
+      "REPORTS_PREMIUM": "✔ Available and detailed",
+      "AUTO_WATERING": "Automatic watering scheduling",
+      "AUTO_WATERING_FREE": "✘",
+      "AUTO_WATERING_PREMIUM": "✔ Customizable",
+      "RECOMMENDATIONS": "Personalized recommendations",
+      "RECOMMENDATIONS_FREE": "✘",
+      "RECOMMENDATIONS_PREMIUM": "✔ Relevant and detailed",
+      "SUPPORT": "User technical support",
+      "SUPPORT_FREE": "Less than 24 hours",
+      "SUPPORT_PREMIUM": "Less than 4 hours",
+      "EARLY_ACCESS": "Early access to new features",
+      "EARLY_ACCESS_FREE": "✘",
+      "EARLY_ACCESS_PREMIUM": "✔ Via email"
+    },
+    "FOOTER_TITLE": "Affordable plans for every gardener",
+    "FOOTER_DESC": "Choose a Macetech plan and take care of your plants with smart monitoring, automatic watering and personalized alerts from your phone or computer. Enjoy care recommendations and easily adjust your preferences. Cancel or change plans anytime.",
+    "FAQ_TITLE": "Frequently Asked Questions:",
+    "FAQ": {
+      "CHANGE_PLAN_Q": "Can I change plans at any time?",
+      "CHANGE_PLAN_A": "Yes, you can upgrade to Premium at any time. If you switch back to the free plan, the change will take effect at the end of your billing cycle.",
+      "ANNUAL_BILLING_Q": "How does annual billing work?",
+      "ANNUAL_BILLING_A": "With annual billing, you pay for 12 months upfront and get a 17% discount compared to monthly payments.",
+      "PAYMENT_METHODS_Q": "What payment methods do you accept?",
+      "PAYMENT_METHODS_A": "We accept all major credit and debit cards (Visa, Mastercard, American Express) as well as PayPal.",
+      "CANCEL_PREMIUM_Q": "Can I cancel my Premium subscription?",
+      "CANCEL_PREMIUM_A": "Yes, you can cancel your subscription at any time from your account settings. You will still have access to Premium features until the end of your billing cycle."
+    }
+  },
+  "POTS": {
+    "TITLE": "My Pots",
+    "SUBTITLE": "Monitor and care for your smart plants",
+    "POT_COUNT": "pots",
+    "STATUS": {
+      "HEALTHY": "healthy",
+      "WARNING": "need attention",
+      "CRITICAL": "critical"
+    },
+    "ADD_POT": "Add Pot",
+    "TABS": {
+      "ALL": "All",
+      "HEALTHY": "Healthy",
+      "WARNING": "Needs Attention",
+      "CRITICAL": "Critical"
+    },
+    "LOADING": "Loading pots...",
+    "RETRY": "Retry",
+    "NO_POTS": {
+      "FIRST": "Add your first pot",
+      "NEW": "Add new pot"
+    },
+    "CREATE_POT": {
+      "TITLE": "Add New Pot",
+      "STEP1": {
+        "LABEL": "Basic Information",
+        "NAME_LABEL": "Pot Name",
+        "NAME_PLACEHOLDER": "e.g., Living Room Monstera",
+        "NAME_HINT": "Give your pot a descriptive name",
+        "NAME_REQUIRED": "Name is required",
+        "NAME_MIN": "Name must be at least 2 characters long",
+        "LOCATION_LABEL": "Location",
+        "LOCATION_PLACEHOLDER": "e.g., Living room, next to the window",
+        "LOCATION_HINT": "Where will the pot be located?",
+        "LOCATION_REQUIRED": "Location is required"
+      },
+      "STEP2": {
+        "LABEL": "Technical Configuration",
+        "DEVICE_ID_LABEL": "Device ID",
+        "DEVICE_ID_PLACEHOLDER": "e.g., MACETECH_001",
+        "DEVICE_HINT": "Unique identifier for the IoT device (optional)",
+        "STATUS_LABEL": "Initial Status",
+        "STATUS_HINT": "Initial status of the pot in the system",
+        "STATUS": {
+          "ACTIVE": {
+            "NAME": "Active",
+            "DESC": "The pot will be ready for monitoring"
+          },
+          "INACTIVE": {
+            "NAME": "Inactive",
+            "DESC": "The pot will not send data until activated"
+          },
+          "MAINTENANCE": {
+            "NAME": "Maintenance",
+            "DESC": "The pot is under configuration process"
+          }
+        },
+        "INFO_TITLE": "Device Setup",
+        "INFO_DESC": "Once the pot is created, you’ll be able to link sensors and set custom thresholds from the details page."
+      },
+      "STEP3": {
+        "LABEL": "Confirmation"
+      },
+      "SUMMARY": {
+        "TITLE": "New Pot Summary",
+        "NAME": "Name",
+        "LOCATION": "Location",
+        "DEVICE": "Device",
+        "NO_DEVICE": "Not specified",
+        "STATUS": "Status"
+      },
+      "NEXT_STEPS": {
+        "TITLE": "Next Steps",
+        "STEP1": "The pot will be created and automatically assigned to your account",
+        "STEP2": "You can configure sensors and thresholds from the details page",
+        "STEP3": "If you have a physical device, sync it using the device ID",
+        "STEP4": "Link a specific plant to get personalized recommendations"
+      },
+      "CANCEL": "Cancel",
+      "BACK": "Back",
+      "CONTINUE": "Continue",
+      "CREATE": "Create Pot",
+      "CREATING": "Creating..."
+    },
+    "ASSIGN_POT": {
+      "TITLE": "Assign Pot",
+      "NAME_LABEL": "Pot Name",
+      "LOCATION_LABEL": "Location",
+      "STATUS_LABEL": "Status",
+      "STATUS": {
+        "ACTIVE": "Active",
+        "INACTIVE": "Inactive",
+        "MAINTENANCE": "Maintenance"
+      },
+      "CANCEL": "Cancel",
+      "SUBMIT": "Assign Pot",
+      "ASSIGNING": "Assigning..."
+    }
+  },
+  "NOTIFICATIONS": {
+    "TITLE": "Notification Center",
+    "ALL": "All notifications",
+    "UNREAD_COUNT": "You have {{count}} unread notifications",
+    "FILTER": "Filter",
+    "MARK_ALL_AS_READ": "Mark all as read",
+    "TABS": {
+      "ALL": "All",
+      "IRRIGATION": "Irrigation",
+      "ENVIRONMENT": "Environment",
+      "SYSTEM": "System",
+      "UNREAD": "Unread"
+    },
+    "TOOLTIP": {
+      "READ": "Mark as read",
+      "DELETE": "Delete notification"
+    },
+    "NO_NOTIFICATIONS": "There are no notifications in this category"
+  },
+  "PROFILE": {
+    "TITLE": "My Profile",
+    "SUBTITLE": "Manage your personal information and settings",
+    "STATS": {
+      "MEMBER_SINCE": "Member since",
+      "ACTIVE_POTS": "Active pots"
+    },
+    "MEMBERSHIP": {
+      "TITLE": "Current Membership",
+      "FREE": "Free Plan",
+      "PREMIUM": "Premium Plan"
+    },
+    "ACTIONS": {
+      "SIGN_OUT": "Sign Out",
+      "DELETE_ACCOUNT": "Delete Account",
+      "UPGRADE": "Upgrade to Premium"
+    },
+    "TABS": {
+      "PERSONAL_INFO": "Personal Information",
+      "NOTIFICATIONS": "Notifications",
+      "PRIVACY": "Settings",
+      "LANGUAGE": "Language",
+      "LANGUAGE_DESC": "Select your preferred language for the app"
+    },
+    "EDIT": {
+      "EDIT_BUTTON": "Edit",
+      "FULL_NAME": "Full Name",
+      "EMAIL": "Email",
+      "PHONE": "Phone",
+      "ADDRESS": "Address",
+      "NOT_SPECIFIED": "Not specified",
+      "CHANGE_PASSWORD": "Change Password"
+    },
+    "NOTIFICATIONS_SETTINGS": {
+      "TITLE": "Notification Preferences",
+      "DESCRIPTION": "Configure how and when you want to receive notifications about your plants.",
+      "SENSOR_ALERTS": "Sensor Alerts",
+      "SENSOR_ALERTS_DESC": "Notifications when sensors detect abnormal conditions",
+      "WEEKLY_REPORTS": "Weekly Reports",
+      "WEEKLY_REPORTS_DESC": "Weekly summary of your plants' status",
+      "EMAIL_NOTIFICATIONS": "Email Notifications",
+      "EMAIL_NOTIFICATIONS_DESC": "Receive all notifications via email"
+    },
+    "PRIVACY_SETTINGS": {
+      "TITLE": "Privacy Settings",
+      "DESCRIPTION": "Control how your data is used and who can access your information.",
+      "PUBLIC_PROFILE": "Public Profile",
+      "PUBLIC_PROFILE_DESC": "Allow others to view your basic profile",
+      "SHARE_PLANT_DATA": "Share Plant Data",
+      "SHARE_PLANT_DATA_DESC": "Help improve the service by sharing anonymous data",
+      "USAGE_ANALYTICS": "Usage Analytics",
+      "USAGE_ANALYTICS_DESC": "Allow analysis of how you use the app",
+      "DATA_MANAGEMENT": "Data Management",
+      "DOWNLOAD_DATA": "Download My Data",
+      "DELETE_DATA": "Delete All Data"
+    },
+    "LOADING": "Loading profile...",
+    "CHANGE_PASSWORD": {
+      "TITLE": "Change Password",
+      "SUBTITLE": "Enter your new password (minimum 6 characters)",
+      "NEW_PASSWORD": "New Password",
+      "CONFIRM_PASSWORD": "Confirm New Password",
+      "SAVE": "Save",
+      "CANCEL": "Cancel"
+    },
+    "DELETE_ACCOUNT": {
+      "TITLE": "Delete Account",
+      "CONFIRMATION": "Are you sure you want to delete your account? This action cannot be undone.",
+      "DELETE_BUTTON": "Delete Account",
+      "CANCEL_BUTTON": "Cancel"
+    }
+  }
+}

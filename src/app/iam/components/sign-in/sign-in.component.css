@@ -1,0 +1,122 @@
+/* sign-in.component.css */
+
+:host {
+  --brand-green-dark: #2c6b4f;
+  --accent-green: #27ae60;
+  --text-primary: #111827;
+  --text-secondary: #6b7280;
+  --error-color: #ef4444;
+  --input-bg-color: #f7f8fa;
+}
+
+.sign-in-form {
+  display: flex;
+  flex-direction: column;
+  text-align: left;
+}
+
+.w-full {
+  width: 100%;
+}
+
+/* ======================================================== */
+/*  REGLAS FINALES PARA ESTILIZAR LOS INPUTS DE MATERIAL    */
+/* ======================================================== */
+
+/* 1. Contenedor del campo de formulario */
+:host ::ng-deep .mat-mdc-form-field {
+  /* La altura total se controla con el `height` del contenedor de abajo */
+  margin-bottom: 12px !important;
+}
+
+/* 2. Oculta el borde por defecto de Material */
+:host ::ng-deep .mat-mdc-form-field .mdc-notched-outline > * {
+  border: none !important;
+}
+
+/* 3. Estiliza el contenedor principal del input */
+:host ::ng-deep .mat-mdc-form-field .mdc-text-field {
+  padding: 0 !important;
+  display: flex;
+  align-items: center;
+  background-color: var(--input-bg-color) !important;
+  border-radius: 14px !important;
+  /* Borde transparente para evitar que el layout "salte" al cambiar su grosor */
+  border: 2px solid transparent !important;
+  transition: border-color 0.2s ease-in-out;
+  height: 60px; /* <<< Puedes ajustar la ALTURA TOTAL aquí >>> */
+}
+
+/* 4. Estilos para los diferentes estados (focus, error) */
+:host ::ng-deep .mat-mdc-form-field.mat-focused .mdc-text-field {
+  border-color: var(--accent-green) !important;
+}
+:host ::ng-deep .mat-mdc-form-field.ng-invalid.ng-touched .mdc-text-field {
+  border-color: var(--error-color) !important;
+}
+
+/* 5. Posicionamiento del texto y los iconos dentro del input */
+:host ::ng-deep .mat-mdc-form-field .mdc-text-field__input {
+  padding: 0 16px !important;
+  font-size: 1rem; /* <<< Puedes ajustar el TAMAÑO DEL TEXTO aquí >>> */
+}
+:host ::ng-deep .mat-mdc-form-field .mat-mdc-icon-suffix {
+  padding-right: 16px;
+}
+
+/* Mueve el label un poco hacia arriba para que se alinee con el texto */
+:host ::ng-deep .mat-mdc-form-field .mdc-floating-label {
+  top: 28px !important;
+}
+
+:host ::ng-deep .mat-mdc-form-field .mdc-floating-label.mdc-floating-label--float-above {
+  top: 16px !important; /* Este valor asegura que se vea bien sobre el borde */
+}
+
+:host ::ng-deep .mat-mdc-form-field .mdc-floating-label,
+:host ::ng-deep .mat-mdc-form-field .mat-mdc-icon-suffix {
+  color: var(--text-secondary) !important;
+}
+:host ::ng-deep .mat-mdc-form-field.mat-focused .mdc-floating-label,
+:host ::ng-deep .mat-mdc-form-field.mat-focused .mat-mdc-icon-suffix {
+  color: var(--accent-green) !important;
+}
+:host ::ng-deep .mat-mdc-form-field.ng-invalid.ng-touched .mdc-floating-label,
+:host ::ng-deep .mat-mdc-form-field.ng-invalid.ng-touched .mat-mdc-icon-suffix {
+  color: var(--error-color) !important;
+}
+
+:host ::ng-deep .mat-mdc-form-field-error {
+  font-size: 0.85rem;
+  font-weight: 500;
+  padding-left: 16px;
+  color: var(--error-color);
+}
+
+
+.forgot-password-container {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 0;
+  margin-bottom: 24px;
+}
+.forgot-password-link {
+  font-size: 0.9rem;
+  font-weight: 500;
+  color: var(--brand-green-dark);
+  text-decoration: none;
+}
+.login-button {
+  width: 100%;
+  padding: 12px 0 !important;
+  border-radius: 12px !important;
+  font-weight: 600 !important;
+  font-size: 1rem !important;
+  background-color: var(--accent-green) !important;
+  color: #ffffff !important;
+}
+.register-link-container {
+  text-align: center;
+  margin-top: 24px;
+  font-size: 0.9rem;
+}

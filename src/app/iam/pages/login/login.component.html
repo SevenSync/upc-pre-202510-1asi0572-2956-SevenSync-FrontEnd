@@ -1,0 +1,33 @@
+<div class="login-container">
+  <div class="language-switch">
+    <mat-button-toggle-group [value]="currentLang" (change)="setLanguage($event.value)" aria-label="Selección de idioma">
+      <mat-button-toggle value="es">ES</mat-button-toggle>
+      <mat-button-toggle value="en">EN</mat-button-toggle>
+    </mat-button-toggle-group>
+  </div>
+
+  <div class="login-card">
+    <div class="brand-section">
+      <img src="/assets/images/Macetech-Logo.png" alt="MaceTech Logo" class="logo-image">
+      <h2 class="form-title">{{ 'LOGIN.TITLE' | translate}}</h2>
+      <p class="form-subtitle">{{ 'LOGIN.SUBTITLE' | translate}}</p>
+    </div>
+
+    <div class="form-section">
+      <app-sign-in
+        [isLoading]="isLoading"
+        (signIn)="onSignIn($event)"
+        #signInComponent>
+      </app-sign-in>
+      <div *ngIf="errorMessage()" class="error-message">
+        <mat-icon>error_outline</mat-icon>
+        <span>{{ errorMessage() }}</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="background-decoration">
+    <div class="decoration-circle circle-1"></div>
+    <div class="decoration-circle circle-2"></div>
+  </div>
+</div>

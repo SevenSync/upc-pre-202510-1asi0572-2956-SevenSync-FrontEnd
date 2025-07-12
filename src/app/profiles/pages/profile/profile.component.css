@@ -1,0 +1,179 @@
+/* profile.component.css */
+
+:host {
+  --primary-color: #2B614B;
+  --text-dark: #1f2937;
+  --text-secondary: #6b7280;
+  --surface-ground: #f9fafb;
+  --surface-card: #ffffff;
+  --surface-border: #e5e7eb;
+  --surface-overlay: #f7f8fa;
+  --premium-yellow: #f59e0b; /* Amarillo/Dorado para el botón premium */
+  --error-color: #ef4444;
+}
+
+/* Contenedor principal con scroll habilitado */
+.profile-container {
+  height: calc(100vh - 64px);
+  overflow-y: auto;
+  background-color: var(--surface-ground);
+}
+
+/* Encabezado de la página */
+.header-section { padding: 32px 40px; background-color: var(--surface-card); border-bottom: 1px solid var(--surface-border); }
+.page-title { color: var(--text-dark); font-size: 2rem; font-weight: 600; margin: 0 0 4px; }
+.subtitle { color: var(--text-secondary); font-size: 1.1rem; margin: 0; }
+
+/* Layout principal */
+.content-wrapper { max-width: 1400px; margin: 0 auto; padding: 32px 40px; }
+.profile-layout { display: grid; grid-template-columns: 340px 1fr; gap: 32px; align-items: flex-start; }
+
+/* --- Sidebar --- */
+.profile-sidebar { position: sticky; top: 24px; }
+.profile-card { background: var(--surface-card); border-radius: 16px; padding: 24px; border: 1px solid var(--surface-border); text-align: center; }
+.avatar-section { margin-bottom: 24px; }
+.avatar { position: relative; display: inline-block; margin-bottom: 12px; }
+.avatar-image { width: 90px; height: 90px; border-radius: 50%; border: 3px solid var(--primary-color); }
+.profile-name { font-size: 1.25rem; font-weight: 600; margin: 0 0 4px; color: var(--text-dark); }
+.profile-email { color: var(--text-secondary); }
+
+.profile-stats { padding: 16px 0; border-top: 1px solid var(--surface-border); border-bottom: 1px solid var(--surface-border); margin: 24px 0; display: flex; flex-direction: column; gap: 16px; text-align: left; }
+.stat-item { display: flex; align-items: center; gap: 12px; }
+.stat-icon { color: var(--primary-color); }
+.stat-info { display: flex; flex-direction: column; }
+.stat-label { color: var(--text-secondary); font-size: 0.9rem; }
+.stat-value { font-weight: 500; color: var(--text-dark); }
+
+.membership-info { text-align: center; margin-bottom: 24px; }
+.membership-info h3 { font-size: 1.1rem; font-weight: 600; margin-bottom: 12px; color: var(--text-dark); }
+.membership-badge { display: flex; align-items: center; justify-content: center; gap: 8px; padding: 10px; background-color: var(--surface-overlay); border-radius: 8px; margin-bottom: 16px; }
+.membership-icon { color: var(--primary-color); }
+
+
+
+/* ✅ BOTÓN DE ACTUALIZAR A PREMIUM REDISEÑADO */
+.upgrade-button {
+  width: 100%;
+  border-radius: 8px !important;
+  background-color: var(--premium-yellow) !important;
+  color: white !important;
+  font-weight: 500 !important;
+  padding: 10px 0 !important;
+}
+.upgrade-button mat-icon { margin-right: 8px; }
+
+.profile-actions { display: flex; flex-direction: column; gap: 12px; border-top: 1px solid var(--surface-border); padding-top: 24px; }
+.logout-button, .delete-button { border-radius: 8px !important; font-weight: 500; }
+
+/* ✅ BOTÓN DE ELIMINAR CUENTA EN ROJO */
+:host ::ng-deep .delete-button.mat-mdc-button-base {
+  color: var(--error-color);
+  border-color: var(--error-color);
+}
+:host ::ng-deep .delete-button.mat-mdc-button-base:hover { background-color: #fee2e2; }
+
+/* --- Contenido Principal (Pestañas) --- */
+.profile-main { background: var(--surface-card); border-radius: 16px; border: 1px solid var(--surface-border); }
+/* ✅ CORRECCIÓN: Aumentado el padding vertical para más espaciado */
+.tab-content {
+  padding: 40px 32px; /* 40px arriba/abajo, 32px a los lados */
+}
+
+/* ========================================================== */
+/* ✅ REGLAS DE LAYOUT PARA LA PESTAÑA DE AJUSTES             */
+/* ========================================================== */
+.settings-section {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 24px 0;
+  border-bottom: 1px solid var(--surface-border);
+}
+
+.section-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-bottom: 16px;
+  margin-bottom: 24px;
+  border-bottom: 1px solid var(--surface-border);
+}
+
+.section-header h3 {
+  font-size: 1.5rem;
+  font-weight: 600;
+  margin: 0;
+  color: var(--text-dark);
+}
+
+.edit-button {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  color: var(--primary-color);
+  font-weight: 500;
+}
+.edit-button mat-icon {
+  font-size: 20px;
+  width: 20px;
+  height: 20px;
+}
+
+/* Grid para mostrar los datos del perfil */
+.info-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr); /* Crea dos columnas de igual tamaño */
+  gap: 24px 32px; /* Espaciado vertical y horizontal */
+  margin-bottom: 32px;
+}
+
+.info-item label {
+  color: var(--text-secondary);
+  font-size: 0.9rem;
+  margin-bottom: 4px;
+  display: block;
+}
+
+.info-item span {
+  font-size: 1rem;
+  color: var(--text-dark);
+}
+
+/* Sección de Seguridad (Cambiar Contraseña) */
+.security-section {
+  border-top: 1px solid var(--surface-border);
+  padding-top: 24px;
+}
+
+.security-section .section-title {
+  font-size: 1.5rem;
+  font-weight: 600;
+  margin: 0 0 16px;
+  color: var(--text-dark);
+}
+
+.security-button {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: var(--primary-color);
+  font-weight: 500;
+  padding: 0; /* Asegura que no tenga padding extra */
+}
+.security-button mat-icon {
+  font-size: 20px;
+  width: 20px;
+  height: 20px;
+}
+
+.settings-section:last-child { border-bottom: none; }
+.settings-section.section-vertical { flex-direction: column; align-items: flex-start; gap: 16px; }
+.section-text-content { flex: 1; }
+.section-title { font-size: 1.25rem; font-weight: 600; margin: 0 0 4px; color: var(--text-dark); }
+.section-description { color: var(--text-secondary); font-size: 0.9rem; margin: 0; }
+.section-control { flex-shrink: 0; margin-left: 24px; }
+
+.settings-list { width: 100%; display: flex; flex-direction: column; gap: 12px; }
+.setting-item { display: flex; justify-content: space-between; align-items: center; padding: 16px; background-color: var(--surface-overlay); border-radius: 8px; border: 1px solid var(--surface-border); }
+.setting-info h4 { font-size: 1rem; font-weight: 500; margin: 0 0 2px; }
+.setting-info p { font-size: 0.9rem; color: var(--text-secondary); margin: 0; }

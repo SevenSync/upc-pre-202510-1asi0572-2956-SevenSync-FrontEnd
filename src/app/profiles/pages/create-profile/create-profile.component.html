@@ -1,0 +1,34 @@
+<div class="create-profile-container">
+  <div class="language-switch">
+    <button mat-button (click)="setLanguage('es')">ES</button>
+    <button mat-button (click)="setLanguage('en')">EN</button>
+  </div>
+  <div class="create-profile-card">
+    <div class="header-section">
+      <div class="logo">
+        <img src="logo.png" alt="MaceTech Logo" class="logo-image" width="100" height="100" >
+      </div>
+      <h1 class="title">{{ 'CREATE_PROFILE.TITLE' | translate }}</h1>
+      <p class="subtitle">{{ 'CREATE_PROFILE.SUBTITLE' | translate }}</p>
+    </div>
+
+    <div class="form-section">
+      <app-profile-form
+        [editMode]="false"
+        [isLoading]="isLoading"
+        (profileSubmit)="onProfileSubmit($event)"
+        (cancel)="onCancel()">
+      </app-profile-form>
+
+      <div *ngIf="errorMessage" class="error-message">
+        <mat-icon>error_outline</mat-icon>
+        <span>{{ 'CREATE_PROFILE.ERROR' | translate }}</span>
+      </div>
+
+      <div *ngIf="successMessage" class="success-message">
+        <mat-icon>check_circle</mat-icon>
+        <span>{{ 'CREATE_PROFILE.SUCCESS' | translate }}</span>
+      </div>
+    </div>
+  </div>
+</div>
