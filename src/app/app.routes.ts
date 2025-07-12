@@ -24,7 +24,6 @@ import { NotificationsComponent } from './notifications/pages/notifications/noti
 // Guards
 import { authenticationGuard, simpleAuthGuard } from './iam/services/authentication.guard';
 import {PotDetailsComponent} from './arm';
-
 export const routes: Routes = [
   // Public routes (no authentication required)
   { path: 'login', component: LoginComponent },
@@ -33,17 +32,24 @@ export const routes: Routes = [
 
   // Protected routes that only require authentication (no profile check)
   {
-    path: 'create-profile',
+    path: 'profiles/create',
     component: CreateProfileComponent,
     canActivate: [simpleAuthGuard]
   },
 
   // Protected routes that require authentication AND profile
   {
-    path: 'profile',
+    path: 'profiles',
     component: ProfileComponent,
     canActivate: [authenticationGuard]
   },
+  {
+    path: 'profiles/:id',
+    component: ProfileComponent,
+    canActivate: [authenticationGuard]
+  },
+
+  // ARM (Pots) routes - siguiendo convención semántica
   {
     path: 'pots',
     component: PotsComponent,
@@ -54,24 +60,28 @@ export const routes: Routes = [
     component: PotDetailsComponent,
     canActivate: [authenticationGuard]
   },
+
+  // Subscriptions routes - organizadas por bounded context
   {
-    path: 'notifications',
-    component: NotificationsComponent,
-    canActivate: [authenticationGuard]
-  },
-  {
-    path: 'membership',
+    path: 'subscriptions/membership',
     component: MembershipComponent,
     canActivate: [authenticationGuard]
   },
   {
-    path: 'payment',
+    path: 'subscriptions/payment',
     component: PaymentComponent,
     canActivate: [authenticationGuard]
   },
   {
-    path: 'payment-done',
+    path: 'subscriptions/payment-done',
     component: PaymentDoneComponent,
+    canActivate: [authenticationGuard]
+  },
+
+  // Notifications routes
+  {
+    path: 'notifications',
+    component: NotificationsComponent,
     canActivate: [authenticationGuard]
   },
 
