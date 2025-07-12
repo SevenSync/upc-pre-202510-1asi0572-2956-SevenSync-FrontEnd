@@ -1,73 +1,97 @@
 <app-toolbar></app-toolbar>
 
-<div class="pots-container">
-  <div class="header-section">
-    <h1 class="page-title">{{ 'POTS.TITLE' | translate }}</h1>
-    <p class="subtitle">{{ 'POTS.SUBTITLE' | translate }}</p>
+<main class="pots-container">
+  <!-- ======================= -->
+  <!--      ESTADO DE CARGA      -->
+  <!-- ======================= -->
+  <div class="loading-container" *ngIf="isLoading">
+    <mat-progress-spinner mode="indeterminate" color="primary"></mat-progress-spinner>
+    <p>{{ 'POTS.LOADING' | translate }}</p>
   </div>
 
-  <div class="content-wrapper">
-    <div class="pots-header">
-      <div class="header-info">
-        <h2 class="section-title">{{ filteredPots.length }} {{ 'POTS.POT_COUNT' | translate }}</h2>
-        <p class="status-summary">
-          {{ healthyCount }} {{ 'POTS.STATUS.HEALTHY' | translate }} •
-          {{ warningCount }} {{ 'POTS.STATUS.WARNING' | translate }} •
-          {{ criticalCount }} {{ 'POTS.STATUS.CRITICAL' | translate }}
-        </p>
-      </div>
-
-      <div class="header-actions">
-        <button mat-raised-button
-                color="primary"
-                class="add-pot-button"
-                (click)="onAddPot()"
-                [disabled]="isLoading">
-          <mat-icon>add_circle</mat-icon>
-          <span>{{ 'POTS.ADD_POT' | translate }}</span>
-        </button>
-      </div>
-    </div>
-
-    <mat-tab-group
-      class="pots-tabs"
-      (selectedTabChange)="onTabChange($event.index)"
-      animationDuration="200ms">
-      <mat-tab label="{{ 'POTS.TABS.ALL' | translate }}"></mat-tab>
-      <mat-tab label="{{ 'POTS.TABS.HEALTHY' | translate }}"></mat-tab>
-      <mat-tab label="{{ 'POTS.TABS.WARNING' | translate }}"></mat-tab>
-      <mat-tab label="{{ 'POTS.TABS.CRITICAL' | translate }}"></mat-tab>
-    </mat-tab-group>
-
-    <div class="loading-container" *ngIf="isLoading">
-      <p>{{ 'POTS.LOADING' | translate }}</p>
-    </div>
-
-    <div class="error-container" *ngIf="errorMessage">
-      <p>{{ errorMessage }}</p>
-      <button mat-button (click)="loadPots()">{{ 'POTS.RETRY' | translate }}</button>
-    </div>
-
-    <div class="pots-grid" *ngIf="!isLoading && !errorMessage">
-      <app-pot-card
-        *ngFor="let pot of filteredPots"
-        [pot]="pot"
-        (waterPlant)="onWaterPlant($event)"
-        (viewDetails)="onViewPotDetails($event)">
-      </app-pot-card>
-
-      <div *ngIf="filteredPots.length === 0 && !isLoading" class="no-pots">
-        <mat-icon class="no-pots-icon">eco</mat-icon>
-        <h3>{{ getEmptyStateTitle() }}</h3>
-        <p>{{ getEmptyStateMessage() }}</p>
-        <button mat-raised-button
-                color="primary"
-                (click)="onAddPot()"
-                class="add-first-pot-button">
-          <mat-icon>add_circle</mat-icon>
-          {{ pots.length === 0 ? ('POTS.NO_POTS.FIRST' | translate) : ('POTS.NO_POTS.NEW' | translate) }}
-        </button>
-      </div>
-    </div>
+  <!-- ====================== -->
+  <!--      ESTADO DE ERROR     -->
+  <!-- ====================== -->
+  <div class="error-container" *ngIf="!isLoading && errorMessage">
+    <mat-icon>error_outline</mat-icon>
+    <p>{{ errorMessage }}</p>
+    <button mat-stroked-button color="warn" (click)="loadPots()">{{ 'POTS.RETRY' | translate }}</button>
   </div>
-</div>
+
+  <!-- ======================= -->
+  <!--   CONTENIDO PRINCIPAL   -->
+  <!-- ======================= -->
+  <ng-container *ngIf="!isLoading && !errorMessage">
+
+    <!-- 1. ESTADO "CERO MACETAS": Se muestra si el array `pots` está completamente vacío -->
+    <div *ngIf="pots.length === 0; else potsAvailable" class="empty-state-container">
+      <div class="welcome-header">
+        <h1 class="page-title">{{ 'POTS.SMART_POTS_TITLE' | translate }}</h1>
+        <p class="subtitle">{{ 'POTS.WELCOME' | translate:{name: userName} }}</p>
+      </div>
+
+      <!-- Tarjeta clickeable para añadir la primera maceta -->
+      <button class="add-pot-prompt" (click)="onAddPot()">
+        <span class="icon-wrapper">
+          <mat-icon>add</mat-icon>
+        </span>
+        <span class="prompt-title">{{ 'POTS.ADD_NEW_POT' | translate }}</span>
+        <span class="prompt-subtitle">{{ 'POTS.CONNECT_INSTRUCTION' | translate }}</span>
+        <span class="prompt-action-button" mat-button color="primary">
+          {{ 'POTS.ADD_POT_BUTTON' | translate }}
+        </span>
+      </button>
+    </div>
+
+    <!-- 2. ESTADO "HAY MACETAS": Se muestra si el array `pots` tiene al menos un elemento -->
+    <ng-template #potsAvailable>
+      <section class="pots-dashboard">
+        <div class="dashboard-header">
+          <div class="header-info">
+            <h2 class="section-title">{{ pots.length }} {{ 'POTS.POT_COUNT' | translate }}</h2>
+            <p class="status-summary">
+              {{ healthyCount }} {{ 'POTS.STATUS.HEALTHY' | translate }} •
+              {{ warningCount }} {{ 'POTS.STATUS.WARNING' | translate }} •
+              {{ criticalCount }} {{ 'POTS.STATUS.CRITICAL' | translate }}
+            </p>
+          </div>
+          <button mat-flat-button color="primary" class="add-pot-button" (click)="onAddPot()">
+            <mat-icon>add_circle</mat-icon>
+            <span>{{ 'POTS.ADD_POT' | translate }}</span>
+          </button>
+        </div>
+
+        <mat-tab-group class="pots-tabs" (selectedTabChange)="onTabChange($event.index)" animationDuration="200ms">
+          <mat-tab label="{{ 'POTS.TABS.ALL' | translate }}"></mat-tab>
+          <mat-tab label="{{ 'POTS.TABS.HEALTHY' | translate }}"></mat-tab>
+          <mat-tab label="{{ 'POTS.TABS.WARNING' | translate }}"></mat-tab>
+          <mat-tab label="{{ 'POTS.TABS.CRITICAL' | translate }}"></mat-tab>
+        </mat-tab-group>
+
+        <!-- Cuadrícula de macetas (si el filtro actual no está vacío) -->
+        <div class="pots-grid-wrapper" *ngIf="filteredPots.length > 0; else filterEmpty">
+          <div class="pots-grid">
+            <!-- Itera sobre las macetas filtradas -->
+            <app-pot-card *ngFor="let pot of filteredPots" [pot]="pot"></app-pot-card>
+
+            <!-- Tarjeta fija para añadir maceta (Estilo mockup) -->
+            <button class="add-pot-card-in-grid" (click)="onAddPot()">
+              <mat-icon class="add-icon">add</mat-icon>
+              <span class="add-title">{{ 'POTS.ADD_NEW_CARD.TITLE' | translate }}</span>
+              <span class="add-subtitle">{{ 'POTS.ADD_NEW_CARD.SUBTITLE' | translate }}</span>
+            </button>
+          </div>
+        </div>
+
+        <!-- Estado para cuando un filtro no tiene resultados -->
+        <ng-template #filterEmpty>
+          <div class="filter-empty-state">
+            <mat-icon class="filter-icon">filter_list_off</mat-icon>
+            <h3>{{ 'POTS.EMPTY_FILTER.TITLE' | translate }}</h3>
+            <p>{{ 'POTS.EMPTY_FILTER.MESSAGE' | translate }}</p>
+          </div>
+        </ng-template>
+      </section>
+    </ng-template>
+  </ng-container>
+</main>

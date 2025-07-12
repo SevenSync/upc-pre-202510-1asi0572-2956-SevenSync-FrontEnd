@@ -1,1 +1,73 @@
-<p>pot-card works!</p>
+<!-- La tarjeta entera ahora es un botón que navega a los detalles -->
+<mat-card class="pot-card" (click)="onViewDetails()" [ngClass]="pot.status | potStatusToClass" matTooltip="Ver detalles de {{pot.name}}">
+  <div class="pot-image-container">
+    <img [src]="pot.imageUrl || 'assets/images/demoplant.png'" [alt]="pot.name" class="pot-image" />
+    <div class="status-overlay">
+      <!-- Usamos los pipes para la clase de color y el texto -->
+      <div class="status-indicator" [ngClass]="pot.status | potStatusToClass">
+        <span class="status-text">{{ pot.status | potStatus }}</span>
+      </div>
+    </div>
+  </div>
+
+  <mat-card-header class="pot-header">
+    <div class="pot-info">
+      <mat-card-title class="pot-name">{{ pot.name }}</mat-card-title>
+      <mat-card-subtitle class="pot-location">{{ pot.location }}</mat-card-subtitle>
+    </div>
+  </mat-card-header>
+
+  <mat-card-content class="pot-content" *ngIf="pot">
+    <!-- ✅ La lógica ahora es plana, no necesitamos `pot.metrics` -->
+    <div class="metrics-grid">
+      <!-- Humedad -->
+      <div class="metric">
+        <div class="metric-header"><mat-icon class="metric-icon">water_drop</mat-icon><span class="metric-label">Humedad</span></div>
+        <div class="metric-value">
+          <span class="value">{{ pot.humidity }}%</span>
+          <mat-progress-bar mode="determinate" [value]="pot.humidity" [color]="pot.humidity >= 60 ? 'primary' : (pot.humidity >= 30 ? 'accent' : 'warn')"></mat-progress-bar>
+        </div>
+      </div>
+
+      <!-- Temperatura -->
+      <div class="metric">
+        <div class="metric-header"><mat-icon class="metric-icon">thermostat</mat-icon><span class="metric-label">Temperatura</span></div>
+        <div class="metric-value"><span class="value">{{ pot.temperature }}°C</span></div>
+      </div>
+
+      <!-- Luz -->
+      <div class="metric">
+        <div class="metric-header"><mat-icon class="metric-icon">wb_sunny</mat-icon><span class="metric-label">Luz</span></div>
+        <div class="metric-value">
+          <span class="value">{{ pot.luminance }}%</span>
+          <mat-progress-bar mode="determinate" [value]="pot.luminance" color="accent"></mat-progress-bar>
+        </div>
+      </div>
+
+      <!-- Batería -->
+      <div class="metric">
+        <div class="metric-header"><mat-icon class="metric-icon">battery_std</mat-icon><span class="metric-label">Batería</span></div>
+        <div class="metric-value">
+          <span class="value">{{ pot.batteryLevel }}%</span>
+          <mat-progress-bar mode="determinate" [value]="pot.batteryLevel" [color]="pot.batteryLevel >= 70 ? 'primary' : (pot.batteryLevel >= 30 ? 'accent' : 'warn')"></mat-progress-bar>
+        </div>
+      </div>
+    </div>
+
+    <!-- Info de Riego (Opcional, si tienes la propiedad `lastWatered`) -->
+    <div class="watering-info" *ngIf="pot.lastWatered">
+      <div class="watering-item">
+        <span class="label">Último riego:</span>
+        <span class="value">{{ pot.lastWatered | relativeTime }}</span>
+      </div>
+    </div>
+  </mat-card-content>
+
+  <mat-card-actions class="pot-actions">
+    <!-- ✅ Usamos el pipe `needsWatering` directamente para deshabilitar el botón -->
+    <button mat-flat-button color="primary" class="action-button" (click)="onWaterPlant($event)" [disabled]="!(pot | needsWatering)">
+      <mat-icon>water_drop</mat-icon>
+      Regar ahora
+    </button>
+  </mat-card-actions>
+</mat-card>

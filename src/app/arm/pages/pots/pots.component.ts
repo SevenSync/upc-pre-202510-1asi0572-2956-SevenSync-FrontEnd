@@ -1,44 +1,68 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { Router } from '@angular/router';
+import { Subject } from 'rxjs';
+import { takeUntil } from 'rxjs/operators';
+
+// Angular Material Modules
 import { MatTabsModule } from '@angular/material/tabs';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
+import { MatDialog, MatDialogModule } from '@angular/material/dialog';
+import { MatSnackBar } from '@angular/material/snack-bar';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+
+// Core & Shared
 import { ToolbarComponent } from '../../../shared/components/toolbar/toolbar.component';
+import { TranslateModule } from '@ngx-translate/core';
+
+// Local (ARM Module)
 import { PotCardComponent } from '../../components/pot-card/pot-card.component';
+import { AddPotDialogComponent } from '../../components/add-pot-dialog/add-pot-dialog.component';
 import { PotService } from '../../services/pot.service';
-import {Pot, PotMetrics} from '../../model/pot.entity';
-import {AssignPotToUserRequest} from '../../model/assign-pot.request';
-import {AssignPotFormComponent} from '../../components/assign-pot-form/assign-pot-form.component';
-import {MatDialog} from '@angular/material/dialog';
-import {MatSnackBar} from '@angular/material/snack-bar';
-import {Router} from '@angular/router';
-import {CreatePotRequest} from '../../model/create-pot.request';
-import {CreatePotDialogComponent} from '../../components/create-pot-dialog/create-pot-dialog.component';
-import {TranslateModule} from '@ngx-translate/core';
+import { BluetoothService } from '../../services/bluetooth.service';
+import { Pot, PotStatus } from '../../model/pot.entity';
 
 @Component({
   selector: 'app-pots',
   standalone: true,
   imports: [
+    // Angular & Shared
     CommonModule,
+    TranslateModule,
+    ToolbarComponent,
+    // Angular Material
     MatTabsModule,
     MatButtonModule,
     MatIconModule,
-    ToolbarComponent,
-    PotCardComponent,
-    TranslateModule
+    MatDialogModule,
+    MatProgressSpinnerModule,
+    // Local Components
+    PotCardComponent
   ],
   templateUrl: './pots.component.html',
   styleUrl: './pots.component.css'
 })
-export class PotsComponent implements OnInit {
+export class PotsComponent implements OnInit, OnDestroy {
+  // --- Propiedades del Estado de Datos ---
   pots: Pot[] = [];
+  filteredPots: Pot[] = [];
+  healthyCount = 0;
+  warningCount = 0;
+  criticalCount = 0;
+
+  // --- Propiedades del Estado de la UI ---
   selectedTabIndex = 0;
   isLoading = false;
-  errorMessage = '';
+  errorMessage: string | null = null;
+  userName = 'John Doe'; // En una app real, vendría de un servicio de autenticación
+
+  // Subject para gestionar la desuscripción de Observables y evitar fugas de memoria
+  private destroy$ = new Subject<void>();
 
   constructor(
     private potService: PotService,
+    private bluetoothService: BluetoothService,
     private dialog: MatDialog,
     private snackBar: MatSnackBar,
     private router: Router
@@ -46,282 +70,142 @@ export class PotsComponent implements OnInit {
 
   ngOnInit(): void {
     this.loadPots();
+    this.listenToBluetoothStatus();
   }
 
+  ngOnDestroy(): void {
+    // Emite un valor para notificar a todas las suscripciones que deben completarse
+    this.destroy$.next();
+    this.destroy$.complete();
+  }
+
+  /**
+   * Carga la lista de macetas desde el servicio y actualiza la vista.
+   */
   loadPots(): void {
     const token = localStorage.getItem('token');
     if (!token) {
-      this.router.navigate(['/login']);
+      this.router.navigate(['/login']); // Redirige si no hay token
       return;
     }
 
     this.isLoading = true;
-    this.errorMessage = '';
+    this.errorMessage = null;
 
-    this.potService.getAllPots(token).subscribe({
-      next: (potsData) => {
-        this.isLoading = false;
-        this.pots = potsData.map(potData => new Pot(
-          potData.id,
-          potData.name,
-          potData.location,
-          potData.status,
-          potData.deviceId,
-          potData.assignedUserId,
-          potData.plantId,
-          potData.metrics ? new PotMetrics(
-            potData.metrics.batteryLevel,
-            potData.metrics.waterLevel,
-            potData.metrics.humidity,
-            potData.metrics.luminance,
-            potData.metrics.temperature,
-            potData.metrics.ph,
-            potData.metrics.salinity,
-            new Date(potData.metrics.timestamp)
-          ) : undefined,
-          undefined, // lastWatered - would need to be added to backend response
-          '/assets/default-plant.png' // Default image
-        ));
-      },
-      error: (error) => {
-        this.isLoading = false;
-        console.error('Error loading pots:', error);
-        this.errorMessage = 'Error al cargar las macetas';
-        this.snackBar.open('Error al cargar las macetas', 'Cerrar', {
-          duration: 3000
-        });
-      }
+    this.potService.getAllPots(token)
+      .pipe(takeUntil(this.destroy$)) // La suscripción se cancelará automáticamente al destruir el componente
+      .subscribe({
+        next: (mappedPots) => {
+          // El servicio ya nos entrega los datos limpios y mapeados
+          this.pots = mappedPots;
+          this.updateAndRecalculate();
+          this.isLoading = false;
+        },
+        error: (error) => {
+          console.error('Error loading pots:', error);
+          this.errorMessage = 'No se pudieron cargar tus macetas. Inténtalo de nuevo.';
+          this.isLoading = false;
+        }
+      });
+  }
+
+  /**
+   * Abre el diálogo de selección para añadir una nueva maceta.
+   */
+  onAddPot(): void {
+    const dialogRef = this.dialog.open(AddPotDialogComponent, {
+      width: '500px',
+      autoFocus: false
     });
+
+    dialogRef.afterClosed()
+      .pipe(takeUntil(this.destroy$))
+      .subscribe(result => {
+        if (result === 'bluetooth') {
+          this.snackBar.open('Buscando dispositivos Bluetooth...', 'Cerrar', { duration: 5000 });
+          this.bluetoothService.connectToDevice();
+        } else if (result === 'manual') {
+          // Aquí se implementaría la lógica para el ingreso manual
+          this.snackBar.open('Ingreso manual no implementado aún.', 'Ok', { duration: 3000 });
+        }
+      });
   }
 
-  get filteredPots(): Pot[] {
-    switch (this.selectedTabIndex) {
-      case 0: return this.pots; // Todas
-      case 1: return this.pots.filter(p => p.healthStatus === 'healthy'); // Saludables
-      case 2: return this.pots.filter(p => p.healthStatus === 'warning'); // Necesitan atención
-      case 3: return this.pots.filter(p => p.healthStatus === 'critical'); // Críticas
-      default: return this.pots;
-    }
-  }
-
-  get healthyCount(): number {
-    return this.pots.filter(p => p.healthStatus === 'healthy').length;
-  }
-
-  get warningCount(): number {
-    return this.pots.filter(p => p.healthStatus === 'warning').length;
-  }
-
-  get criticalCount(): number {
-    return this.pots.filter(p => p.healthStatus === 'critical').length;
-  }
-
+  /**
+   * Se ejecuta cuando el usuario cambia de pestaña de filtro.
+   * @param index - El índice de la pestaña seleccionada.
+   */
   onTabChange(index: number): void {
     this.selectedTabIndex = index;
+    this.filterPots(); // Solo filtramos cuando la pestaña cambia, no en cada ciclo de Angular
   }
 
-  onWaterPlant(potId: number): void {
-    const pot = this.pots.find(p => p.id === potId);
-    if (pot && pot.metrics) {
-      // Optimistic update
-      pot.waterNow();
+  // --- MÉTODOS PRIVADOS DE AYUDA ---
 
-      this.snackBar.open(`${pot.name} regada exitosamente`, 'Cerrar', {
-        duration: 3000
-      });
+  /**
+   * Agrupa las tareas de actualización de la UI después de recibir nuevos datos.
+   */
+  private updateAndRecalculate(): void {
+    this.filterPots();
+    this.calculateCounts();
+  }
 
-      // Here you could call the backend to log the watering action
-      // this.wateringService.logWatering(potId, ...)
+  /**
+   * Filtra la lista de macetas según la pestaña seleccionada y actualiza `filteredPots`.
+   */
+  private filterPots(): void {
+    switch (this.selectedTabIndex) {
+      case 0:
+        this.filteredPots = this.pots;
+        break;
+      case 1: // Saludables
+        this.filteredPots = this.pots.filter(p => p.status === PotStatus.Healthy);
+        break;
+      case 2: // Necesitan atención
+        this.filteredPots = this.pots.filter(p => p.status === PotStatus.Warning);
+        break;
+      case 3: // Críticas
+        this.filteredPots = this.pots.filter(p => p.status === PotStatus.Critical);
+        break;
+      default:
+        this.filteredPots = this.pots;
     }
+  }
+
+  /**
+   * Calcula el número de macetas en cada estado para mostrar en la cabecera.
+   */
+  private calculateCounts(): void {
+    this.healthyCount = this.pots.filter(p => p.status === PotStatus.Healthy).length;
+    this.warningCount = this.pots.filter(p => p.status === PotStatus.Warning).length;
+    this.criticalCount = this.pots.filter(p => p.status === PotStatus.Critical).length;
+  }
+
+  /**
+   * Escucha el estado de la conexión Bluetooth para reaccionar a conexiones exitosas.
+   */
+  private listenToBluetoothStatus(): void {
+    this.bluetoothService.connectionStatus$
+      .pipe(takeUntil(this.destroy$))
+      .subscribe(isConnected => {
+        if (isConnected) {
+          this.snackBar.open('¡Dispositivo conectado! Listo para configurar.', 'Ok', { duration: 4000 });
+          // Lógica futura: navegar a la página de configuración de la nueva maceta,
+          // pasando el ID del dispositivo que se obtuvo del servicio Bluetooth.
+          // Ejemplo: this.router.navigate(['/pots/new/configure', { deviceId: '...' }]);
+        }
+      });
+  }
+
+  // --- MANEJADORES DE EVENTOS DE LAS TARJETAS (Implementación futura) ---
+
+  onWaterPlant(potId: number): void {
+    // En una implementación real, esto llamaría a `potService.waterPot(potId)`
+    this.snackBar.open(`Acción "Regar" para maceta ${potId} no implementada.`, 'Ok', { duration: 3000 });
   }
 
   onViewPotDetails(potId: number): void {
-    console.log('Navigate to pot details:', potId);
-    // Implement navigation to pot details page
-    // this.router.navigate(['/pots', potId]);
-  }
-
-  onAddPot(): void {
-    const dialogRef = this.dialog.open(CreatePotDialogComponent, {
-      width: '600px',
-      maxWidth: '90vw',
-      disableClose: true // Evita cerrar accidentalmente durante la creación
-    });
-
-    dialogRef.afterClosed().subscribe(result => {
-      if (result && result.success) {
-        this.createPot(result.potRequest, result.deviceId);
-      }
-    });
-  }
-
-  // ✅ NUEVO MÉTODO: createPot
-  private createPot(potRequest: CreatePotRequest, deviceId?: string): void {
-    const token = localStorage.getItem('token');
-    if (!token) {
-      this.router.navigate(['/login']);
-      return;
-    }
-
-    // Mostrar loading en el snackbar
-    const loadingSnackBar = this.snackBar.open('Creando maceta...', undefined, {
-      duration: 0 // No auto-dismiss
-    });
-
-    this.potService.createPot(potRequest, token).subscribe({
-      next: (response) => {
-        loadingSnackBar.dismiss();
-
-        if (response.success) {
-          this.snackBar.open(
-            `Maceta "${potRequest.name}" creada exitosamente`,
-            'Cerrar',
-            {
-              duration: 4000,
-              panelClass: ['success-snackbar']
-            }
-          );
-
-          // Recargar la lista de macetas
-          this.loadPots();
-
-          // Si hay deviceId, mostrar información adicional
-          if (deviceId) {
-            setTimeout(() => {
-              this.snackBar.open(
-                `Recuerda configurar el dispositivo "${deviceId}" con la nueva maceta`,
-                'Entendido',
-                {
-                  duration: 6000,
-                  panelClass: ['info-snackbar']
-                }
-              );
-            }, 1000);
-          }
-
-        } else {
-          this.snackBar.open(
-            'No se pudo crear la maceta. Intenta nuevamente.',
-            'Cerrar',
-            {
-              duration: 4000,
-              panelClass: ['error-snackbar']
-            }
-          );
-        }
-      },
-      error: (error) => {
-        loadingSnackBar.dismiss();
-        console.error('Error creating pot:', error);
-
-        let errorMessage = 'Error al crear la maceta';
-        if (error.status === 400) {
-          errorMessage = 'Datos inválidos. Verifica la información ingresada.';
-        } else if (error.status === 403) {
-          errorMessage = 'No tienes permisos para crear macetas.';
-        } else if (error.status === 409) {
-          errorMessage = 'Ya existe una maceta con ese nombre o dispositivo.';
-        }
-
-        this.snackBar.open(errorMessage, 'Cerrar', {
-          duration: 5000,
-          panelClass: ['error-snackbar']
-        });
-      }
-    });
-  }
-
-  onAssignPot(potId: number): void {
-    const dialogRef = this.dialog.open(AssignPotFormComponent, {
-      width: '500px'
-    });
-
-    dialogRef.componentInstance.potId = potId;
-
-    // ✅ CORRECCIÓN: Subscribe al EventEmitter
-    const subscription = dialogRef.componentInstance.assign.subscribe((request: AssignPotToUserRequest) => {
-      this.assignPot(potId, request);
-      dialogRef.close();
-    });
-
-    // Subscribe al cancel también
-    const cancelSubscription = dialogRef.componentInstance.cancel.subscribe(() => {
-      dialogRef.close();
-    });
-
-    // Cleanup subscriptions cuando el dialog se cierre
-    dialogRef.afterClosed().subscribe(() => {
-      subscription.unsubscribe();
-      cancelSubscription.unsubscribe();
-    });
-  }
-
-  private assignPot(potId: number, request: AssignPotToUserRequest): void {
-    const token = localStorage.getItem('token');
-    if (!token) return;
-
-    this.potService.assignPot(potId, request, token).subscribe({
-      next: (response) => {
-        if (response.success) {
-          this.snackBar.open('Maceta asignada exitosamente', 'Cerrar', {
-            duration: 3000
-          });
-          this.loadPots(); // Reload to get updated data
-        }
-      },
-      error: (error) => {
-        console.error('Error assigning pot:', error);
-        this.snackBar.open('Error al asignar la maceta', 'Cerrar', {
-          duration: 3000
-        });
-      }
-    });
-  }
-
-  onUnassignPot(potId: number): void {
-    const token = localStorage.getItem('token');
-    if (!token) return;
-
-    this.potService.unassignPot(potId, token).subscribe({
-      next: (response) => {
-        if (response.success) {
-          this.snackBar.open('Maceta desasignada exitosamente', 'Cerrar', {
-            duration: 3000
-          });
-          this.loadPots(); // Reload to get updated data
-        }
-      },
-      error: (error) => {
-        console.error('Error unassigning pot:', error);
-        this.snackBar.open('Error al desasignar la maceta', 'Cerrar', {
-          duration: 3000
-        });
-      }
-    });
-  }
-  getEmptyStateTitle(): string {
-    if (this.pots.length === 0) {
-      return '¡Bienvenido a MaceTech!';
-    }
-
-    switch (this.selectedTabIndex) {
-      case 1: return 'No hay macetas saludables';
-      case 2: return 'No hay macetas que necesiten atención';
-      case 3: return 'No hay macetas en estado crítico';
-      default: return 'No hay macetas en esta categoría';
-    }
-  }
-
-  getEmptyStateMessage(): string {
-    if (this.pots.length === 0) {
-      return 'Comienza agregando tu primera maceta inteligente para monitorear tus plantas.';
-    }
-
-    switch (this.selectedTabIndex) {
-      case 1: return 'Todas tus macetas necesitan algún tipo de atención.';
-      case 2: return 'Excelente, ninguna de tus macetas necesita atención especial.';
-      case 3: return 'Perfecto, ninguna de tus macetas está en estado crítico.';
-      default: return 'Cambia de categoría para ver otras macetas.';
-    }
+    // Navegaría a la página de detalles de la maceta
+    this.router.navigate(['/arm/pots', potId]);
   }
 }

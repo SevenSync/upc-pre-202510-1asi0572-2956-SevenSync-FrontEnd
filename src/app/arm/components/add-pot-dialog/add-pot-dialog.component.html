@@ -1,0 +1,29 @@
+<h2 mat-dialog-title>Añadir Nueva Maceta</h2>
+
+<mat-dialog-content class="dialog-content">
+  <p>Elige cómo quieres conectar tu nueva maceta inteligente a tu colección.</p>
+
+  <div class="options-container">
+    <!-- Opción 1: Emparejar por Bluetooth -->
+    <button class="option-card" (click)="closeDialog('bluetooth')">
+      <mat-icon class="option-icon" aria-hidden="false" fontIcon="bluetooth_searching"></mat-icon>
+      <div class="option-text">
+        <span class="option-title">Emparejar por Bluetooth</span>
+        <span class="option-description">Busca y conecta tu maceta de forma automática. Es la opción recomendada.</span>
+      </div>
+    </button>
+
+    <!-- Opción 2: Ingresar Código Manualmente -->
+    <button class="option-card" (click)="closeDialog('manual')">
+      <mat-icon class="option-icon" aria-hidden="false" fontIcon="pin"></mat-icon>
+      <div class="option-text">
+        <span class="option-title">Ingresar Código</span>
+        <span class="option-description">Introduce manualmente el código de serie que se encuentra en tu maceta.</span>
+      </div>
+    </button>
+  </div>
+</mat-dialog-content>
+
+<mat-dialog-actions align="end">
+  <button mat-button (click)="onCancel()">Cancelar</button>
+</mat-dialog-actions>

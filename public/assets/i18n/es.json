@@ -202,6 +202,11 @@
     }
   },
   "POTS": {
+    "SMART_POTS_TITLE": "Mis Macetas Inteligentes",
+    "WELCOME": "Bienvenido, {{name}}",
+    "ADD_NEW_POT": "Añadir nueva maceta",
+    "CONNECT_INSTRUCTION": "Conecta una nueva maceta inteligente a tu colección",
+    "ADD_POT_BUTTON": "Añadir maceta",
     "TITLE": "Mis Macetas",
     "SUBTITLE": "Monitorea y cuida tus plantas inteligentes",
     "POT_COUNT": "macetas",

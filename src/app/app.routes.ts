@@ -11,7 +11,7 @@ import { ProfileComponent } from './profiles/pages/profile/profile.component';
 import { CreateProfileComponent } from './profiles/pages/create-profile/create-profile.component';
 
 // ARM Components (Pots)
-import { PotsComponent } from './arm/pages/pots/pots.component';
+import { PotsComponent } from './arm';
 
 // Subscriptions Components
 import { MembershipComponent } from './subscriptions/pages/membership/membership.component';

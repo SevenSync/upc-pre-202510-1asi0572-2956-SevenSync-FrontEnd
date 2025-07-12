@@ -1,1 +1,77 @@
-<p>pot-metrics works!</p>
+<!-- src/app/arm/components/pot-metrics/pot-metrics.component.html -->
+
+<div class="metrics-container" *ngIf="pot">
+  <div class="metrics-grid">
+    <!-- Tarjeta de Humedad -->
+    <mat-card class="metric-card humidity">
+      <div class="metric-header"><mat-icon>water_drop</mat-icon><span class="metric-title">Humedad</span></div>
+      <div class="metric-content">
+        <!-- ✅ Usamos clases dinámicas para el color del texto -->
+        <span class="metric-value" [ngClass]="{'optimal': pot.humidity >= 60, 'low': pot.humidity < 60 && pot.humidity >= 30, 'critical': pot.humidity < 30}">{{ pot.humidity }}%</span>
+        <!-- ✅ Usamos expresiones ternarias para el color de la barra -->
+        <mat-progress-bar mode="determinate" [value]="pot.humidity" [color]="pot.humidity >= 60 ? 'primary' : (pot.humidity >= 30 ? 'accent' : 'warn')"></mat-progress-bar>
+        <!-- ✅ La lógica para el texto del estado ahora está aquí -->
+        <span class="status-text">
+          {{ pot.humidity >= 60 ? 'Óptimo' : (pot.humidity >= 30 ? 'Bajo' : 'Crítico') }}
+        </span>
+      </div>
+    </mat-card>
+
+    <!-- Tarjeta de Temperatura -->
+    <mat-card class="metric-card temperature">
+      <div class="metric-header"><mat-icon>thermostat</mat-icon><span class="metric-title">Temperatura</span></div>
+      <div class="metric-content">
+        <span class="metric-value" [ngClass]="{'optimal': pot.temperature >= 18 && pot.temperature <= 26, 'hot': pot.temperature > 26, 'cold': pot.temperature < 18}">{{ pot.temperature }}°C</span>
+        <span class="status-text">
+          {{ pot.temperature > 26 ? 'Caluroso' : (pot.temperature < 18 ? 'Frío' : 'Óptimo') }}
+        </span>
+      </div>
+    </mat-card>
+
+    <!-- Tarjeta de Luz -->
+    <mat-card class="metric-card light">
+      <div class="metric-header"><mat-icon>wb_sunny</mat-icon><span class="metric-title">Luminosidad</span></div>
+      <div class="metric-content">
+        <span class="metric-value" [ngClass]="{'optimal': pot.luminance >= 40 && pot.luminance <= 80, 'low': pot.luminance < 40, 'high': pot.luminance > 80}">{{ pot.luminance }} kLux</span>
+        <mat-progress-bar mode="determinate" [value]="pot.luminance" color="accent"></mat-progress-bar>
+        <span class="status-text">
+          {{ pot.luminance > 80 ? 'Alta' : (pot.luminance < 40 ? 'Baja' : 'Óptima') }}
+        </span>
+      </div>
+    </mat-card>
+
+    <!-- Tarjeta de Batería -->
+    <mat-card class="metric-card battery">
+      <div class="metric-header"><mat-icon>battery_std</mat-icon><span class="metric-title">Batería</span></div>
+      <div class="metric-content">
+        <span class="metric-value" [ngClass]="{'good': pot.batteryLevel >= 70, 'low': pot.batteryLevel < 70 && pot.batteryLevel >= 30, 'critical': pot.batteryLevel < 30}">{{ pot.batteryLevel }}%</span>
+        <mat-progress-bar mode="determinate" [value]="pot.batteryLevel" [color]="pot.batteryLevel >= 70 ? 'primary' : (pot.batteryLevel >= 30 ? 'accent' : 'warn')"></mat-progress-bar>
+        <span class="status-text">
+          {{ pot.batteryLevel >= 70 ? 'Bueno' : (pot.batteryLevel >= 30 ? 'Bajo' : 'Crítico') }}
+        </span>
+      </div>
+    </mat-card>
+  </div>
+
+  <!-- Métricas Adicionales -->
+  <div class="additional-metrics">
+    <h3>Métricas Adicionales</h3>
+    <div class="metric-row">
+      <span class="label">pH del Suelo:</span>
+      <span class="value">{{ pot.ph | number:'1.1-1' }}</span>
+    </div>
+    <div class="metric-row">
+      <span class="label">Salinidad:</span>
+      <span class="value">{{ pot.salinity | number:'1.1-1' }} µS/cm</span>
+    </div>
+    <div class="metric-row">
+      <span class="label">Nivel de Agua:</span>
+      <span class="value">{{ pot.waterLevel }}%</span>
+    </div>
+    <div class="metric-row">
+      <span class="label">Última Actualización:</span>
+      <!-- ✅ Usamos el pipe DatePipe de Angular para formatear la fecha -->
+      <span class="value">{{ pot.updatedAt | date:'dd/MM/yyyy HH:mm' }}</span>
+    </div>
+  </div>
+</div>

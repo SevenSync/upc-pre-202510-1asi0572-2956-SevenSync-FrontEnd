@@ -1,0 +1,68 @@
+:host {
+  display: block;
+}
+
+.dialog-content {
+  padding-top: 20px;
+}
+
+.dialog-content p {
+  margin-bottom: 24px;
+  color: #5f6368;
+}
+
+.options-container {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.option-card {
+  display: flex;
+  align-items: center;
+  text-align: left;
+  width: 100%;
+  padding: 20px;
+  border: 1px solid #e0e0e0;
+  border-radius: 12px;
+  background-color: transparent;
+  transition: all 0.2s ease-in-out;
+  cursor: pointer;
+}
+
+.option-card:hover {
+  border-color: var(--primary-color, #388e3c); /* Usa el color primario de tu app */
+  background-color: #f8f9fa;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 10px rgba(0,0,0,0.06);
+}
+
+.option-icon {
+  font-size: 36px;
+  width: 36px;
+  height: 36px;
+  margin-right: 20px;
+  color: var(--primary-color, #388e3c);
+}
+
+.option-text {
+  display: flex;
+  flex-direction: column;
+}
+
+.option-title {
+  font-size: 1.1rem;
+  font-weight: 500;
+  color: #202124;
+}
+
+.option-description {
+  margin-top: 4px;
+  font-size: 0.9rem;
+  color: #5f6368;
+  line-height: 1.4;
+}
+
+mat-dialog-actions {
+  padding: 16px 24px;
+}
