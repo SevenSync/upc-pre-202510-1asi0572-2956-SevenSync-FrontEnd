@@ -1,0 +1,92 @@
+/* --- Tema Claro --- */
+:host {
+  --bg-color: #ffffff;
+  --surface-color: #f7f9fc;
+  --primary-color: #4caf50;
+  --primary-hover-color: #66bb6a;
+  --text-color: #212529;
+  --text-secondary-color: #6c757d;
+  --border-color: #dee2e6;
+  --selected-border-color: var(--primary-color);
+}
+.modal-overlay {
+  position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+  background-color: rgba(0, 0, 0, 0.4); display: flex;
+  justify-content: center; align-items: center; z-index: 1000;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+}
+.modal-container {
+  background-color: var(--bg-color); color: var(--text-color);
+  border-radius: 8px; width: 90%; max-width: 800px;
+  max-height: 90vh; display: flex; flex-direction: column;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.15);
+}
+.modal-header {
+  padding: 1.5rem; position: relative;
+}
+.modal-header h2 { margin: 0; font-size: 1.5rem; font-weight: 600; }
+.modal-header p { margin: 0.25rem 0 0; color: var(--text-secondary-color); }
+.close-btn {
+  position: absolute; top: 1rem; right: 1.5rem; font-size: 1.5rem;
+  color: #aaa; cursor: pointer; background: none; border: none;
+}
+.modal-body {
+  padding: 0 1.5rem 1.5rem; overflow-y: auto; flex-grow: 1;
+}
+.plant-list-container { min-height: 400px; }
+.plant-grid {
+  display: grid; grid-template-columns: repeat(2, 1fr); gap: 1rem;
+  padding-top: 1.5rem;
+}
+.plant-card {
+  display: flex; align-items: center; gap: 1rem; padding: 1rem;
+  background-color: #fff; border: 1px solid var(--border-color);
+  border-radius: 8px; cursor: pointer; transition: all 0.2s ease-in-out;
+}
+.plant-card:hover {
+  transform: translateY(-2px); box-shadow: 0 4px 8px rgba(0,0,0,0.05);
+}
+.plant-card.selected {
+  border-color: var(--selected-border-color); box-shadow: 0 0 0 2px var(--selected-border-color);
+  background-color: #f0f7f0;
+}
+.plant-image {
+  width: 60px; height: 60px; border-radius: 6px;
+  background-color: #e9ecef; object-fit: cover; flex-shrink: 0;
+}
+.plant-info { overflow: hidden; }
+.plant-name { margin: 0; font-weight: 500; font-size: 1rem; }
+.plant-scientific-name { margin: 0.1rem 0 0; font-style: italic; font-size: 0.9rem; color: var(--text-secondary-color); }
+.loader, .no-results { text-align: center; color: var(--text-secondary-color); padding: 4rem 0; }
+
+/* --- Footer y Paginador --- */
+.paginator-footer {
+  padding: 1rem 1.5rem;
+  border-top: 1px solid var(--border-color);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #f8f9fa;
+}
+.paginator { display: flex; gap: 0.5rem; }
+.paginator-btn {
+  background-color: #fff; border: 1px solid var(--border-color);
+  color: var(--text-color); width: 38px; height: 38px;
+  border-radius: 6px; font-size: 1.2rem; cursor: pointer;
+  display: flex; justify-content: center; align-items: center;
+  transition: all 0.2s;
+}
+.paginator-btn:hover:not(:disabled) { background-color: #f1f3f5; }
+.paginator-btn:disabled { opacity: 0.5; cursor: not-allowed; }
+.action-buttons { display: flex; gap: 0.75rem; }
+.btn {
+  display: inline-flex; align-items: center; gap: 0.5rem;
+  padding: 0.75rem 1.25rem; border: 1px solid transparent;
+  border-radius: 6px; font-size: 1rem; font-weight: 500;
+  cursor: pointer; transition: all 0.2s;
+}
+.btn-secondary { background-color: #fff; border-color: var(--border-color); color: var(--text-color); }
+.btn-secondary:hover { background-color: #f1f3f5; }
+.btn-primary { background-color: var(--primary-color); color: #fff; }
+.btn-primary:hover { background-color: var(--primary-hover-color); }
+.btn:disabled { opacity: 0.65; cursor: not-allowed; }
